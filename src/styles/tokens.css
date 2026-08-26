@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Lúmen — tokens do sistema visual (vintage-reforma)
+   Fonte: sistema entregue pelo Claude Design. Claro + escuro.
+   ========================================================================== */
+:root {
+  --paper:#E7DCC6; --card:#F3EBD9; --card-2:#EDE3CF; --card-3:#F7F0E0;
+  --ink:#33291C; --ink-soft:#867655; --ink-mid:#5C4E3A;
+  --line:#D8C9AC; --line-strong:#C7B590;
+  --terra:#C05B3A; --terra-deep:#9A4327; --terra-soft:#EBCDB9;
+  --forest:#33463A; --forest-deep:#233229; --forest-soft:#C7D3BE;
+  --sage:#9DAE8C; --sage-soft:#D2DAC5;
+  --mustard:#C39433; --mustard-deep:#9C7420; --mustard-soft:#EDD9AE;
+  --slate:#2A3640; --wrong:#A23B22; --wrong-soft:#EBCDB9;
+  --cream:#FFF7EC;
+  --locked:#DCD0B8; --locked-ink:#A2947A;
+  --shadow:0 20px 55px rgba(51,41,28,.22); --shadow-soft:0 6px 16px rgba(51,41,28,.12);
+  --disp:"Fraunces",Georgia,serif;
+  --ui:"Nunito",system-ui,-apple-system,sans-serif;
+}
+:root:not([data-theme="light"]) {
+  @media (prefers-color-scheme: dark) {
+    --paper:#191510; --card:#241E15; --card-2:#2E2618; --card-3:#2E2618;
+    --ink:#F0E7D4; --ink-soft:#A2947A; --ink-mid:#CFC2A6;
+    --line:#3A3125; --line-strong:#4A3F2E;
+    --terra:#D9694A; --terra-deep:#8E3E23; --terra-soft:#42291d;
+    --forest:#6E8A71; --forest-deep:#233229; --forest-soft:#243026;
+    --sage:#8FA07E; --sage-soft:#2C3524;
+    --mustard:#D9AC4E; --mustard-deep:#B4842C; --mustard-soft:#3A2E12;
+    --wrong:#D9694A; --wrong-soft:#3A1a11;
+    --locked:#2E2618; --locked-ink:#6b5d44;
+    --shadow:0 20px 55px rgba(0,0,0,.55); --shadow-soft:0 8px 20px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"] {
+  --paper:#191510; --card:#241E15; --card-2:#2E2618; --card-3:#2E2618;
+  --ink:#F0E7D4; --ink-soft:#A2947A; --ink-mid:#CFC2A6;
+  --line:#3A3125; --line-strong:#4A3F2E;
+  --terra:#D9694A; --terra-deep:#8E3E23; --terra-soft:#42291d;
+  --forest:#6E8A71; --forest-deep:#233229; --forest-soft:#243026;
+  --sage:#8FA07E; --sage-soft:#2C3524;
+  --mustard:#D9AC4E; --mustard-deep:#B4842C; --mustard-soft:#3A2E12;
+  --wrong:#D9694A; --wrong-soft:#3A1a11;
+  --locked:#2E2618; --locked-ink:#6b5d44;
+  --shadow:0 20px 55px rgba(0,0,0,.55); --shadow-soft:0 8px 20px rgba(0,0,0,.4);
+}
