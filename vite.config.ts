@@ -9,6 +9,11 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["icon.svg"],
+      workbox: {
+        // Guarda a Bíblia (bible.json ~5MB) offline junto com os assets.
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,json,woff2}"],
+        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024
+      },
       manifest: {
         name: "Lúmen — Devocional Reformado",
         short_name: "Lúmen",

@@ -23,7 +23,9 @@ import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const IN = join(__dirname, "..", "content-source", "blivre.json");
-const OUT = join(__dirname, "..", "src", "content", "bible.generated.json");
+// Servido como asset estático (não embutido no bundle JS): carregado em runtime
+// e guardado offline pelo PWA.
+const OUT = join(__dirname, "..", "public", "bible.json");
 
 if (!existsSync(IN)) {
   console.error(`\n✗ Arquivo-fonte não encontrado: ${IN}\n`);
@@ -54,5 +56,5 @@ for (const book of books) {
 }
 
 writeFileSync(OUT, JSON.stringify(out) + "\n");
-console.log(`\n✓ BLIVRE importada: ${count} versículos → src/content/bible.generated.json`);
-console.log(`  (a semente em bible.ts é automaticamente sobrescrita pelos dados importados)\n`);
+console.log(`\n✓ BLIVRE importada: ${count} versículos → public/bible.json`);
+console.log(`  (carregado em runtime; sobrescreve a semente de bible.ts)\n`);
