@@ -40,7 +40,7 @@ const out = {};
 let count = 0;
 for (const book of books) {
   const abbrev = String(book.abbrev || book.abbr || "").toLowerCase();
-  const name = book.name || abbrev;
+  const name = book.name || book.book || book.nome || abbrev;
   const chapters = book.chapters || [];
   if (!abbrev || !chapters.length) continue;
   chapters.forEach((verses, ci) => {
