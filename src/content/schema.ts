@@ -41,6 +41,10 @@ export interface Unit {
   id: string;
   title: string;
   theme: string;       // ex.: "Fundamentos"
+  blurb?: string;      // sinopse curta para a tela de escolha
+  icon?: string;       // nome do ícone (padrão: i-book)
+  accent?: string;     // var(--...) para o cartão da unidade
+  source?: string;     // atribuição (ex.: "Baseado em João Calvino")
   days: DevotionalDay[];
 }
 

@@ -52,7 +52,7 @@ export function Devotional({ day, hearts, gems, actions, onExit, onDone }: Props
   }
 
   if (phase.kind === "selo") {
-    return <Selo day={day} xp={phase.xp} onDone={() => { actions.completeDay(); onDone(); }} />;
+    return <Selo day={day} xp={phase.xp} onDone={onDone} />;
   }
 
   const st = day.stations[phase.i];

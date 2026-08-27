@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { loadState, saveState, todayStr, type SaveState } from "./engine/storage";
+import { loadState, saveState, todayStr, type SaveState, type Reminder } from "./engine/storage";
 
 export const HEART_REFILL_COST = 20; // gemas para recarregar as vidas
 
@@ -9,10 +9,13 @@ export interface GameActions {
   loseHeart: () => void;
   resetHearts: () => void;
   refillHearts: () => void;   // gasta gemas para reabastecer as vidas
-  completeDay: () => void;
+  completeDay: (dayId: string) => void;
   addDiary: (ref: string, text: string) => void;
   bumpMastery: (courseId: string, before: number, gain: number, setTo?: number) => number;
   setStudyPos: (courseId: string, index: number) => void;
+  setActiveUnit: (unitId: string) => void;
+  setReminder: (r: Reminder) => void;
+  migrateDone: (ids: string[]) => void;  // backfill único de progresso legado
   setTheme: (t: SaveState["theme"]) => void;
   setOnboarded: (v: boolean) => void;
   resetDemo: () => void;
@@ -36,9 +39,10 @@ export function useLumen(): { state: SaveState; actions: GameActions } {
   const resetHearts = useCallback(() => setState((s) => ({ ...s, hearts: 5 })), []);
   const refillHearts = useCallback(() => setState((s) =>
     s.gems >= HEART_REFILL_COST ? { ...s, gems: s.gems - HEART_REFILL_COST, hearts: 5 } : s), []);
-  const completeDay = useCallback(() => setState((s) => ({
-    ...s, dayIndex: s.dayIndex + 1, streak: s.streak + 1, hearts: 5
-  })), []);
+  const completeDay = useCallback((dayId: string) => setState((s) => {
+    if (s.doneDays.includes(dayId)) return { ...s, hearts: 5 };
+    return { ...s, doneDays: [...s.doneDays, dayId], dayIndex: s.dayIndex + 1, streak: s.streak + 1, hearts: 5 };
+  }), []);
   const addDiary = useCallback((ref: string, text: string) => {
     const t = text.trim();
     if (!t) return;
@@ -53,16 +57,21 @@ export function useLumen(): { state: SaveState; actions: GameActions } {
 
   const setStudyPos = useCallback((courseId: string, index: number) =>
     setState((s) => ({ ...s, studyPos: { ...s.studyPos, [courseId]: index } })), []);
+  const setActiveUnit = useCallback((unitId: string) => setState((s) => ({ ...s, activeUnit: unitId })), []);
+  const setReminder = useCallback((r: Reminder) => setState((s) => ({ ...s, reminder: r })), []);
+  const migrateDone = useCallback((ids: string[]) =>
+    setState((s) => (s.doneDays.length ? s : { ...s, doneDays: ids })), []);
   const setTheme = useCallback((t: SaveState["theme"]) => setState((s) => ({ ...s, theme: t })), []);
   const setOnboarded = useCallback((v: boolean) => setState((s) => ({ ...s, onboarded: v })), []);
   const resetDemo = useCallback(() => setState((s) => ({
-    ...loadState(), theme: s.theme, onboarded: true,
-    streak: 0, gems: 30, xp: 0, hearts: 5, dayIndex: 0, mastery: {}, studyPos: {}, diary: s.diary
+    ...loadState(), theme: s.theme, onboarded: true, reminder: s.reminder,
+    streak: 0, gems: 30, xp: 0, hearts: 5, dayIndex: 0, doneDays: [], activeUnit: "",
+    mastery: {}, studyPos: {}, diary: s.diary
   })), []);
 
   return {
     state,
-    actions: { addXp, addGems, loseHeart, resetHearts, refillHearts, completeDay, addDiary, bumpMastery, setStudyPos, setTheme, setOnboarded, resetDemo }
+    actions: { addXp, addGems, loseHeart, resetHearts, refillHearts, completeDay, addDiary, bumpMastery, setStudyPos, setActiveUnit, setReminder, migrateDone, setTheme, setOnboarded, resetDemo }
   };
 }
 

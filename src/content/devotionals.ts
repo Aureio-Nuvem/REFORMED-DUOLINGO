@@ -14,6 +14,8 @@ export const UNITS: Unit[] = [
     id: "conhecendo-a-deus",
     title: "Conhecendo a Deus",
     theme: "Fundamentos",
+    icon: "i-lamp", accent: "var(--terra)",
+    blurb: "O ponto de partida da fé: quem Deus é e como Ele se dá a conhecer na sua Palavra. Providência, cuidado e refúgio, dos Salmos ao coração.",
     days: [
       {
         id: "cad-1",
@@ -129,6 +131,8 @@ export const UNITS: Unit[] = [
     id: "salmos-de-confianca",
     title: "Salmos de Confiança",
     theme: "Confiança",
+    icon: "i-anchor", accent: "var(--forest)",
+    blurb: "Quando o medo aperta e o mundo estremece, os Salmos ensinam o coração a descansar. Luz, deleite na Palavra e a certeza de pertencer a Deus.",
     days: [
       {
         id: "sc-1",
@@ -238,6 +242,8 @@ export const UNITS: Unit[] = [
     id: "descanso-e-graca",
     title: "Descanso e Graça",
     theme: "Evangelho",
+    icon: "i-dove", accent: "var(--mustard-deep)",
+    blurb: "O coração do Evangelho: somos salvos pela graça, não pelo mérito. Descanse no dom de Deus e nas misericórdias que se renovam a cada manhã.",
     days: [
       {
         id: "dg-1",
@@ -342,6 +348,124 @@ export const UNITS: Unit[] = [
           { type: "order", kicker: "Memorização · Lamentações 3.23", q: "Complete a confissão:", ref: "Lamentações 3.23",
             words: ["grande", "é", "a", "tua", "fidelidade"],
             exp: "A fidelidade de Deus é a base firme de cada manhã." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "livrete-de-ouro",
+    title: "O Livrete de Ouro",
+    theme: "Vida Cristã · Calvino",
+    icon: "i-cross", accent: "var(--slate)",
+    source: "Baseado em João Calvino",
+    blurb: "Uma caminhada pela “Breve Instrução sobre a Vida Cristã” de Calvino (Institutas III.6–10). Bloco 1: o chamado à vida cristã — a Escritura como regra que vem de fora.",
+    days: [
+      {
+        id: "lo-1",
+        title: "A regra que vem de fora",
+        subtitle: "Salmo 119 · Institutas III.6",
+        minutes: 9,
+        carryRef: "sl.119.9",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Antes de desenhar qualquer caminho neste mês, peça a Deus que ilumine o dele. Toque na lâmpada.",
+            prayer: "Senhor, antes de eu desenhar qualquer caminho este mês, ilumina o teu. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Bem-aventurados os que andam na lei",
+            passageRefs: ["sl.119.1", "sl.119.2"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Como purificar o caminho",
+            verseRef: "sl.119.9", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "O alvo vem de fora",
+            intro: "Calvino abre o “Livrete de Ouro” apontando de onde vem a regra da vida cristã.",
+            author: "João Calvino", initial: "C", source: "Institutas III.6.1–2",
+            text: "Calvino abre o Livrete dizendo que o alvo da vida cristã não é inventado por nós: a Escritura nos apresenta um padrão, e esse padrão é a santidade de Deus. Não somos chamados a melhorar por autoajuda, mas a sermos conformados àquele que nos adotou. A regra da vida vem de fora — e isso é liberdade, não prisão, porque nos tira o peso de definir sozinhos o que é uma vida boa." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Quem define o seu caminho: você ou Deus?",
+            intro: "Puxe os quatro fios, uma linha cada — Ensino, Gratidão, Confissão, Súplica. Onde tenho preferido a minha luz à dele? Fica guardado no seu Diário, só você vê." },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "A semente de oração do dia — ore com as suas próprias palavras, se preferir.",
+            prayer: "Senhor, a regra da minha vida vem de ti. Dá-me um coração ensinável para começar estes dias andando na tua luz, e não na minha. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "Para Calvino, o alvo da vida cristã...",
+            opts: ["é inventado por cada um de nós", "nos é dado de fora, na Palavra de Deus", "depende só de autoajuda", "muda a cada geração"], answer: 1,
+            exp: "A regra vem de fora — a santidade de Deus — e isso é liberdade, não prisão (Sl 119.1)." },
+          { type: "mcq", kicker: "Salmo 119 · O Desafio", q: "Como o jovem purifica o seu caminho?", verseRef: "sl.119.9",
+            opts: ["Seguindo o próprio coração", "Observando a Palavra de Deus", "Evitando as pessoas", "Com boas intenções"], answer: 1,
+            exp: "“Sendo o que observa a tua palavra” — a Escritura ilumina antes de pisarmos (Sl 119.9)." },
+          { type: "match", kicker: "O chamado à vida cristã", q: "Ligue cada ideia ao seu sentido:",
+            pairs: [["Regra de fora", "A Palavra de Deus"], ["O padrão", "A santidade de Deus"], ["Liberdade", "Não definir sozinho o bem"], ["Adoção", "Ser conformado a Deus"]],
+            exp: "A vida cristã começa recebendo de Deus o alvo — não o inventando (III.6.1–2)." }
+        ]
+      },
+      {
+        id: "lo-2",
+        title: "Doutrina que desce ao coração",
+        subtitle: "Tiago 1 · Institutas III.6",
+        minutes: 9,
+        carryRef: "tg.1.22",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Peça que a Palavra de hoje não pare na sua cabeça — desça ao coração e à vida. Toque na lâmpada.",
+            prayer: "Senhor, não deixes a tua verdade parar na minha língua. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Praticantes da palavra",
+            passageRefs: ["tg.1.22", "tg.1.23"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Ouvir e cumprir",
+            verseRef: "tg.1.22", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Doutrina de vida, não de língua",
+            intro: "Calvino é direto: a fé não é conteúdo de discurso, mas posse do coração.",
+            author: "João Calvino", initial: "C", source: "Institutas III.6.4",
+            text: "Calvino é duro aqui: o evangelho não é doutrina de língua, mas de vida. Ele não foi dado para ocupar apenas a memória e o intelecto — só é verdadeiramente recebido quando toma posse da alma inteira e encontra assento no mais íntimo do coração. Um cristianismo que vive só no discurso é, para ele, pior que inútil." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que verdade você domina no discurso, mas ainda não pratica?",
+            intro: "Puxe os quatro fios — Ensino, Gratidão, Confissão, Súplica. Peça ao Espírito que feche a distância entre o que você sabe e o que vive. Só você vê." },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "A semente de oração do dia — adapte às suas palavras.",
+            prayer: "Espírito Santo, faze a tua Palavra descer da minha cabeça ao meu coração, e do coração à minha vida. Que eu seja praticante, e não só ouvinte. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Tiago 1 · O Desafio", q: "Tiago nos chama a ser...", verseRef: "tg.1.22",
+            opts: ["apenas ouvintes da palavra", "praticantes da palavra, e não somente ouvintes", "mestres da palavra", "juízes da palavra"], answer: 1,
+            exp: "Ouvir sem praticar é enganar-se a si mesmo (Tg 1.22)." },
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "Para Calvino, o evangelho é doutrina de...",
+            opts: ["língua, não de vida", "vida, não apenas de língua", "memória apenas", "intelecto apenas"], answer: 1,
+            exp: "A Palavra só é recebida quando toma posse da alma inteira e assenta no coração (III.6.4)." },
+          { type: "match", kicker: "Ouvir e cumprir", q: "Ligue cada termo ao seu sentido:",
+            pairs: [["Ouvir", "Apenas o começo"], ["Cumprir", "A Palavra recebida"], ["Doutrina de língua", "Fé só no discurso"], ["Doutrina de vida", "Fé que se pratica"]],
+            exp: "A teologia verdadeira não para na língua — desce ao coração e à vida." }
+        ]
+      },
+      {
+        id: "lo-3",
+        title: "Progresso, não perfeição",
+        subtitle: "Filipenses 3 · Institutas III.6",
+        minutes: 9,
+        carryRef: "fp.3.14",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Traga o cansaço de tentar ser perfeito. Hoje o convite é avançar, não chegar. Toque na lâmpada.",
+            prayer: "Senhor, livra-me da perfeição que paralisa; dá-me a constância que avança. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Prossigo para o alvo",
+            passageRefs: ["fp.3.13", "fp.3.14"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Rumo ao prêmio",
+            verseRef: "fp.3.14", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Jornada, não chegada",
+            intro: "Calvino encerra o capítulo com pastoral fina, para que o padrão da santidade não esmague ninguém.",
+            author: "João Calvino", initial: "C", source: "Institutas III.6.5",
+            text: "Calvino sabia que o padrão da santidade esmagaria qualquer um — por isso encerra com pastoral fina: não exijo, diz ele, que a vida do cristão respire nada além do evangelho perfeito, o que não se encontraria em ninguém. O que importa é a direção: avançar um pouco a cada dia, ainda que com passos pequenos e mancando, sem desistir. A vida cristã é jornada, não chegada." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde o perfeccionismo tem te paralisado em vez de te mover?",
+            intro: "Puxe os quatro fios — Ensino, Gratidão, Confissão, Súplica. Nomeie um passo pequeno e concreto para esta semana. Só você vê." },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "A semente de oração do dia — ore com as suas palavras.",
+            prayer: "Pai, não me peças hoje a perfeição, mas a constância. Faze-me avançar um passo em tua direção, ainda que pequeno, sem desistir. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Filipenses 3 · O Desafio", q: "Mesmo sem ter chegado ao alvo, o que Paulo faz?", verseRef: "fp.3.14",
+            opts: ["Desiste da corrida", "Prossegue para o alvo", "Volta atrás", "Espera parado"], answer: 1,
+            exp: "“Persigo o alvo, rumo ao prêmio da soberana vocação” — a vida cristã avança (Fp 3.14)." },
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "A vida cristã, para Calvino, é...",
+            opts: ["chegada imediata à perfeição", "jornada: avançar um pouco a cada dia", "impossível de viver", "reservada a poucos"], answer: 1,
+            exp: "Avançar com passos pequenos, mancando, sem desistir — direção importa mais que perfeição (III.6.5)." },
+          { type: "match", kicker: "Progresso, não perfeição", q: "Ligue cada ideia ao seu sentido:",
+            pairs: [["O alvo", "A soberana vocação"], ["Progresso", "Avançar a cada dia"], ["Perfeccionismo", "Paralisa em vez de mover"], ["Constância", "A marca do cristão"]],
+            exp: "Deus busca a direção do coração, não uma perfeição que ninguém alcança nesta vida." }
         ]
       }
     ]
