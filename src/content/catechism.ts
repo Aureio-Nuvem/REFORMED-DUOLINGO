@@ -1,14 +1,15 @@
 import type { CatechismItem, Course, Question } from "./schema";
+import generated from "./catechism.generated.json";
 
 /**
  * Catecismo Breve de Westminster — domínio público (107 perguntas).
  *
- * ⚠️ SEMENTE: apenas as primeiras perguntas, em redação de trabalho, para
- * demonstrar a arquitetura. O plano é importar as 107 de um arquivo-fonte
- * verificado. Com o catecismo completo, este único arquivo gera dezenas de
- * lições e centenas de flashcards automaticamente (ver `catechismCourse`).
+ * A semente abaixo cobre as primeiras perguntas (redação de trabalho). Quando
+ * `catechism.generated.json` é preenchido pelo importador
+ * (`npm run content:catechism`), ele TEM PRIORIDADE. Com as 107 perguntas, este
+ * arquivo gera dezenas de lições e centenas de flashcards automaticamente.
  */
-export const SHORTER_CATECHISM: CatechismItem[] = [
+const SEED: CatechismItem[] = [
   { n: 1, q: "Qual é o fim principal do homem?", a: "O fim principal do homem é glorificar a Deus e desfrutá-Lo para sempre." },
   { n: 2, q: "Que regra deu Deus para nos dirigir sobre como glorificá-Lo e desfrutá-Lo?", a: "A Palavra de Deus, contida nas Escrituras do Antigo e do Novo Testamento, é a única regra para nos dirigir." },
   { n: 3, q: "O que as Escrituras principalmente ensinam?", a: "As Escrituras principalmente ensinam o que o homem deve crer a respeito de Deus e o dever que Deus requer do homem." },
@@ -17,6 +18,10 @@ export const SHORTER_CATECHISM: CatechismItem[] = [
   { n: 6, q: "Quantas pessoas há na divindade?", a: "Há três pessoas na divindade: o Pai, o Filho e o Espírito Santo; e estes três são um só Deus, iguais em poder e glória." },
   { n: 7, q: "Que são os decretos de Deus?", a: "Os decretos de Deus são o seu propósito eterno, pelo qual, para a sua glória, predeterminou tudo o que acontece." }
 ];
+
+// A fonte importada (107 perguntas) tem prioridade sobre a semente.
+const GENERATED = generated as CatechismItem[];
+export const SHORTER_CATECHISM: CatechismItem[] = GENERATED.length ? GENERATED : SEED;
 
 /** Gera uma coleção da Academia a partir do catecismo (múltipla escolha). */
 function catechismQuestions(items: CatechismItem[]): Question[] {

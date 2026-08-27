@@ -233,5 +233,117 @@ export const UNITS: Unit[] = [
         ]
       }
     ]
+  },
+  {
+    id: "descanso-e-graca",
+    title: "Descanso e Graça",
+    theme: "Evangelho",
+    days: [
+      {
+        id: "dg-1",
+        title: "A graça que salva",
+        subtitle: "Efésios 2 · Salvação",
+        minutes: 8,
+        carryRef: "ef2.8",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Venha sem nada nas mãos — a graça não se compra. Toque na lâmpada.",
+            prayer: "Deus de graça, esvazia as minhas mãos para eu receber o que só tu podes dar. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Pela graça, por meio da fé",
+            passageRefs: ["ef2.8", "ef2.9"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Descanse no dom", verseRef: "ef2.8", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Não por mérito, mas por dom",
+            intro: "Um reformador resume o coração do Evangelho.",
+            author: "Martinho Lutero", initial: "L", source: "tema da justificação pela fé",
+            text: "Lutero descobriu, lendo Paulo, que a justiça de Deus não é uma exigência que nos esmaga, mas um presente que nos veste. Deixamos de tentar subir até Deus por obras e recebemos, de graça, a justiça de Cristo. O crente vive de mãos abertas, não de mãos cheias." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Em que você ainda tenta 'merecer' o amor de Deus?",
+            intro: "Escreva e entregue à graça. Só você vê." },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "Uma sugestão de oração — use as suas palavras.",
+            prayer: "Pai, não me salvei a mim mesmo: tu me salvaste pela graça. Que eu viva hoje grato, e não ansioso por merecer. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Efésios 2 · O Desafio", q: "Somos salvos pela graça, por meio de quê?", verseRef: "ef2.8",
+            opts: ["das obras", "da fé", "do mérito", "da lei"], answer: 1,
+            exp: "A fé recebe a graça; ambas são dom de Deus, não conquista nossa." },
+          { type: "mcq", kicker: "A Voz dos Pais · Lutero", q: "A justiça de Deus, para Lutero, é...",
+            opts: ["uma exigência que esmaga", "um presente que veste o crente", "uma recompensa por obras", "impossível de receber"], answer: 1,
+            exp: "A justiça de Cristo é dada de graça a quem crê." },
+          { type: "order", kicker: "Memorização · Efésios 2.9", q: "Monte a razão de não haver orgulho:", ref: "Efésios 2.9",
+            words: ["para", "que", "ninguém", "se", "glorie"],
+            exp: "Se a salvação é dom, toda a glória é de Deus — Soli Deo Gloria." }
+        ]
+      },
+      {
+        id: "dg-2",
+        title: "Vinde a mim",
+        subtitle: "Mateus 11 · Descanso",
+        minutes: 7,
+        carryRef: "mt11.28",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Traga o seu cansaço de hoje — é a ele que Jesus fala. Toque na lâmpada.",
+            prayer: "Senhor Jesus, venho cansado. Dá-me o teu descanso. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Eu vos aliviarei",
+            passageRefs: ["mt11.28", "mt11.29"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Entregue o peso", verseRef: "mt11.28", seconds: 20 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "O coração inquieto encontra repouso",
+            intro: "Um pai da Igreja fala do descanso da alma.",
+            author: "Agostinho", initial: "A", source: "tema do descanso em Deus",
+            text: "Agostinho passou anos exausto, buscando paz em tudo, menos em Deus. O convite de Jesus é o fim dessa corrida: o jugo de Cristo é leve porque Ele carrega conosco. Descansar não é parar de andar — é andar atrelado a Quem sustenta." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que peso você precisa entregar a Cristo hoje?",
+            intro: "Escreva e deixe aos pés dele. Só você vê." },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "Uma sugestão de oração.",
+            prayer: "Jesus, manso e humilde, tomo hoje o teu jugo. Descansa a minha alma em ti. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Mateus 11 · O Desafio", q: "A quem Jesus chama?", verseRef: "mt11.28",
+            opts: ["aos fortes e prontos", "aos cansados e sobrecarregados", "somente aos justos", "aos que não erram"], answer: 1,
+            exp: "O convite é para quem não aguenta mais — é ali que a graça age." },
+          { type: "mcq", kicker: "A Voz dos Pais · Agostinho", q: "O descanso da alma, segundo Agostinho, está em...",
+            opts: ["parar de andar", "buscar paz em tudo", "andar atrelado a Cristo", "esforçar-se mais"], answer: 2,
+            exp: "O jugo de Cristo é leve porque Ele carrega conosco." },
+          { type: "match", kicker: "Ligue", q: "Relacione:",
+            pairs: [["Cansados", "O convite de Jesus"], ["Jugo", "Andar com Cristo"], ["Manso e humilde", "O coração de Jesus"], ["Descanso", "Para a alma"]],
+            exp: "Em Cristo, o esforço vira confiança e o peso vira descanso." }
+        ]
+      },
+      {
+        id: "dg-3",
+        title: "Misericórdias que se renovam",
+        subtitle: "Lamentações 3 · Fidelidade",
+        minutes: 7,
+        carryRef: "lm3.23",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Mesmo depois de um dia difícil, há misericórdia nova. Toque na lâmpada.",
+            prayer: "Deus fiel, abre os meus olhos para as tuas misericórdias de hoje. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Novas cada manhã",
+            passageRefs: ["lm3.22", "lm3.23"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Grande é a fidelidade", verseRef: "lm3.23", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "A providência que sustenta",
+            intro: "Um reformador nos lembra que nada foge das mãos de Deus.",
+            author: "João Calvino", initial: "C", source: "tema da providência",
+            text: "Calvino ensinava que a providência não é um destino frio, mas o cuidado ativo de um Pai. Mesmo em Lamentações — um livro de choro — o crente enxerga misericórdias novas a cada manhã. Confiar na fidelidade de Deus não nega a dor; a atravessa com esperança." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você já viu a fidelidade de Deus na sua história?",
+            intro: "Escreva uma lembrança de gratidão. Só você vê." },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "Uma sugestão de oração.",
+            prayer: "Senhor, as tuas misericórdias se renovam a cada manhã. Faze-me confiar na tua fidelidade hoje. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Lamentações 3 · O Desafio", q: "Com que frequência as misericórdias se renovam?", verseRef: "lm3.23",
+            opts: ["uma vez na vida", "cada manhã", "só nos bons dias", "raramente"], answer: 1,
+            exp: "Novas a cada manhã — a graça acompanha cada novo dia." },
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "A providência, para Calvino, é...",
+            opts: ["um destino frio", "o cuidado ativo de um Pai", "acaso", "ausência de Deus"], answer: 1,
+            exp: "Deus governa todas as coisas com cuidado paternal." },
+          { type: "order", kicker: "Memorização · Lamentações 3.23", q: "Complete a confissão:", ref: "Lamentações 3.23",
+            words: ["grande", "é", "a", "tua", "fidelidade"],
+            exp: "A fidelidade de Deus é a base firme de cada manhã." }
+        ]
+      }
+    ]
   }
 ];

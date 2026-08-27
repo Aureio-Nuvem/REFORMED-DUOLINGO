@@ -8,7 +8,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "content:bible": "node scripts/import-bible.mjs",
+    "content:catechism": "node scripts/import-catechism.mjs",
+    "content": "npm run content:bible && npm run content:catechism"
   },
   "dependencies": {
     "react": "^18.3.1",
