@@ -9,6 +9,14 @@ import { catechismCourse } from "./catechism";
 const solas: Course = {
   id: "solas", icon: "i-cross", color: "var(--terra)",
   title: "Os Cinco Solas", subtitle: "As bandeiras da Reforma",
+  teach: [
+    { eyebrow: "Introdução", title: "As cinco bandeiras da Reforma", body: "No século XVI, a Reforma resgatou cinco verdades do Evangelho, resumidas em cinco 'solas' (do latim, 'somente'). Elas apontam para onde está a autoridade e de quem é a salvação e a glória." },
+    { eyebrow: "Sola Scriptura", title: "Somente a Escritura", body: "A Palavra de Deus é a autoridade final e infalível em fé e prática. Tradições e concílios se submetem à Escritura — nunca o contrário." },
+    { eyebrow: "Sola Gratia", title: "Somente a graça", body: "A salvação é inteiramente pela graça de Deus, um favor imerecido. Não a iniciamos, não a completamos nem a merecemos: é dom de Deus do início ao fim." },
+    { eyebrow: "Sola Fide", title: "Somente a fé", body: "Somos justificados somente pela fé, que recebe a justiça de Cristo. As boas obras são fruto da salvação, jamais a sua causa." },
+    { eyebrow: "Solus Christus", title: "Somente Cristo", body: "Cristo é o único Mediador entre Deus e os homens. Só a sua obra — vida, morte e ressurreição — nos salva. Não há outro nome nem outro caminho." },
+    { eyebrow: "Soli Deo Gloria", title: "Glória somente a Deus", body: "Se a salvação é de Deus do princípio ao fim, então toda a glória também é somente dele." }
+  ],
   questions: [
     { type: "match", kicker: "Cinco Solas", q: "Ligue cada sola ao seu significado:",
       pairs: [["Sola Scriptura", "Somente a Escritura"], ["Sola Fide", "Somente a fé"], ["Sola Gratia", "Somente a graça"], ["Solus Christus", "Somente Cristo"]],
@@ -28,6 +36,14 @@ const solas: Course = {
 const tulip: Course = {
   id: "tulip", icon: "i-anchor", color: "var(--forest)",
   title: "Doutrinas da Graça", subtitle: "TULIP · a soberania na salvação",
+  teach: [
+    { eyebrow: "Introdução", title: "As Doutrinas da Graça", body: "As 'doutrinas da graça' (conhecidas pela sigla TULIP) descrevem a salvação como obra soberana de Deus, do princípio ao fim. São cinco pontos que se sustentam juntos." },
+    { eyebrow: "T · Depravação Total", title: "Incapacidade do pecador", body: "O pecado atingiu toda a natureza humana — mente, vontade e afetos. Não que sejamos tão maus quanto poderíamos ser, mas que nenhuma parte de nós escapou do pecado, e por isso não podemos nos salvar." },
+    { eyebrow: "U · Eleição Incondicional", title: "A escolha graciosa de Deus", body: "Antes da fundação do mundo, Deus escolheu os seus por pura graça, não por prever méritos ou fé neles. A escolha se funda na vontade de Deus, não em nós." },
+    { eyebrow: "L · Expiação Particular", title: "Cristo salva os seus", body: "A morte de Cristo salva de modo eficaz o seu povo. A cruz não apenas tornou a salvação possível — ela de fato garante a redenção dos que são de Cristo." },
+    { eyebrow: "I · Graça Irresistível", title: "O chamado eficaz", body: "Quando Deus chama eficazmente os seus, o Espírito vence a resistência do coração e o faz crer. A graça que salva alcança o seu propósito." },
+    { eyebrow: "P · Perseverança dos Santos", title: "Guardados até o fim", body: "Aqueles que Deus verdadeiramente salva, Ele guarda até o fim. A segurança da salvação está no poder de Deus, não na força do crente." }
+  ],
   questions: [
     { type: "mcq", kicker: "Depravação Total", q: "A Depravação Total ensina que o pecado afetou...",
       opts: ["apenas o corpo.", "toda a natureza humana — mente, vontade e coração.", "somente algumas pessoas.", "nada essencial no homem."], answer: 1,

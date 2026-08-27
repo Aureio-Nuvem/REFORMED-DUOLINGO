@@ -137,7 +137,10 @@ export function LessonView({ questions, hearts, header, onWrong, onQuit, onFinis
 
 function McqBody({ q, sel, locked, onSel }: { q: Extract<Question, { type: "mcq" }>; sel: number | null; locked: boolean; onSel: (i: number) => void; }) {
   const verse = q.verseRef ? getVerse(q.verseRef) : null;
-  const blanked = verse ? verse.text.replace(q.opts[q.answer], "______") : null;
+  // Apaga a palavra-resposta do versículo, ignorando maiúsculas/minúsculas.
+  const answer = q.opts[q.answer];
+  const re = new RegExp(answer.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
+  const blanked = verse ? verse.text.replace(re, "______") : null;
   return (
     <>
       <div className="q-text">{q.q}</div>

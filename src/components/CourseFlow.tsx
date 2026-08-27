@@ -1,15 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Course } from "../content/schema";
-import { buildFlashcards } from "../engine/exercises";
+import type { Course, Question } from "../content/schema";
+import { buildFlashcards, shuffle } from "../engine/exercises";
 import { snd } from "../engine/audio";
 import { burst } from "../engine/confetti";
 import { Icon, type IconName } from "../ui/Icons";
 import { LessonView } from "./LessonView";
 import { Flashcards } from "./Flashcards";
+import { TeachRead } from "./TeachRead";
 import type { GameActions } from "../state";
 
 type Mode = "aprender" | "revisar" | "relampago" | "maestria";
-type Phase = { kind: "menu" } | { kind: "study"; mode: Mode } | { kind: "result"; mode: Mode; correct: number; total: number };
+type Phase =
+  | { kind: "menu" }
+  | { kind: "teach" }
+  | { kind: "flash" }
+  | { kind: "quiz"; mode: Mode; questions: Question[] }
+  | { kind: "result"; mode: Mode; correct: number; total: number };
 
 interface Props {
   course: Course;
@@ -36,16 +42,37 @@ export function CourseFlow({ course, mastery, hearts, actions, onExit }: Props) 
   const [phase, setPhase] = useState<Phase>({ kind: "menu" });
   const cards = useMemo(() => buildFlashcards(course.questions), [course]);
 
-  if (phase.kind === "study") {
-    if (phase.mode === "revisar") {
-      return (
-        <Flashcards cards={cards} onQuit={() => setPhase({ kind: "menu" })}
-          onFinish={(known, total) => setPhase({ kind: "result", mode: "revisar", correct: known, total })} />
-      );
-    }
+  // Sorteia um subconjunto para variar a cada sessão.
+  function pick(mode: Mode): Question[] {
+    const limit = mode === "maestria" ? Math.min(10, course.questions.length) : Math.min(5, course.questions.length);
+    return shuffle(course.questions).slice(0, limit);
+  }
+
+  function startMode(mode: Mode) {
+    snd.nav();
+    if (mode === "revisar") { setPhase({ kind: "flash" }); return; }
+    if (mode === "aprender" && course.teach && course.teach.length) { setPhase({ kind: "teach" }); return; }
+    setPhase({ kind: "quiz", mode, questions: pick(mode) });
+  }
+
+  if (phase.kind === "teach") {
+    return (
+      <TeachRead cards={course.teach ?? []} onQuit={() => setPhase({ kind: "menu" })}
+        onDone={() => setPhase({ kind: "quiz", mode: "aprender", questions: pick("aprender") })} />
+    );
+  }
+
+  if (phase.kind === "flash") {
+    return (
+      <Flashcards cards={cards} onQuit={() => setPhase({ kind: "menu" })}
+        onFinish={(known, total) => setPhase({ kind: "result", mode: "revisar", correct: known, total })} />
+    );
+  }
+
+  if (phase.kind === "quiz") {
     return (
       <LessonView
-        questions={course.questions}
+        questions={phase.questions}
         hearts={hearts}
         header={phase.mode === "relampago" ? <><div style={{ flex: 1 }} /><Elapsed /></> : <div style={{ flex: 1 }} />}
         onWrong={actions.loseHeart}
@@ -63,7 +90,7 @@ export function CourseFlow({ course, mastery, hearts, actions, onExit }: Props) 
   }
 
   const modes: { mode: Mode; icon: IconName; bg: string; fg: string; t: string; d: string; tag?: string }[] = [
-    { mode: "aprender", icon: "i-book", bg: "var(--mustard-soft)", fg: "var(--mustard-deep)", t: "Aprender", d: "Conteúdo novo, no seu ritmo" },
+    { mode: "aprender", icon: "i-book", bg: "var(--mustard-soft)", fg: "var(--mustard-deep)", t: "Aprender", d: "Estude o conteúdo e depois pratique" },
     { mode: "revisar", icon: "i-reset", bg: "var(--sage-soft)", fg: "var(--forest)", t: "Revisar", d: "Flashcards para fixar na memória", tag: `${cards.length} cartões` },
     { mode: "relampago", icon: "i-flame", bg: "var(--terra-soft)", fg: "var(--terra)", t: "Desafio relâmpago", d: "Rápido, valendo XP em dobro", tag: "2× XP" },
     { mode: "maestria", icon: "i-trophy", bg: "var(--forest-soft)", fg: "var(--forest)", t: "Maestria", d: "Prove o seu domínio da coleção", tag: "≥80%" }
@@ -85,7 +112,7 @@ export function CourseFlow({ course, mastery, hearts, actions, onExit }: Props) 
         </div>
       </div>
       {modes.map((m) => (
-        <button key={m.mode} className="mode-card" onClick={() => { snd.nav(); setPhase({ kind: "study", mode: m.mode }); }}>
+        <button key={m.mode} className="mode-card" onClick={() => startMode(m.mode)}>
           <span className="mode-ic" style={{ background: m.bg, color: m.fg }}><Icon name={m.icon} /></span>
           <div><div className="mode-t">{m.t}</div><div className="mode-d">{m.d}</div></div>
           {m.tag && <span className="mode-tag">{m.tag}</span>}

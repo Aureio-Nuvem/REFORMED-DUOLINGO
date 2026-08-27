@@ -67,5 +67,10 @@ export const catechismCourse: Course = {
   color: "var(--mustard)",
   title: "Catecismo de Westminster",
   subtitle: "Perguntas e respostas da fé",
+  teach: SHORTER_CATECHISM.map((it) => ({
+    eyebrow: `Pergunta ${it.n}`,
+    title: it.q,
+    body: it.a
+  })),
   questions: catechismQuestions(SHORTER_CATECHISM)
 };

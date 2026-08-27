@@ -49,7 +49,11 @@ for (const book of books) {
     verses.forEach((text, vi) => {
       const ch = ci + 1;
       const vs = vi + 1;
-      out[`${abbrev}.${ch}.${vs}`] = { ref: `${name} ${ch}.${vs}`, text: String(text).trim() };
+      let clean = String(text).trim();
+      // Salmo 119 é acróstico: a BLIVRE prefixa o nome da letra hebraica
+      // ("Nun :", "Alef :"…) no 1º versículo de cada bloco. Removemos.
+      if (abbrev === "sl" && ch === 119) clean = clean.replace(/^[\p{L}]+\s*:\s*/u, "");
+      out[`${abbrev}.${ch}.${vs}`] = { ref: `${name} ${ch}.${vs}`, text: clean };
       count++;
     });
   });

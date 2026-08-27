@@ -44,6 +44,13 @@ export interface Unit {
   days: DevotionalDay[];
 }
 
+/** Cartão de ensino (modo "Aprender": ler/estudar o conteúdo antes de praticar). */
+export interface TeachCard {
+  eyebrow: string; // ex.: "Pergunta 1" ou "Sola Fide"
+  title: string;   // o conceito/pergunta
+  body: string;    // a explicação/resposta
+}
+
 /** Coleção da Academia (estudo livre). */
 export interface Course {
   id: string;
@@ -52,6 +59,7 @@ export interface Course {
   title: string;
   subtitle: string;
   locked?: boolean;
+  teach?: TeachCard[]; // material de estudo (modo Aprender)
   questions: Question[];
 }
 
