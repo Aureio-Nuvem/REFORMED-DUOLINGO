@@ -29,7 +29,22 @@ const solas: Course = {
       exp: "Sola Scriptura: a Palavra de Deus é a norma suprema, acima de tradições e concílios." },
     { type: "mcq", kicker: "Soli Deo Gloria", q: "'Soli Deo Gloria' significa que...",
       opts: ["a glória é dividida entre Deus e os santos.", "toda a glória pertence somente a Deus.", "o homem busca a própria glória.", "a igreja recebe a glória."], answer: 1,
-      exp: "Soli Deo Gloria: o fim de todas as coisas é a glória de Deus, e só dele." }
+      exp: "Toda a glória é de Deus, e só dele (Rm 11.36; 1 Co 10.31)." },
+    { type: "mcq", kicker: "Solus Christus", q: "Quem é o único Mediador entre Deus e os homens?",
+      opts: ["Os santos", "A igreja", "Jesus Cristo", "Os anjos"], answer: 2,
+      exp: "Há um só Mediador entre Deus e os homens: Cristo Jesus (1 Tm 2.5)." },
+    { type: "mcq", kicker: "Sola Gratia", q: "As boas obras, na fé reformada, são...",
+      opts: ["a causa da salvação", "o fruto da salvação", "um mérito diante de Deus", "desnecessárias"], answer: 1,
+      exp: "Salvos para boas obras — elas são fruto, não causa (Ef 2.10; Tg 2.17)." },
+    { type: "order", kicker: "Memorização · Romanos 1.17", q: "Monte a base da justificação:", ref: "Romanos 1.17",
+      words: ["o", "justo", "viverá", "pela", "fé"],
+      exp: "“O justo viverá pela fé” — o coração da Sola Fide (Rm 1.17)." },
+    { type: "mcq", kicker: "Sola Scriptura", q: "A 'Sola Scriptura' se opõe a...",
+      opts: ["ler a Bíblia", "pregar a Palavra", "colocar tradições no mesmo nível da Escritura", "estudar teologia"], answer: 2,
+      exp: "A Escritura é inspirada e suficiente para nos instruir (2 Tm 3.16-17)." },
+    { type: "match", kicker: "Cinco Solas", q: "Ligue cada sola à sua ênfase:",
+      pairs: [["Sola Scriptura", "Autoridade"], ["Sola Gratia", "Origem da salvação"], ["Sola Fide", "Meio de recepção"], ["Soli Deo Gloria", "Fim de todas as coisas"]],
+      exp: "As solas se encaixam: de onde vem, como se recebe, e para quem é a glória." }
   ]
 };
 
@@ -56,7 +71,25 @@ const tulip: Course = {
       exp: "Quem o Pai dá ao Filho, o Filho não perde nenhum (Jo 6, 10)." },
     { type: "match", kicker: "TULIP", q: "Ligue a doutrina ao seu tema:",
       pairs: [["Depravação", "Incapacidade do pecador"], ["Eleição", "Escolha graciosa"], ["Expiação", "Cristo salva os seus"], ["Graça", "Chamado eficaz"]],
-      exp: "TULIP: a salvação é obra soberana de Deus, do início ao fim." }
+      exp: "TULIP: a salvação é obra soberana de Deus, do início ao fim." },
+    { type: "mcq", kicker: "Expiação Particular", q: "A Expiação Particular ensina que a morte de Cristo...",
+      opts: ["apenas tornou a salvação possível para todos.", "salva de modo eficaz o povo pelo qual Ele morreu.", "não garante a salvação de ninguém.", "foi um exemplo moral apenas."], answer: 1,
+      exp: "O Bom Pastor dá a vida pelas ovelhas — e as salva de fato (Jo 10.11,15)." },
+    { type: "mcq", kicker: "Graça Irresistível", q: "A Graça Irresistível afirma que aquele que o Pai dá ao Filho...",
+      opts: ["pode recusar para sempre a Cristo.", "certamente virá a Cristo, pois o Espírito vence sua resistência.", "só vem se colaborar primeiro.", "vem por mérito próprio."], answer: 1,
+      exp: "“Todo o que o Pai me dá virá a mim” (Jo 6.37)." },
+    { type: "mcq", kicker: "Eleição Incondicional", q: "Quando Deus escolheu os seus, segundo Efésios 1?",
+      opts: ["Depois que creram.", "Antes da fundação do mundo.", "Ao verem suas boas obras.", "No fim dos tempos."], answer: 1,
+      exp: "Ele nos escolheu antes da fundação do mundo, para sermos santos (Ef 1.4-5)." },
+    { type: "order", kicker: "Memorização · João 10.27", q: "Monte a palavra de Cristo sobre os seus:", ref: "João 10.27",
+      words: ["as", "minhas", "ovelhas", "ouvem", "a", "minha", "voz"],
+      exp: "“As minhas ovelhas ouvem a minha voz” — o chamado eficaz do Pastor (Jo 10.27)." },
+    { type: "mcq", kicker: "Perseverança dos Santos", q: "Em quem se funda a segurança da salvação?",
+      opts: ["Na força de vontade do crente.", "No poder de Deus, que completa a obra iniciada.", "Na constância dos sentimentos.", "Na ausência total de pecado."], answer: 1,
+      exp: "Aquele que começou a boa obra há de completá-la (Fp 1.6)." },
+    { type: "match", kicker: "TULIP · siglas", q: "Ligue cada letra à sua doutrina:",
+      pairs: [["T", "Depravação Total"], ["U", "Eleição Incondicional"], ["L", "Expiação Particular"], ["I", "Graça Irresistível"], ["P", "Perseverança dos Santos"]],
+      exp: "TULIP resume os cinco pontos das doutrinas da graça." }
   ]
 };
 

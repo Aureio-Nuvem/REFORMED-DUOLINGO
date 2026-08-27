@@ -61,7 +61,10 @@ export function App() {
             <CourseFlow
               course={COURSES.find((c) => c.id === courseId)!}
               mastery={state.mastery[courseId] ?? 0}
+              studyPos={state.studyPos[courseId] ?? 0}
+              onStudyPos={(idx) => actions.setStudyPos(courseId, idx)}
               hearts={state.hearts}
+              gems={state.gems}
               actions={actions}
               onExit={() => setScreen("academy")}
             />
@@ -79,7 +82,7 @@ export function App() {
           {screen === "medals" && <Medals onBack={() => go("profile")} />}
           {screen === "diary" && <Diary entries={state.diary} onBack={() => go("profile")} />}
           {screen === "devo" && todayEntry && (
-            <Devotional day={todayEntry.day} hearts={state.hearts} actions={actions}
+            <Devotional day={todayEntry.day} hearts={state.hearts} gems={state.gems} actions={actions}
               onExit={() => setScreen("home")} onDone={() => setScreen("home")} />
           )}
         </div>

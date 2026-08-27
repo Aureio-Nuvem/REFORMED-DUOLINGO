@@ -10,6 +10,7 @@ import type { GameActions } from "../state";
 interface Props {
   day: DevotionalDay;
   hearts: number;
+  gems: number;
   actions: GameActions;
   onExit: () => void;   // sair sem concluir
   onDone: () => void;   // concluiu e guardou o selo
@@ -27,7 +28,7 @@ function Segments({ active }: { active: number }) {
   );
 }
 
-export function Devotional({ day, hearts, actions, onExit, onDone }: Props) {
+export function Devotional({ day, hearts, gems, actions, onExit, onDone }: Props) {
   const [phase, setPhase] = useState<Phase>({ kind: "stations", i: 0 });
 
   if (phase.kind === "challenge") {
@@ -35,8 +36,10 @@ export function Devotional({ day, hearts, actions, onExit, onDone }: Props) {
       <LessonView
         questions={day.challenge}
         hearts={hearts}
+        gems={gems}
         header={<div style={{ flex: 1 }}><Segments active={6} /></div>}
         onWrong={actions.loseHeart}
+        onRefill={actions.refillHearts}
         onQuit={onExit}
         onFinish={(correct) => {
           const xp = 15 + correct * 5;
@@ -91,6 +94,7 @@ function StationBody({ station, onNext }: { station: Station; onNext: () => void
 /* Cada estação tem o seu conteúdo e a sua regra de "Continuar". */
 function StationFoot({ station, onNext }: { station: Station; onNext: () => void }) {
   const [ready, setReady] = useState(station.type !== "light" && station.type !== "breath");
+  const timerRef = useRef<number | null>(null);
   const label =
     station.type === "reflect" ? "Guardar reflexão" :
     station.type === "pray" ? "Amém" :
@@ -101,13 +105,21 @@ function StationFoot({ station, onNext }: { station: Station; onNext: () => void
     setReady(false);
     let left = station.seconds;
     const el = document.getElementById("breath-count");
-    const id = setInterval(() => {
+    if (el) el.textContent = left + "s";
+    timerRef.current = window.setInterval(() => {
       left -= 1;
       if (el) el.textContent = left <= 0 ? "✓" : left + "s";
-      if (left <= 0) { clearInterval(id); setReady(true); snd.chime(); }
+      if (left <= 0) { if (timerRef.current) clearInterval(timerRef.current); timerRef.current = null; setReady(true); snd.chime(); }
     }, 1000);
-    return () => clearInterval(id);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); timerRef.current = null; };
   }, [station]);
+
+  function skipBreath() {
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+    const el = document.getElementById("breath-count");
+    if (el) el.textContent = "✓";
+    setReady(true); snd.tap();
+  }
 
   // "acender a lâmpada" habilita o Continuar
   useEffect(() => {
@@ -127,6 +139,9 @@ function StationFoot({ station, onNext }: { station: Station; onNext: () => void
   return (
     <div className="flow-foot">
       <button className="cta" disabled={!ready} onClick={onNext}>{label}</button>
+      {station.type === "breath" && !ready && (
+        <button className="skip-link" onClick={skipBreath}>Pular a meditação</button>
+      )}
     </div>
   );
 }

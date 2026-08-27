@@ -9,6 +9,7 @@ export interface SaveState {
   hearts: number;
   dayIndex: number;            // próximo dia do devocional (índice global no plano)
   mastery: Record<string, number>; // courseId -> % de maestria
+  studyPos: Record<string, number>; // courseId -> próximo cartão de estudo (Aprender)
   diary: DiaryEntry[];
   onboarded: boolean;
   theme: "system" | "light" | "dark";
@@ -18,7 +19,7 @@ const KEY = "lumen_save_v1";
 
 const DEFAULT: SaveState = {
   streak: 0, gems: 30, xp: 0, hearts: 5,
-  dayIndex: 0, mastery: {}, diary: [], onboarded: false, theme: "system"
+  dayIndex: 0, mastery: {}, studyPos: {}, diary: [], onboarded: false, theme: "system"
 };
 
 export function loadState(): SaveState {

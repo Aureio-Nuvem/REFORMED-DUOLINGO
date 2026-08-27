@@ -12,15 +12,20 @@ import type { GameActions } from "../state";
 type Mode = "aprender" | "revisar" | "relampago" | "maestria";
 type Phase =
   | { kind: "menu" }
-  | { kind: "teach" }
+  | { kind: "teach"; start: number }
   | { kind: "flash" }
   | { kind: "quiz"; mode: Mode; questions: Question[] }
   | { kind: "result"; mode: Mode; correct: number; total: number };
+
+const BLOCK = 5; // cartões de estudo por bloco
 
 interface Props {
   course: Course;
   mastery: number;
   hearts: number;
+  gems: number;
+  studyPos: number;                 // próximo cartão de estudo salvo
+  onStudyPos: (index: number) => void;
   actions: GameActions;
   onExit: () => void;
 }
@@ -38,9 +43,10 @@ function Elapsed() {
   );
 }
 
-export function CourseFlow({ course, mastery, hearts, actions, onExit }: Props) {
+export function CourseFlow({ course, mastery, hearts, gems, studyPos, onStudyPos, actions, onExit }: Props) {
   const [phase, setPhase] = useState<Phase>({ kind: "menu" });
   const cards = useMemo(() => buildFlashcards(course.questions), [course]);
+  const teach = course.teach ?? [];
 
   // Sorteia um subconjunto para variar a cada sessão.
   function pick(mode: Mode): Question[] {
@@ -51,14 +57,27 @@ export function CourseFlow({ course, mastery, hearts, actions, onExit }: Props) 
   function startMode(mode: Mode) {
     snd.nav();
     if (mode === "revisar") { setPhase({ kind: "flash" }); return; }
-    if (mode === "aprender" && course.teach && course.teach.length) { setPhase({ kind: "teach" }); return; }
+    if (mode === "aprender" && teach.length) {
+      const start = studyPos >= teach.length ? 0 : studyPos;
+      setPhase({ kind: "teach", start });
+      return;
+    }
     setPhase({ kind: "quiz", mode, questions: pick(mode) });
   }
 
   if (phase.kind === "teach") {
+    const block = teach.slice(phase.start, phase.start + BLOCK);
+    const from = phase.start + 1;
+    const to = Math.min(teach.length, phase.start + block.length);
+    const label = teach.length > BLOCK ? `Bloco ${Math.floor(phase.start / BLOCK) + 1} · ${from}–${to} de ${teach.length}` : undefined;
     return (
-      <TeachRead cards={course.teach ?? []} onQuit={() => setPhase({ kind: "menu" })}
-        onDone={() => setPhase({ kind: "quiz", mode: "aprender", questions: pick("aprender") })} />
+      <TeachRead cards={block} blockLabel={label}
+        onStop={(readCount) => { onStudyPos(phase.start + readCount); setPhase({ kind: "menu" }); }}
+        onDone={() => {
+          const np = phase.start + block.length;
+          onStudyPos(np >= teach.length ? teach.length : np);
+          setPhase({ kind: "quiz", mode: "aprender", questions: pick("aprender") });
+        }} />
     );
   }
 
@@ -74,8 +93,10 @@ export function CourseFlow({ course, mastery, hearts, actions, onExit }: Props) 
       <LessonView
         questions={phase.questions}
         hearts={hearts}
+        gems={gems}
         header={phase.mode === "relampago" ? <><div style={{ flex: 1 }} /><Elapsed /></> : <div style={{ flex: 1 }} />}
         onWrong={actions.loseHeart}
+        onRefill={actions.refillHearts}
         onQuit={() => setPhase({ kind: "menu" })}
         onFinish={(correct, total) => setPhase({ kind: "result", mode: phase.mode, correct, total })}
       />
@@ -90,7 +111,8 @@ export function CourseFlow({ course, mastery, hearts, actions, onExit }: Props) 
   }
 
   const modes: { mode: Mode; icon: IconName; bg: string; fg: string; t: string; d: string; tag?: string }[] = [
-    { mode: "aprender", icon: "i-book", bg: "var(--mustard-soft)", fg: "var(--mustard-deep)", t: "Aprender", d: "Estude o conteúdo e depois pratique" },
+    { mode: "aprender", icon: "i-book", bg: "var(--mustard-soft)", fg: "var(--mustard-deep)", t: "Aprender", d: "Estude o conteúdo e depois pratique",
+      tag: teach.length ? (studyPos >= teach.length ? "✓ estudado" : `${studyPos}/${teach.length}`) : undefined },
     { mode: "revisar", icon: "i-reset", bg: "var(--sage-soft)", fg: "var(--forest)", t: "Revisar", d: "Flashcards para fixar na memória", tag: `${cards.length} cartões` },
     { mode: "relampago", icon: "i-flame", bg: "var(--terra-soft)", fg: "var(--terra)", t: "Desafio relâmpago", d: "Rápido, valendo XP em dobro", tag: "2× XP" },
     { mode: "maestria", icon: "i-trophy", bg: "var(--forest-soft)", fg: "var(--forest)", t: "Maestria", d: "Prove o seu domínio da coleção", tag: "≥80%" }

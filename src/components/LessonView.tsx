@@ -8,17 +8,22 @@ import { Icon } from "../ui/Icons";
 interface Props {
   questions: Question[];
   hearts: number;
+  gems?: number;                    // para oferecer recarga de vidas
   header?: React.ReactNode;         // segmentos (devo) ou cronômetro
   onWrong: () => void;
+  onRefill?: () => void;            // gasta gemas e reabastece as vidas
   onQuit: () => void;
   onFinish: (correct: number, total: number) => void;
 }
 
+const HEART_REFILL_COST = 20;
+
 type Fb = { right: boolean; text: string } | null;
 
-export function LessonView({ questions, hearts, header, onWrong, onQuit, onFinish }: Props) {
+export function LessonView({ questions, hearts, gems = 0, header, onWrong, onRefill, onQuit, onFinish }: Props) {
   const [i, setI] = useState(0);
   const q = questions[i];
+  const [out, setOut] = useState(false);   // sem vidas
   const [locked, setLocked] = useState(false);
   const [feedback, setFeedback] = useState<Fb>(null);
   const [correct, setCorrect] = useState(0);
@@ -74,21 +79,52 @@ export function LessonView({ questions, hearts, header, onWrong, onQuit, onFinis
       const nm = new Set(matched); nm.add(k); setMatched(nm); leftSel.current = null; snd.correct();
       if (nm.size === q.pairs.length) { setLocked(true); setTimeout(() => showFb(true, q.exp), 350); }
     } else {
-      setBadPair([l, k]); snd.wrong();
+      setBadPair([l, k]); snd.wrong(); onWrong();
       const lp = l; const kp = k;
       setTimeout(() => { setBadPair(null); leftSel.current = null; }, 550);
       void lp; void kp;
     }
   }
 
-  function next() {
+  function advance() {
     if (i + 1 >= questions.length) { onFinish(correct, questions.length); return; }
     setI(i + 1); reset();
+  }
+  function next() {
+    if (hearts <= 0) { setOut(true); return; }
+    advance();
   }
 
   const canCheck =
     (q.type === "mcq" && sel !== null) ||
     (q.type === "order" && built.length === q.words.length);
+
+  if (out) {
+    const canBuy = !!onRefill && gems >= HEART_REFILL_COST;
+    return (
+      <section className="screen flow" style={{ position: "absolute", inset: 0 }}>
+        <div className="flow-top">
+          <button className="xbtn" onClick={onQuit} aria-label="Sair"><Icon name="i-x" /></button>
+          {header}
+          <div className="mini-heart"><Icon name="i-heart" /><span>0</span></div>
+        </div>
+        <div className="flow-body" style={{ justifyContent: "center", textAlign: "center", gap: 14 }}>
+          <div style={{ color: "var(--terra)" }}><Icon name="i-heart" style={{ fontSize: 56 }} /></div>
+          <div className="st-title">Suas vidas acabaram</div>
+          <div className="st-lead">Descanse um pouco e volte, ou recarregue com gemas para continuar agora. As vidas também voltam ao concluir um devocional.</div>
+        </div>
+        <div className="flow-foot" style={{ display: "grid", gap: 10 }}>
+          {onRefill && (
+            <button className="cta" disabled={!canBuy}
+              onClick={() => { onRefill(); setOut(false); advance(); }}>
+              <Icon name="i-gem" style={{ marginRight: 6 }} />Recarregar · {HEART_REFILL_COST} gemas{canBuy ? "" : " (sem gemas)"}
+            </button>
+          )}
+          <button className="ghost-btn" onClick={onQuit}>Sair e voltar depois</button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="screen flow" style={{ position: "absolute", inset: 0 }}>
