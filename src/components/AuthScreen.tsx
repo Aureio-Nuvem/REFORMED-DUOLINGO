@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "../ui/Icons";
 import { api, type Account } from "../engine/cloud";
 import type { SaveState } from "../engine/storage";
@@ -19,10 +19,20 @@ export function AuthScreen({ onDone, onBack }: Props) {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Se ainda não há nenhuma conta, a primeira é a dona e não precisa de código.
+  const [needsOwner, setNeedsOwner] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    api.status()
+      .then((s) => { setNeedsOwner(s.needsOwner); if (s.needsOwner) setMode("register"); })
+      .catch(() => setNeedsOwner(false));
+  }, []);
+
+  const wantsCode = mode === "register" && needsOwner === false;
 
   const canSubmit = mode === "login"
     ? username.trim().length >= 3 && password.length >= 8
-    : code.trim().length > 0 && username.trim().length >= 3 && name.trim().length >= 2 && password.length >= 8;
+    : (!wantsCode || code.trim().length > 0) && username.trim().length >= 3 && name.trim().length >= 2 && password.length >= 8;
 
   async function submit() {
     if (!canSubmit || busy) return;
@@ -47,16 +57,18 @@ export function AuthScreen({ onDone, onBack }: Props) {
         <button className="xbtn" onClick={onBack} aria-label="Voltar">
           <Icon name="i-arrow" style={{ transform: "scaleX(-1)" }} />
         </button>
-        <div className="scr-title" style={{ margin: 0 }}>{mode === "login" ? "Entrar" : "Criar conta"}</div>
+        <div className="scr-title" style={{ margin: 0 }}>{mode === "login" ? "Entrar" : needsOwner ? "Criar a sua conta" : "Criar conta"}</div>
       </div>
       <div className="scr-sub">
         {mode === "login"
           ? "Entre para guardar o seu progresso e continuar em qualquer aparelho."
-          : "Use o código de convite que você recebeu para criar a sua conta."}
+          : needsOwner
+            ? "Esta é a primeira conta do app — ela será a dona, e poderá convidar as outras pessoas."
+            : "Use o código de convite que você recebeu para criar a sua conta."}
       </div>
 
       <div className="auth-form">
-        {mode === "register" && (
+        {wantsCode && (
           <label className="fld">
             <span>Código de convite</span>
             <input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())}
@@ -87,9 +99,11 @@ export function AuthScreen({ onDone, onBack }: Props) {
         <button className="cta terra" disabled={!canSubmit || busy} onClick={() => void submit()}>
           {busy ? "Um instante…" : mode === "login" ? "Entrar" : "Criar minha conta"}
         </button>
-        <button className="ghost-btn" onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(null); snd.tap(); }}>
-          {mode === "login" ? "Tenho um código de convite" : "Já tenho conta"}
-        </button>
+        {!needsOwner && (
+          <button className="ghost-btn" onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(null); snd.tap(); }}>
+            {mode === "login" ? "Tenho um código de convite" : "Já tenho conta"}
+          </button>
+        )}
         <div className="auth-fine">
           O seu progresso já está salvo neste aparelho. Ao entrar, ele é somado ao da sua conta — nada se perde.
         </div>

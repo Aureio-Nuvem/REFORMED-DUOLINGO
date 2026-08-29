@@ -9,6 +9,7 @@ import type { SaveState, Reminder } from "./engine/storage";
 import { applyReminder, reminderSupported, reminderPermission, requestReminderPermission } from "./engine/reminder";
 import { useSync, type SyncStatus } from "./engine/useSync";
 import { AuthScreen } from "./components/AuthScreen";
+import { Invites } from "./components/Invites";
 import { Devotional } from "./components/Devotional";
 import { CourseFlow } from "./components/CourseFlow";
 
@@ -22,7 +23,7 @@ function resolveActiveUnit(state: SaveState): Unit {
   return UNITS.find((u) => u.days.some((d) => !done.has(d.id))) ?? UNITS[UNITS.length - 1];
 }
 
-type Screen = "home" | "academy" | "shop" | "profile" | "course" | "medals" | "diary" | "devo" | "units" | "auth" | "onboard";
+type Screen = "home" | "academy" | "shop" | "profile" | "course" | "medals" | "diary" | "devo" | "units" | "auth" | "invites" | "onboard";
 const CHROME: Screen[] = ["home", "academy", "shop", "profile"];
 
 const OFFSETS = [0, -1, -2, -1, 0, 1, 2, 1];
@@ -110,6 +111,7 @@ export function App() {
             <Profile state={state} muted={muted}
               account={sync.account} syncStatus={sync.status}
               onSignIn={() => go("auth")} onSignOut={sync.signOut} onSyncNow={() => void sync.syncNow()}
+              onInvites={() => go("invites")}
               onReminder={(r) => actions.setReminder(r)}
               onDiary={() => go("diary")}
               onMedals={() => go("medals")}
@@ -122,6 +124,7 @@ export function App() {
             <AuthScreen onBack={() => go("profile")}
               onDone={(t, u, save, rev) => { void sync.adopt(t, u, save, rev); setScreen("profile"); }} />
           )}
+          {screen === "invites" && <Invites onBack={() => go("profile")} />}
           {screen === "medals" && <Medals onBack={() => go("profile")} />}
           {screen === "diary" && <Diary entries={state.diary} onBack={() => go("profile")} />}
           {screen === "devo" && playDay && (
@@ -337,9 +340,9 @@ const SYNC_LABEL: Record<SyncStatus, string> = {
   error: "Sem conexão — salvo aqui"
 };
 
-function AccountBox({ account, status, onSignIn, onSignOut, onSyncNow }: {
-  account: { name: string; username: string } | null; status: SyncStatus;
-  onSignIn: () => void; onSignOut: () => void; onSyncNow: () => void;
+function AccountBox({ account, status, onSignIn, onSignOut, onSyncNow, onInvites }: {
+  account: { name: string; username: string; owner?: boolean } | null; status: SyncStatus;
+  onSignIn: () => void; onSignOut: () => void; onSyncNow: () => void; onInvites: () => void;
 }) {
   if (!account) {
     return (
@@ -366,6 +369,9 @@ function AccountBox({ account, status, onSignIn, onSignOut, onSyncNow }: {
         </div>
       </div>
       <div className="acc-actions">
+        {account.owner && (
+          <button className="ctrl" onClick={onInvites}><Icon name="i-journal" />Convidar pessoas</button>
+        )}
         <button className="ctrl" onClick={onSyncNow}><Icon name="i-reset" />Sincronizar agora</button>
         <button className="ctrl" onClick={onSignOut}><Icon name="i-lock" />Sair da conta</button>
       </div>
@@ -413,10 +419,10 @@ function ReminderSetting({ reminder, onReminder }: { reminder: Reminder; onRemin
 }
 
 /* ---------- Perfil ---------- */
-function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyncNow, onReminder, onDiary, onMedals, onToggleMute, onToggleTheme, onReplayIntro, onReset }: {
+function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyncNow, onInvites, onReminder, onDiary, onMedals, onToggleMute, onToggleTheme, onReplayIntro, onReset }: {
   state: ReturnType<typeof useLumen>["state"]; muted: boolean;
-  account: { name: string; username: string } | null; syncStatus: SyncStatus;
-  onSignIn: () => void; onSignOut: () => void; onSyncNow: () => void;
+  account: { name: string; username: string; owner?: boolean } | null; syncStatus: SyncStatus;
+  onSignIn: () => void; onSignOut: () => void; onSyncNow: () => void; onInvites: () => void;
   onReminder: (r: Reminder) => void;
   onDiary: () => void; onMedals: () => void; onToggleMute: () => void; onToggleTheme: () => void; onReplayIntro: () => void; onReset: () => void;
 }) {
@@ -446,7 +452,7 @@ function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyn
       <button className="open-row" onClick={onDiary}><span className="di"><Icon name="i-journal" /></span>Ver minhas reflexões<span className="arw"><Icon name="i-arrow" /></span></button>
       <button className="open-row" onClick={onMedals}><span className="di"><Icon name="i-medal" /></span>Minhas medalhas<span className="arw"><Icon name="i-arrow" /></span></button>
       <div className="sec-h">Conta</div>
-      <AccountBox account={account} status={syncStatus} onSignIn={onSignIn} onSignOut={onSignOut} onSyncNow={onSyncNow} />
+      <AccountBox account={account} status={syncStatus} onSignIn={onSignIn} onSignOut={onSignOut} onSyncNow={onSyncNow} onInvites={onInvites} />
       <div className="sec-h">Lembrete</div>
       <ReminderSetting reminder={state.reminder} onReminder={onReminder} />
       <div className="sec-h">Configurações</div>

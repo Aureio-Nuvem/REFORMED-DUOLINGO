@@ -4,7 +4,7 @@
  */
 import type { SaveState } from "./storage";
 
-export interface Account { name: string; username: string }
+export interface Account { name: string; username: string; owner?: boolean }
 export interface AuthResult { token: string; user: Account; save: { data: SaveState; rev: number } | null }
 
 const TOKEN_KEY = "lumen_token";
@@ -49,6 +49,13 @@ export const api = {
 
   login: (username: string, password: string) =>
     call<AuthResult>("/api/login", { method: "POST", body: JSON.stringify({ username, password }) }),
+
+  status: () => call<{ ready: boolean; needsOwner: boolean }>("/api/status"),
+
+  listInvites: () => call<{ invites: { code: string; used: number; used_name: string | null }[] }>("/api/invites"),
+
+  createInvites: (count: number) =>
+    call<{ codes: string[] }>("/api/invites", { method: "POST", body: JSON.stringify({ count }) }),
 
   getSave: () => call<{ data: SaveState | null; rev: number }>("/api/save"),
 
