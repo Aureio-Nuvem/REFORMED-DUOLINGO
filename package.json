@@ -6,12 +6,13 @@
   "description": "Lúmen — devocional reformado gamificado (PWA)",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run check && tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit",
     "content:bible": "node scripts/import-bible.mjs",
     "content:catechism": "node scripts/import-catechism.mjs",
-    "content": "npm run content:bible && npm run content:catechism"
+    "content": "npm run content:bible && npm run content:catechism",
+    "check": "node scripts/check-content.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

@@ -176,7 +176,9 @@ function McqBody({ q, sel, locked, onSel }: { q: Extract<Question, { type: "mcq"
   // Apaga a palavra-resposta do versículo, ignorando maiúsculas/minúsculas.
   const answer = q.opts[q.answer];
   const re = new RegExp(answer.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
-  const blanked = verse ? verse.text.replace(re, "______") : null;
+  // Só exibe o cartão se a lacuna foi realmente criada — caso contrário o
+  // versículo inteiro entregaria a resposta.
+  const blanked = verse && re.test(verse.text) ? verse.text.replace(re, "______") : null;
   return (
     <>
       <div className="q-text">{q.q}</div>
