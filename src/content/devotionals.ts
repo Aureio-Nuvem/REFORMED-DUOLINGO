@@ -16,6 +16,7 @@ export const UNITS: Unit[] = [
     theme: "Fundamentos",
     icon: "i-lamp", accent: "var(--terra)",
     blurb: "O ponto de partida da fé: quem Deus é e como Ele se dá a conhecer na sua Palavra. Providência, cuidado e refúgio, dos Salmos ao coração.",
+    about: "Unidade escrita para o Lúmen, a partir dos Salmos. As leituras vêm da Bíblia Livre (BLIVRE), uma tradução em português de domínio público. Na estação “A Voz dos Pais” você ouve João Calvino (1509–1564) e Agostinho (354–430) — dois mestres que a tradição reformada lê com atenção — em paráfrases nossas dos temas deles, sempre com a fonte indicada.",
     days: [
       {
         id: "cad-1",
@@ -36,7 +37,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas I.6.1 · paráfrase",
             text: "Calvino comparava a Escritura a um par de óculos. Sem eles, enxergamos Deus de forma confusa e borrada; com eles, as letras se ordenam e passamos a ler com clareza quem Deus é. A Palavra não inventa a luz — ela foca a luz para os nossos olhos fracos." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde a Palavra iluminou um passo seu hoje?",
-            intro: "Puxe os quatro fios, uma linha cada — Ensino: o que a Palavra afirmou hoje? Gratidão: por qual passo já iluminado eu agradeço? Confissão: onde andei na minha própria luz? Súplica: que passo peço que Ele firme? Fica no seu Diário, só você vê." },
+            intro: "Responda ao texto de hoje em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "O que a Palavra de hoje afirma sobre o caminho?" },
+              { key: "gratidao", prompt: "Por qual passo já iluminado por Deus eu agradeço?" },
+              { key: "confissao", prompt: "Onde tenho andado na minha própria luz?" },
+              { key: "suplica", prompt: "Que passo peço que Ele firme hoje?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia. Ore com ela ou deixe que ela abra as suas próprias palavras — Deus ouve as duas.",
             prayer: "Pai, a tua Palavra é lâmpada para os meus pés. Firma os meus passos hoje, guarda-me do mal e faze-me andar na tua luz. Por Cristo, amém." }
@@ -72,7 +79,13 @@ export const UNITS: Unit[] = [
             author: "Agostinho", initial: "A", source: "Confissões I.1 · paráfrase",
             text: "Agostinho reconheceu que o coração humano vive inquieto, correndo atrás de mil pastores que não saciam. Só descansa quem se deixa conduzir por Aquele que nos fez. Dizer 'o SENHOR é o meu pastor' é confessar que a busca acabou: encontrei quem cuida de mim." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Em que área você tem tentado ser o próprio pastor?",
-            intro: "Puxe os quatro fios — Ensino: o que significa ter o SENHOR como Pastor? Gratidão: onde Ele já me guiou sem que eu percebesse? Confissão: que área ainda pastoreio sozinho? Súplica: que direção peço hoje? Só você vê." },
+            intro: "Responda ao Salmo 23 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "O que significa ter o SENHOR como Pastor?" },
+              { key: "gratidao", prompt: "Onde Ele já me guiou sem que eu percebesse?" },
+              { key: "confissao", prompt: "Que área da minha vida ainda pastoreio sozinho?" },
+              { key: "suplica", prompt: "Que direção peço a Ele hoje?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — deixe que ela abra as suas próprias palavras.",
             prayer: "Senhor, tu és o meu Pastor. Ensina-me a confiar que, contigo, nada me faltará. Guia-me hoje. Amém." }
@@ -108,7 +121,13 @@ export const UNITS: Unit[] = [
             author: "Martinho Lutero", initial: "L", source: "Castelo Forte, sobre o Salmo 46 · paráfrase",
             text: "Lutero se apoiou neste salmo em tempos de medo e escreveu sobre Deus como uma fortaleza segura. A ideia é simples e firme: quando o mundo treme, o crente não corre para dentro de si mesmo, mas para dentro de Deus. A quietude do versículo 10 não é passividade — é confiança que descansa porque sabe quem reina." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que muda quando você lembra que Deus reina sobre isso?",
-            intro: "Puxe os quatro fios — Ensino: o que muda se Deus reina sobre isto? Gratidão: que refúgio Ele já foi para mim? Confissão: onde troquei a quietude pela ansiedade? Súplica: que tempestade peço que Ele aquiete? Só você vê." },
+            intro: "Traga a sua preocupação de hoje e responda em quatro frentes.",
+            threads: [
+              { key: "ensino", prompt: "O que muda na minha situação se Deus reina sobre ela?" },
+              { key: "gratidao", prompt: "Que refúgio Ele já foi para mim antes?" },
+              { key: "confissao", prompt: "Onde troquei a quietude pela ansiedade?" },
+              { key: "suplica", prompt: "Que tempestade peço que Ele aquiete?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore devagar. Cada frase é um lugar onde descansar, não uma fórmula.",
             prayer: "Pai, quando tudo estremece, tu permaneces. Sê hoje o meu refúgio e a minha força. Faze-me quieto para saber que tu és Deus. Amém." }
@@ -133,6 +152,7 @@ export const UNITS: Unit[] = [
     theme: "Confiança",
     icon: "i-anchor", accent: "var(--forest)",
     blurb: "Quando o medo aperta e o mundo estremece, os Salmos ensinam o coração a descansar. Luz, deleite na Palavra e a certeza de pertencer a Deus.",
+    about: "Três salmos que a Igreja reza há séculos em tempos de medo: o 27 (coragem), o 1 (o deleite na Palavra) e o 100 (adoração). Texto bíblico da Bíblia Livre (BLIVRE), de domínio público; as vozes de Calvino e Lutero aparecem em paráfrases nossas, com a fonte indicada em cada estação.",
     days: [
       {
         id: "sc-1",
@@ -151,7 +171,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas I.2.2 · paráfrase",
             text: "Calvino ensinava que quem teme a Deus deixa de temer mil outras coisas. O temor reverente do Senhor não paralisa — liberta. Quando Deus é a maior realidade da minha vida, as ameaças diminuem ao seu tamanho verdadeiro." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que medo perde o poder quando Deus é a sua luz?",
-            intro: "Puxe os quatro fios — Ensino: o que significa Deus ser luz e salvação? Gratidão: de que medo Ele já me livrou? Confissão: a que tenho dado mais peso do que a Ele? Súplica: que temor entrego agora? Só você vê." },
+            intro: "Nomeie o seu medo e responda em quatro frentes.",
+            threads: [
+              { key: "ensino", prompt: "O que significa Deus ser a minha luz e salvação?" },
+              { key: "gratidao", prompt: "De que medo Ele já me livrou?" },
+              { key: "confissao", prompt: "A que tenho dado mais peso do que a Ele?" },
+              { key: "suplica", prompt: "Que temor entrego agora?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore em voz alta, se puder — o medo perde força quando a verdade é dita.",
             prayer: "Senhor, luz da minha vida e minha salvação, a quem temerei? Anda comigo hoje e cala os meus medos. Amém." }
@@ -185,7 +211,13 @@ export const UNITS: Unit[] = [
             author: "Martinho Lutero", initial: "L", source: "Oratio, meditatio, tentatio · paráfrase",
             text: "Lutero comparava a meditação a ruminar: voltar ao mesmo texto de novo e de novo, deixando-o descer do olho ao coração. A árvore do Salmo 1 não dá fruto de repente — dá porque está plantada e enraizada junto às águas da Palavra." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que verdade da Palavra você quer 'ruminar' hoje?",
-            intro: "Puxe os quatro fios — Ensino: que verdade quero ruminar? Gratidão: que fruto a Palavra já deu em mim? Confissão: onde tratei a Escritura como dever, não deleite? Súplica: que raiz peço que Ele aprofunde? Só você vê." },
+            intro: "Responda ao Salmo 1 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "Que verdade da Palavra quero levar comigo hoje?" },
+              { key: "gratidao", prompt: "Que fruto a Palavra já deu na minha vida?" },
+              { key: "confissao", prompt: "Onde tratei a Escritura como dever, e não como deleite?" },
+              { key: "suplica", prompt: "Que raiz peço que Ele aprofunde em mim?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — plante-a e volte a ela durante o dia.",
             prayer: "Senhor, planta-me junto às águas da tua Palavra, para que eu dê fruto no tempo certo. Amém." }
@@ -219,7 +251,13 @@ export const UNITS: Unit[] = [
             author: "Agostinho", initial: "A", source: "Confissões, criatura e Criador · paráfrase",
             text: "Agostinho insistia que não nos criamos nem nos sustentamos. Reconhecer 'foi ele que nos fez, e não nós a nós mesmos' derruba o orgulho e funda a adoração: tudo o que sou é dom. Quem se recebe das mãos de Deus aprende a devolvê-lo em louvor." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que muda ao lembrar que você não se fez a si mesmo?",
-            intro: "Puxe os quatro fios — Ensino: o que muda em saber que não me fiz? Gratidão: que dom recebido eu nomeio hoje? Confissão: onde vivi como se fosse o dono de mim? Súplica: que parte de mim devolvo ao Criador? Só você vê." },
+            intro: "Responda como criatura diante do Criador, em quatro frentes.",
+            threads: [
+              { key: "ensino", prompt: "O que muda em saber que não me fiz a mim mesmo?" },
+              { key: "gratidao", prompt: "Que dom recebido eu nomeio e agradeço hoje?" },
+              { key: "confissao", prompt: "Onde vivi como se fosse dono de mim?" },
+              { key: "suplica", prompt: "Que parte de mim devolvo ao Criador?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore como criatura diante do Criador — sem pressa e sem defesa.",
             prayer: "Senhor, tu me fizeste e eu sou teu. Recebe hoje a minha vida em adoração. Amém." }
@@ -244,6 +282,7 @@ export const UNITS: Unit[] = [
     theme: "Evangelho",
     icon: "i-dove", accent: "var(--mustard-deep)",
     blurb: "O coração do Evangelho: somos salvos pela graça, não pelo mérito. Descanse no dom de Deus e nas misericórdias que se renovam a cada manhã.",
+    about: "Unidade sobre a graça, no centro da fé reformada: Efésios 2 (salvos por dom), Mateus 11 (o descanso que Cristo oferece) e Lamentações 3 (a fidelidade que se renova). Traz Martinho Lutero (1483–1546), o reformador cuja redescoberta da justificação pela fé abriu a Reforma, e Agostinho — ambos em paráfrases nossas.",
     days: [
       {
         id: "dg-1",
@@ -263,7 +302,13 @@ export const UNITS: Unit[] = [
             author: "Martinho Lutero", initial: "L", source: "Prefácio às obras latinas · paráfrase",
             text: "Lutero descobriu, lendo Paulo, que a justiça de Deus não é uma exigência que nos esmaga, mas um presente que nos veste. Deixamos de tentar subir até Deus por obras e recebemos, de graça, a justiça de Cristo. O crente vive de mãos abertas, não de mãos cheias." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Em que você ainda tenta 'merecer' o amor de Deus?",
-            intro: "Puxe os quatro fios — Ensino: o que significa ser salvo por dom? Gratidão: o que recebi sem nunca ter merecido? Confissão: onde ainda tento pagar o que já foi pago? Súplica: que mão fechada peço que Ele abra? Só você vê." },
+            intro: "Responda à graça de Efésios 2 em quatro frentes.",
+            threads: [
+              { key: "ensino", prompt: "O que significa ser salvo por dom, e não por mérito?" },
+              { key: "gratidao", prompt: "O que recebi sem nunca ter merecido?" },
+              { key: "confissao", prompt: "Onde ainda tento pagar o que já foi pago?" },
+              { key: "suplica", prompt: "Que mão fechada peço que Ele abra?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore de mãos abertas. Não há nada a apresentar, só a receber.",
             prayer: "Pai, não me salvei a mim mesmo: tu me salvaste pela graça. Que eu viva hoje grato, e não ansioso por merecer. Amém." }
@@ -298,7 +343,13 @@ export const UNITS: Unit[] = [
             author: "Agostinho", initial: "A", source: "Confissões I.1 · paráfrase",
             text: "Agostinho passou anos exausto, buscando paz em tudo, menos em Deus. O convite de Jesus é o fim dessa corrida: o jugo de Cristo é leve porque Ele carrega conosco. Descansar não é parar de andar — é andar atrelado a Quem sustenta." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que peso você precisa entregar a Cristo hoje?",
-            intro: "Puxe os quatro fios — Ensino: por que o jugo de Cristo é leve? Gratidão: onde Ele já carregou comigo? Confissão: que peso insisti em levar sozinho? Súplica: que carga entrego agora? Só você vê." },
+            intro: "Traga o seu cansaço e responda em quatro frentes.",
+            threads: [
+              { key: "ensino", prompt: "Por que o jugo de Cristo é leve?" },
+              { key: "gratidao", prompt: "Onde Ele já carregou o peso comigo?" },
+              { key: "confissao", prompt: "Que peso insisti em levar sozinho?" },
+              { key: "suplica", prompt: "Que carga entrego a Ele agora?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — traga o cansaço junto, não o esconda.",
             prayer: "Jesus, manso e humilde, tomo hoje o teu jugo. Descansa a minha alma em ti. Amém." }
@@ -333,7 +384,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas I.16–17 · paráfrase",
             text: "Calvino ensinava que a providência não é um destino frio, mas o cuidado ativo de um Pai. Mesmo em Lamentações — um livro de choro — o crente enxerga misericórdias novas a cada manhã. Confiar na fidelidade de Deus não nega a dor; a atravessa com esperança." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você já viu a fidelidade de Deus na sua história?",
-            intro: "Puxe os quatro fios — Ensino: o que é fidelidade que se renova? Gratidão: que misericórdia recebi nesta semana? Confissão: onde julguei Deus pela dor, e não pelo caráter? Súplica: que manhã peço que Ele ilumine? Só você vê." },
+            intro: "Responda a Lamentações 3 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "O que é uma fidelidade que se renova a cada manhã?" },
+              { key: "gratidao", prompt: "Que misericórdia eu recebi nesta semana?" },
+              { key: "confissao", prompt: "Onde julguei Deus pela dor, e não pelo seu caráter?" },
+              { key: "suplica", prompt: "Que manhã peço que Ele ilumine?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore lembrando: a misericórdia de amanhã já está a caminho.",
             prayer: "Senhor, as tuas misericórdias se renovam a cada manhã. Faze-me confiar na tua fidelidade hoje. Amém." }
@@ -358,6 +415,7 @@ export const UNITS: Unit[] = [
     theme: "Vida Cristã · Calvino",
     icon: "i-cross", accent: "var(--slate)",
     source: "Baseado em João Calvino",
+    about: "O “Livrete de Ouro” é o apelido que ganhou um trecho das Institutas da Religião Cristã, a grande obra de João Calvino (1509–1564): os capítulos 6 a 10 do Livro III. Por serem práticos e curtos, foram publicados sozinhos durante séculos, como um pequeno manual de vida cristã — daí o apelido. Não trata de doutrina abstrata, mas de como viver: negar a si mesmo, carregar a cruz, usar bem os bens desta vida. Cada dia aqui traz uma leitura bíblica, uma paráfrase nossa do que Calvino diz naquela seção (com a referência para você conferir na sua edição) e os quatro fios para responder. A obra está em domínio público.",
     blurb: "Uma caminhada pela “Breve Instrução sobre a Vida Cristã” de Calvino (Institutas III.6–10). O chamado à vida cristã e a negação de si: a regra que vem de fora, e a vida que deixa de nos pertencer.",
     days: [
       {
@@ -379,7 +437,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas III.6.1–2",
             text: "Calvino abre o Livrete dizendo que o alvo da vida cristã não é inventado por nós: a Escritura nos apresenta um padrão, e esse padrão é a santidade de Deus. Não somos chamados a melhorar por autoajuda, mas a sermos conformados àquele que nos adotou. A regra da vida vem de fora — e isso é liberdade, não prisão, porque nos tira o peso de definir sozinhos o que é uma vida boa." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Quem define o seu caminho: você ou Deus?",
-            intro: "Puxe os quatro fios, uma linha cada — Ensino, Gratidão, Confissão, Súplica. Onde tenho preferido a minha luz à dele? Fica guardado no seu Diário, só você vê." },
+            intro: "Comece o mês respondendo em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "De onde vem a regra da vida cristã, segundo o texto?" },
+              { key: "gratidao", prompt: "Que direção recebida de Deus eu agradeço?" },
+              { key: "confissao", prompt: "Onde tenho preferido a minha luz à dele?" },
+              { key: "suplica", prompt: "Que coração ensinável peço para estes dias?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — ore com as suas próprias palavras, se preferir.",
             prayer: "Senhor, a regra da minha vida vem de ti. Dá-me um coração ensinável para começar estes dias andando na tua luz, e não na minha. Amém." }
@@ -415,7 +479,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas III.6.4",
             text: "Calvino é duro aqui: o evangelho não é doutrina de língua, mas de vida. Ele não foi dado para ocupar apenas a memória e o intelecto — só é verdadeiramente recebido quando toma posse da alma inteira e encontra assento no mais íntimo do coração. Um cristianismo que vive só no discurso é, para ele, pior que inútil." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que verdade você domina no discurso, mas ainda não pratica?",
-            intro: "Puxe os quatro fios — Ensino, Gratidão, Confissão, Súplica. Peça ao Espírito que feche a distância entre o que você sabe e o que vive. Só você vê." },
+            intro: "Responda a Tiago 1 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "O que Tiago diz sobre ouvir e praticar?" },
+              { key: "gratidao", prompt: "Que verdade já desceu da minha cabeça à minha vida?" },
+              { key: "confissao", prompt: "Que verdade eu domino no discurso, mas ainda não pratico?" },
+              { key: "suplica", prompt: "Que distância peço ao Espírito que feche?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — adapte às suas palavras.",
             prayer: "Espírito Santo, faze a tua Palavra descer da minha cabeça ao meu coração, e do coração à minha vida. Que eu seja praticante, e não só ouvinte. Amém." }
@@ -451,7 +521,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas III.6.5",
             text: "Calvino sabia que o padrão da santidade esmagaria qualquer um — por isso encerra com pastoral fina: não exijo, diz ele, que a vida do cristão respire nada além do evangelho perfeito, o que não se encontraria em ninguém. O que importa é a direção: avançar um pouco a cada dia, ainda que com passos pequenos e mancando, sem desistir. A vida cristã é jornada, não chegada." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde o perfeccionismo tem te paralisado em vez de te mover?",
-            intro: "Puxe os quatro fios — Ensino, Gratidão, Confissão, Súplica. Nomeie um passo pequeno e concreto para esta semana. Só você vê." },
+            intro: "Responda a Filipenses 3 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "Como Paulo equilibra “não cheguei lá” com “prossigo”?" },
+              { key: "gratidao", prompt: "Que pequeno progresso dos últimos meses posso nomear?" },
+              { key: "confissao", prompt: "Onde o perfeccionismo tem me paralisado em vez de me mover?" },
+              { key: "suplica", prompt: "Que passo pequeno e concreto peço forças para dar?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — ore com as suas palavras.",
             prayer: "Pai, não me peças hoje a perfeição, mas a constância. Faze-me avançar um passo em tua direção, ainda que pequeno, sem desistir. Amém." }
@@ -487,7 +563,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas III.7.1 · paráfrase",
             text: "Não somos nossos, diz Calvino: logo, nem nossa razão nem nossa vontade devem reinar em nossos planos. Não somos nossos: logo, não façamos da nossa conveniência o alvo da vida. Somos de Deus: logo, vivamos e morramos para Ele. Toda a ética cristã nasce dessa transferência de propriedade — e a maior peste que arruína o homem é obedecer a si mesmo." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que área você ainda trata como território só seu?",
-            intro: "Puxe os quatro fios — Ensino: o que muda quando agenda, energia e talento são sacrifício, e não propriedade? Gratidão: o que significa ter sido comprado por preço? Confissão: onde ainda reino? Súplica: que posse entrego hoje? Só você vê." },
+            intro: "Responda a Romanos 12 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "O que muda quando agenda, energia e talento são sacrifício, e não propriedade?" },
+              { key: "gratidao", prompt: "O que significa para mim ter sido comprado por preço?" },
+              { key: "confissao", prompt: "Que área da minha vida ainda trato como território só meu?" },
+              { key: "suplica", prompt: "Que posse eu entrego hoje?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — repita-a quando o ego voltar ao trono.",
             prayer: "Senhor, eu não sou meu, sou teu. Tira as minhas mãos do leme e reina onde eu tenho reinado. Amém." }
@@ -523,7 +605,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas III.7.2 · paráfrase",
             text: "Negar a si mesmo, explica Calvino, é dar adeus ao ego como conselheiro-chefe. É sair de si para que Deus entre; é desocupar o trono interno onde sentamos para decidir tudo segundo o nosso interesse. Ele chama isso de transferência: deixamos de buscar o que é nosso para buscar o que é do Senhor — e isso não acontece uma vez, mas é o trabalho diário de toda a vida." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que decisão atual você está tomando com o ego no trono?",
-            intro: "Puxe os quatro fios — Ensino: por que quem perde a vida a acha? Gratidão: onde renunciar já me trouxe mais vida, não menos? Confissão: onde decidi sozinho? Súplica: em que escolha desta semana peço coragem para perguntar “o que TU queres?” antes de “o que eu quero?” Só você vê." },
+            intro: "Traga uma decisão que está na sua mão e responda em quatro frentes.",
+            threads: [
+              { key: "ensino", prompt: "Qual é a lógica de Jesus: por que quem perde a vida a acha?" },
+              { key: "gratidao", prompt: "Onde renunciar a algo já me trouxe mais vida, e não menos?" },
+              { key: "confissao", prompt: "Que decisão atual estou tomando com o ego no trono?" },
+              { key: "suplica", prompt: "Em que escolha peço coragem para perguntar “o que TU queres?” primeiro?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — negar-se não é violência contra si, é entrega.",
             prayer: "Senhor, destrona o meu ego com a tua gentileza firme, e ensina-me a buscar a tua vontade antes da minha. Amém." }
@@ -559,7 +647,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas III.7.4 · paráfrase",
             text: "Tudo o que temos de bom é depósito, não conquista. Talento, inteligência, criatividade, oportunidades — dons confiados, não troféus. Por isso a verdadeira humildade não é fingir que não temos dons, mas reconhecer a fonte deles e usar tudo com gratidão, sem desprezar o irmão que recebeu dons diferentes. Quem entende isso não compete: administra." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você tem competido em vez de administrar?",
-            intro: "Puxe os quatro fios — Ensino: o que a pergunta de Paulo desmonta no meu jeito de ver meus talentos? Gratidão: que dom eu uso todo dia sem lembrar de quem o deu? Confissão: com quem me comparei? Súplica: que peço para ser mordomo e não dono? Só você vê." },
+            intro: "Responda a 1 Coríntios 4 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", prompt: "O que a pergunta de Paulo desmonta no meu jeito de ver meus talentos?" },
+              { key: "gratidao", prompt: "Que dom eu uso todo dia sem lembrar de quem o deu?" },
+              { key: "confissao", prompt: "Com quem tenho me comparado, em vez de administrar o que recebi?" },
+              { key: "suplica", prompt: "O que peço para ser mordomo, e não dono?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — agradeça nomeando os dons, um a um.",
             prayer: "Senhor, cada habilidade minha é carta tua; que eu nunca rasgue a assinatura. Faze-me grato, e não orgulhoso. Amém." }
@@ -595,7 +689,13 @@ export const UNITS: Unit[] = [
             author: "João Calvino", initial: "C", source: "Institutas III.7.5 · paráfrase",
             text: "Os dons que recebemos, diz Calvino, são depósitos confiados sob a condição de serem aplicados ao bem comum da igreja. O uso legítimo de qualquer graça é, portanto, a comunicação generosa dela aos irmãos. Somos mordomos de tudo o que Deus nos deu para ajudar o próximo — e prestaremos contas dessa mordomia. O amor cristão não calcula retorno; ele se gasta." },
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "A quem, especificamente, você pode servir esta semana?",
-            intro: "Puxe os quatro fios — Ensino: para que serve a liberdade que Cristo me deu? Gratidão: quem usou os próprios dons para me servir? Confissão: que dom usei mais para construir o meu nome do que para servir? Súplica: a quem sirvo nesta semana? Escreva o nome. Só você vê." },
+            intro: "Responda a Gálatas 5 em quatro frentes. No último, escreva um nome.",
+            threads: [
+              { key: "ensino", prompt: "Para que serve a liberdade que Cristo me deu?" },
+              { key: "gratidao", prompt: "Quem usou os próprios dons para me servir, e como isso me marcou?" },
+              { key: "confissao", prompt: "Que dom usei mais para construir o meu nome do que para servir?" },
+              { key: "suplica", prompt: "A quem, especificamente, vou servir nesta semana?" }
+            ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — ore pelo nome que você acabou de escrever.",
             prayer: "Senhor, faze dos meus talentos uma mesa posta para os outros. Que eu me gaste sem calcular retorno. Amém." }

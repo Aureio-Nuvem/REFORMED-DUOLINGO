@@ -242,33 +242,49 @@ function Units({ units, done, activeId, onPick, onBack }: {
         <div className="scr-title" style={{ margin: 0 }}>Unidades</div>
       </div>
       <div className="scr-sub">Escolha por onde caminhar — cada unidade é um plano devocional.</div>
-      {units.map((u) => {
-        const dc = u.days.filter((d) => done.has(d.id)).length;
-        const pct = Math.round((dc / u.days.length) * 100);
-        const isActive = u.id === activeId;
-        const complete = dc === u.days.length;
-        return (
-          <button className={"unit-card" + (isActive ? " active" : "")} key={u.id} onClick={() => onPick(u.id)}>
-            <span className="uc-ic" style={{ background: u.accent ?? "var(--terra)" }}>
-              <Icon name={(u.icon ?? "i-book") as IconName} />
-            </span>
-            <div className="uc-main">
-              <div className="uc-top">
-                <span className="uc-t">{u.title}</span>
-                {isActive && <span className="uc-badge">ATUAL</span>}
-                {complete && <span className="uc-badge done"><Icon name="i-check" /></span>}
-              </div>
-              <div className="uc-theme">{u.theme}{u.source ? ` · ${u.source}` : ""}</div>
-              {u.blurb && <div className="uc-blurb">{u.blurb}</div>}
-              <div className="uc-foot">
-                <div className="uc-bar"><i style={{ width: pct + "%" }} /></div>
-                <span className="uc-count">{dc}/{u.days.length}</span>
-              </div>
-            </div>
-          </button>
-        );
-      })}
+      {units.map((u) => (
+        <UnitCard key={u.id} unit={u} done={done} isActive={u.id === activeId} onPick={() => onPick(u.id)} />
+      ))}
     </section>
+  );
+}
+
+function UnitCard({ unit, done, isActive, onPick }: {
+  unit: Unit; done: Set<string>; isActive: boolean; onPick: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const dc = unit.days.filter((d) => done.has(d.id)).length;
+  const pct = Math.round((dc / unit.days.length) * 100);
+  const complete = dc === unit.days.length;
+  return (
+    <div className={"unit-card" + (isActive ? " active" : "")}>
+      <button className="uc-pick" onClick={onPick}>
+        <span className="uc-ic" style={{ background: unit.accent ?? "var(--terra)" }}>
+          <Icon name={(unit.icon ?? "i-book") as IconName} />
+        </span>
+        <div className="uc-main">
+          <div className="uc-top">
+            <span className="uc-t">{unit.title}</span>
+            {isActive && <span className="uc-badge">ATUAL</span>}
+            {complete && <span className="uc-badge done"><Icon name="i-check" /></span>}
+          </div>
+          <div className="uc-theme">{unit.theme}{unit.source ? ` · ${unit.source}` : ""}</div>
+          {unit.blurb && <div className="uc-blurb">{unit.blurb}</div>}
+          <div className="uc-foot">
+            <div className="uc-bar"><i style={{ width: pct + "%" }} /></div>
+            <span className="uc-count">{dc}/{unit.days.length}</span>
+          </div>
+        </div>
+      </button>
+      {unit.about && (
+        <>
+          <button className="uc-more" onClick={() => { setOpen(!open); snd.tap(); }}>
+            <Icon name="i-book" />{open ? "Ocultar" : "De onde vem este conteúdo?"}
+          </button>
+          {open && <div className="uc-about">{unit.about}</div>}
+        </>
+      )}
+    </div>
   );
 }
 

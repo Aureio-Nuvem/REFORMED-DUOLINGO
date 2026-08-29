@@ -359,9 +359,11 @@ button { font-family: inherit; }
 .up-go { flex: none; color: var(--ink-soft); } .up-go svg { font-size: 18px; }
 
 /* ---------- Tela de unidades ---------- */
-.unit-card { display: flex; align-items: flex-start; gap: 14px; width: 100%; border: 1.5px solid var(--line); border-radius: 18px; padding: 15px; background: var(--card-2); margin-bottom: 12px; cursor: pointer; font: inherit; color: inherit; text-align: left; transition: border-color .12s, transform .08s; }
-.unit-card:hover { border-color: var(--terra); } .unit-card:active { transform: scale(.99); }
+.unit-card { border: 1.5px solid var(--line); border-radius: 18px; background: var(--card-2); margin-bottom: 12px; overflow: hidden; transition: border-color .12s; }
+.unit-card:hover { border-color: var(--terra); }
 .unit-card.active { border-color: var(--terra); background: var(--card); }
+.uc-pick { display: flex; align-items: flex-start; gap: 14px; width: 100%; border: none; background: transparent; padding: 15px; cursor: pointer; font: inherit; color: inherit; text-align: left; transition: transform .08s; }
+.uc-pick:active { transform: scale(.99); }
 .uc-ic { width: 50px; height: 50px; flex: none; border-radius: 15px; display: grid; place-items: center; color: var(--cream); }
 .uc-ic svg { font-size: 26px; }
 .uc-main { flex: 1; min-width: 0; }
@@ -434,3 +436,20 @@ button { font-family: inherit; }
 .inv-empty { text-align: center; color: var(--ink-soft); font-weight: 600; font-size: 13.5px; line-height: 1.55; padding: 30px 20px; }
 .inv-empty svg { font-size: 34px; color: var(--line-strong); }
 .inv-empty .t { font-weight: 800; font-size: 15px; color: var(--ink); margin: 10px 0 4px; }
+
+/* ---------- Os quatro fios (Estação 05) ---------- */
+.fios-note { font-size: 12.5px; font-weight: 600; line-height: 1.55; color: var(--ink-mid); background: var(--card-2); border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
+.fios-note b { font-weight: 900; color: var(--ink); }
+.fio { border: 1.5px solid var(--line); border-radius: 16px; padding: 13px 14px; background: var(--card); margin-bottom: 11px; }
+.fio-head { display: flex; align-items: center; gap: 10px; }
+.fio-n { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; color: var(--cream); font-size: 12px; font-weight: 900; }
+.fio-label { font-size: 13px; font-weight: 900; letter-spacing: .04em; }
+.fio-hint { font-size: 11px; font-weight: 600; color: var(--ink-soft); margin-top: 1px; }
+.fio-q { font-family: var(--disp); font-size: 14.5px; line-height: 1.45; color: var(--ink); margin: 10px 0 8px; }
+.fio-in { width: 100%; font: inherit; font-weight: 600; font-size: 14.5px; line-height: 1.5; color: var(--ink); background: var(--card-2); border: 1.5px solid var(--line); border-radius: 11px; padding: 10px 12px; resize: vertical; min-height: 54px; }
+.fio-in:focus { outline: none; border-color: var(--terra); background: var(--card); }
+.fio-in::placeholder { color: var(--ink-soft); font-weight: 500; }
+.uc-more { display: flex; align-items: center; gap: 7px; width: 100%; border: none; border-top: 1.5px solid var(--line); background: transparent; padding: 11px 15px; font: inherit; font-weight: 800; font-size: 12px; color: var(--ink-soft); cursor: pointer; text-align: left; }
+.uc-more:hover { color: var(--terra); }
+.uc-more svg { font-size: 14px; }
+.uc-about { font-size: 12.5px; font-weight: 600; line-height: 1.6; color: var(--ink-mid); padding: 0 15px 15px; }

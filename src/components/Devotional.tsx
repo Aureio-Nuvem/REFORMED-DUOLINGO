@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { DevotionalDay, Station } from "../content/schema";
+import type { DevotionalDay, Station, ThreadKey } from "../content/schema";
 import { getVerse, joinVerses } from "../content/bible";
 import { snd } from "../engine/audio";
 import { burst } from "../engine/confetti";
@@ -15,6 +15,17 @@ interface Props {
   onExit: () => void;   // sair sem concluir
   onDone: () => void;   // concluiu e guardou o selo
 }
+
+/**
+ * O que cada fio significa. Isto é fixo e explicado na tela: o conteúdo do dia
+ * traz só a pergunta, e aqui dizemos ao usuário para que serve cada campo.
+ */
+const FIOS: Record<ThreadKey, { n: string; label: string; hint: string; color: string }> = {
+  ensino:    { n: "1", label: "Ensino",   hint: "o que o texto me mostra sobre Deus",     color: "var(--mustard-deep)" },
+  gratidao:  { n: "2", label: "Gratidão", hint: "pelo que eu agradeço a partir disto",    color: "var(--forest)" },
+  confissao: { n: "3", label: "Confissão", hint: "o que eu reconheço diante de Deus",     color: "var(--terra)" },
+  suplica:   { n: "4", label: "Súplica",  hint: "o que eu peço a Ele agora",              color: "var(--slate)" }
+};
 
 type Phase = { kind: "stations"; i: number } | { kind: "challenge" } | { kind: "selo"; xp: number };
 
@@ -58,9 +69,21 @@ export function Devotional({ day, hearts, gems, actions, onExit, onDone }: Props
   const st = day.stations[phase.i];
   const goNext = () => {
     if (st.type === "reflect") {
-      const el = document.getElementById("reflect-in") as HTMLTextAreaElement | null;
       const passageRef = getVerse(day.carryRef).ref;
-      if (el) actions.addDiary(passageRef + " · BLIVRE", el.value);
+      if (st.threads?.length) {
+        // Guarda só os fios que a pessoa preencheu, cada um rotulado.
+        const parts = st.threads
+          .map((t) => {
+            const el = document.getElementById("fio-" + t.key) as HTMLTextAreaElement | null;
+            const v = el?.value.trim();
+            return v ? FIOS[t.key].label + ": " + v : null;
+          })
+          .filter(Boolean);
+        if (parts.length) actions.addDiary(passageRef + " · BLIVRE", parts.join("\n"));
+      } else {
+        const el = document.getElementById("reflect-in") as HTMLTextAreaElement | null;
+        if (el) actions.addDiary(passageRef + " · BLIVRE", el.value);
+      }
     }
     snd.tap();
     if (phase.i + 1 < day.stations.length) setPhase({ kind: "stations", i: phase.i + 1 });
@@ -205,7 +228,34 @@ function StationContent({ station }: { station: Station }) {
         <>
           <div className="st-lead">{station.intro}</div>
           <div className="st-body" style={{ alignItems: "stretch" }}>
-            <textarea className="reflect-in" id="reflect-in" placeholder="Escreva aqui o que Deus falou ao seu coração…" />
+            {station.threads?.length ? (
+              <>
+                <div className="fios-note">
+                  <b>Os quatro fios</b> são quatro maneiras de responder ao texto — o que ele
+                  {" "}<b>ensina</b>, o que desperta <b>gratidão</b>, o que leva à <b>confissão</b> e o
+                  que vira <b>pedido</b>. Não precisa preencher todos, nem escrever bonito.
+                </div>
+                {station.threads.map((t) => {
+                  const fio = FIOS[t.key];
+                  return (
+                    <div className="fio" key={t.key}>
+                      <div className="fio-head">
+                        <span className="fio-n" style={{ background: fio.color }}>{fio.n}</span>
+                        <div>
+                          <div className="fio-label">{fio.label}</div>
+                          <div className="fio-hint">{fio.hint}</div>
+                        </div>
+                      </div>
+                      <div className="fio-q">{t.prompt}</div>
+                      <textarea className="fio-in" id={"fio-" + t.key} rows={2}
+                        placeholder="Escreva uma frase…" />
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              <textarea className="reflect-in" id="reflect-in" placeholder="Escreva aqui o que Deus falou ao seu coração…" />
+            )}
             <div className="reflect-meta">
               <span className="l"><Icon name="i-lock" />SÓ VOCÊ VÊ · SEM CERTO OU ERRADO</span>
             </div>

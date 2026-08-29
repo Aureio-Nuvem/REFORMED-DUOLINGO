@@ -16,13 +16,20 @@ export type Question =
   | { type: "order"; kicker: string; q: string; ref?: string; words: string[]; exp: string }
   | { type: "match"; kicker: string; q: string; pairs: [string, string][]; exp: string };
 
+/**
+ * Um dos "quatro fios" da reflexão. O QUE cada fio significa é fixo e vive na
+ * interface (o app explica ao usuário); aqui fica só a pergunta daquele dia.
+ */
+export type ThreadKey = "ensino" | "gratidao" | "confissao" | "suplica";
+export interface ReflectThread { key: ThreadKey; prompt: string }
+
 /** Estações do devocional guiado (registros: sereno 1–6, energético 7–8). */
 export type Station =
   | { type: "light"; eyebrow: string; title: string; lead: string; prayerRef?: string; prayer?: string }
   | { type: "read"; eyebrow: string; title: string; passageRefs: string[] }
   | { type: "breath"; eyebrow: string; title: string; verseRef: string; seconds: number }
   | { type: "voice"; eyebrow: string; title: string; intro: string; author: string; initial: string; source: string; text: string }
-  | { type: "reflect"; eyebrow: string; title: string; intro: string }
+  | { type: "reflect"; eyebrow: string; title: string; intro: string; threads?: ReflectThread[] }
   | { type: "pray"; eyebrow: string; title: string; intro: string; prayer: string };
 
 /** Um dia de devocional dentro de uma unidade/plano. */
@@ -42,6 +49,7 @@ export interface Unit {
   title: string;
   theme: string;       // ex.: "Fundamentos"
   blurb?: string;      // sinopse curta para a tela de escolha
+  about?: string;      // de onde vem o conteúdo, para quem não conhece a obra
   icon?: string;       // nome do ícone (padrão: i-book)
   accent?: string;     // var(--...) para o cartão da unidade
   source?: string;     // atribuição (ex.: "Baseado em João Calvino")
