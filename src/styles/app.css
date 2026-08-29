@@ -394,3 +394,30 @@ button { font-family: inherit; }
 .rem-time { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--card-2); font-weight: 800; font-size: 14px; }
 .rem-time input { font: inherit; font-weight: 800; border: 1.5px solid var(--line-strong); border-radius: 10px; padding: 6px 10px; background: var(--card); color: var(--ink); }
 .rem-fine { font-size: 11px; font-weight: 600; color: var(--ink-soft); line-height: 1.45; margin-top: 9px; padding: 0 2px; }
+
+/* ---------- Conta & sincronização ---------- */
+.acc-box { margin-bottom: 8px; }
+.acc-row { display: flex; align-items: center; gap: 13px; width: 100%; border: 1.5px solid var(--line-strong); border-radius: 16px; padding: 13px 14px; background: var(--card); cursor: pointer; font: inherit; color: inherit; text-align: left; transition: border-color .12s; }
+.acc-row:hover { border-color: var(--terra); }
+.acc-row.static { cursor: default; border-color: var(--sage); }
+.acc-ic { width: 40px; height: 40px; flex: none; border-radius: 12px; display: grid; place-items: center; background: var(--mustard-soft); color: var(--mustard-deep); }
+.acc-ic.on { background: var(--sage-soft); color: var(--forest); }
+.acc-ic svg { font-size: 20px; }
+.acc-main { flex: 1; min-width: 0; }
+.acc-t { font-weight: 800; font-size: 15px; }
+.acc-s { font-size: 12px; font-weight: 700; color: var(--ink-soft); margin-top: 2px; }
+.acc-s.st-ok { color: var(--forest); }
+.acc-s.st-error { color: var(--terra); }
+.acc-go { flex: none; color: var(--ink-soft); } .acc-go svg { font-size: 18px; }
+.acc-actions { display: grid; gap: 8px; margin-top: 10px; }
+.acc-fine { font-size: 11px; font-weight: 600; color: var(--ink-soft); line-height: 1.45; margin-top: 9px; padding: 0 2px; }
+
+/* ---------- Formulário de entrar/cadastrar ---------- */
+.auth-form { display: grid; gap: 12px; }
+.fld { display: grid; gap: 6px; }
+.fld span { font-size: 10px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.fld input { font: inherit; font-weight: 700; font-size: 15px; border: 1.5px solid var(--line-strong); border-radius: 14px; padding: 13px 14px; background: var(--card); color: var(--ink); width: 100%; }
+.fld input:focus { outline: none; border-color: var(--terra); }
+.auth-err { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--terra); background: var(--terra-soft); border-radius: 12px; padding: 11px 13px; }
+.auth-err svg { flex: none; font-size: 15px; }
+.auth-fine { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); line-height: 1.5; text-align: center; padding: 2px 8px; }

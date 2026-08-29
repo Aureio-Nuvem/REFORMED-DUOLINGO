@@ -12,3 +12,4 @@ npm-debug.log*
 # fontes de conteúdo reais (mantém só os *.sample.json e o README)
 content-source/*.json
 !content-source/*.sample.json
+.tmp-test/

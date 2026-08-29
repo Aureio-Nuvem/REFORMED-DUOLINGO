@@ -7,6 +7,8 @@ import { COURSES } from "./content/courses";
 import type { DevotionalDay, Unit } from "./content/schema";
 import type { SaveState, Reminder } from "./engine/storage";
 import { applyReminder, reminderSupported, reminderPermission, requestReminderPermission } from "./engine/reminder";
+import { useSync, type SyncStatus } from "./engine/useSync";
+import { AuthScreen } from "./components/AuthScreen";
 import { Devotional } from "./components/Devotional";
 import { CourseFlow } from "./components/CourseFlow";
 
@@ -20,7 +22,7 @@ function resolveActiveUnit(state: SaveState): Unit {
   return UNITS.find((u) => u.days.some((d) => !done.has(d.id))) ?? UNITS[UNITS.length - 1];
 }
 
-type Screen = "home" | "academy" | "shop" | "profile" | "course" | "medals" | "diary" | "devo" | "units" | "onboard";
+type Screen = "home" | "academy" | "shop" | "profile" | "course" | "medals" | "diary" | "devo" | "units" | "auth" | "onboard";
 const CHROME: Screen[] = ["home", "academy", "shop", "profile"];
 
 const OFFSETS = [0, -1, -2, -1, 0, 1, 2, 1];
@@ -36,6 +38,7 @@ export function App() {
   const [courseId, setCourseId] = useState<string | null>(null);
   const [playDay, setPlayDay] = useState<DevotionalDay | null>(null);
   const [muted, setMutedState] = useState(isMuted());
+  const sync = useSync(state, actions.replaceState);
 
   // (Re)agenda o lembrete diário sempre que a configuração mudar.
   useEffect(() => { applyReminder(state.reminder); }, [state.reminder]);
@@ -105,6 +108,8 @@ export function App() {
           {screen === "shop" && <Shop gems={state.gems} />}
           {screen === "profile" && (
             <Profile state={state} muted={muted}
+              account={sync.account} syncStatus={sync.status}
+              onSignIn={() => go("auth")} onSignOut={sync.signOut} onSyncNow={() => void sync.syncNow()}
               onReminder={(r) => actions.setReminder(r)}
               onDiary={() => go("diary")}
               onMedals={() => go("medals")}
@@ -112,6 +117,10 @@ export function App() {
               onToggleTheme={() => actions.setTheme(state.theme === "dark" ? "light" : "dark")}
               onReplayIntro={() => actions.setOnboarded(false)}
               onReset={() => { actions.resetDemo(); setScreen("home"); }} />
+          )}
+          {screen === "auth" && (
+            <AuthScreen onBack={() => go("profile")}
+              onDone={(t, u, save, rev) => { void sync.adopt(t, u, save, rev); setScreen("profile"); }} />
           )}
           {screen === "medals" && <Medals onBack={() => go("profile")} />}
           {screen === "diary" && <Diary entries={state.diary} onBack={() => go("profile")} />}
@@ -320,6 +329,50 @@ function Shop({ gems }: { gems: number }) {
   );
 }
 
+/* ---------- Conta e sincronização ---------- */
+const SYNC_LABEL: Record<SyncStatus, string> = {
+  off: "Só neste aparelho",
+  syncing: "Sincronizando…",
+  ok: "Progresso salvo na nuvem",
+  error: "Sem conexão — salvo aqui"
+};
+
+function AccountBox({ account, status, onSignIn, onSignOut, onSyncNow }: {
+  account: { name: string; username: string } | null; status: SyncStatus;
+  onSignIn: () => void; onSignOut: () => void; onSyncNow: () => void;
+}) {
+  if (!account) {
+    return (
+      <div className="acc-box">
+        <button className="acc-row" onClick={onSignIn}>
+          <span className="acc-ic"><Icon name="i-lock" /></span>
+          <div className="acc-main">
+            <div className="acc-t">Entrar ou criar conta</div>
+            <div className="acc-s">Guarde o seu progresso e continue em outro aparelho</div>
+          </div>
+          <span className="acc-go"><Icon name="i-arrow" /></span>
+        </button>
+        <div className="acc-fine">Sem conta, tudo funciona — mas fica só neste navegador.</div>
+      </div>
+    );
+  }
+  return (
+    <div className="acc-box">
+      <div className="acc-row static">
+        <span className="acc-ic on"><Icon name="i-check" /></span>
+        <div className="acc-main">
+          <div className="acc-t">{account.name}</div>
+          <div className={"acc-s st-" + status}>{SYNC_LABEL[status]}</div>
+        </div>
+      </div>
+      <div className="acc-actions">
+        <button className="ctrl" onClick={onSyncNow}><Icon name="i-reset" />Sincronizar agora</button>
+        <button className="ctrl" onClick={onSignOut}><Icon name="i-lock" />Sair da conta</button>
+      </div>
+    </div>
+  );
+}
+
 /* ---------- Lembrete diário ---------- */
 function ReminderSetting({ reminder, onReminder }: { reminder: Reminder; onReminder: (r: Reminder) => void }) {
   const [perm, setPerm] = useState(reminderPermission());
@@ -360,8 +413,10 @@ function ReminderSetting({ reminder, onReminder }: { reminder: Reminder; onRemin
 }
 
 /* ---------- Perfil ---------- */
-function Profile({ state, muted, onReminder, onDiary, onMedals, onToggleMute, onToggleTheme, onReplayIntro, onReset }: {
+function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyncNow, onReminder, onDiary, onMedals, onToggleMute, onToggleTheme, onReplayIntro, onReset }: {
   state: ReturnType<typeof useLumen>["state"]; muted: boolean;
+  account: { name: string; username: string } | null; syncStatus: SyncStatus;
+  onSignIn: () => void; onSignOut: () => void; onSyncNow: () => void;
   onReminder: (r: Reminder) => void;
   onDiary: () => void; onMedals: () => void; onToggleMute: () => void; onToggleTheme: () => void; onReplayIntro: () => void; onReset: () => void;
 }) {
@@ -369,9 +424,9 @@ function Profile({ state, muted, onReminder, onDiary, onMedals, onToggleMute, on
   return (
     <section className="screen">
       <div className="prof-head">
-        <div className="prof-av">A</div>
+        <div className="prof-av">{(account?.name ?? "A").charAt(0).toUpperCase()}</div>
         <div>
-          <div className="prof-name">Aureio</div>
+          <div className="prof-name">{account?.name ?? "Visitante"}</div>
           <div className="prof-since">Membro desde agosto de 2026</div>
           <div className="prof-solideo"><Icon name="i-cross" />SOLI DEO GLORIA</div>
         </div>
@@ -390,6 +445,8 @@ function Profile({ state, muted, onReminder, onDiary, onMedals, onToggleMute, on
       <div className="sec-h">Meu diário</div>
       <button className="open-row" onClick={onDiary}><span className="di"><Icon name="i-journal" /></span>Ver minhas reflexões<span className="arw"><Icon name="i-arrow" /></span></button>
       <button className="open-row" onClick={onMedals}><span className="di"><Icon name="i-medal" /></span>Minhas medalhas<span className="arw"><Icon name="i-arrow" /></span></button>
+      <div className="sec-h">Conta</div>
+      <AccountBox account={account} status={syncStatus} onSignIn={onSignIn} onSignOut={onSignOut} onSyncNow={onSyncNow} />
       <div className="sec-h">Lembrete</div>
       <ReminderSetting reminder={state.reminder} onReminder={onReminder} />
       <div className="sec-h">Configurações</div>

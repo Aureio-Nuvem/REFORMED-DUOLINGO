@@ -16,6 +16,7 @@ export interface GameActions {
   setActiveUnit: (unitId: string) => void;
   setReminder: (r: Reminder) => void;
   migrateDone: (ids: string[]) => void;  // backfill único de progresso legado
+  replaceState: (s: SaveState) => void;  // usado pela sincronização na nuvem
   setTheme: (t: SaveState["theme"]) => void;
   setOnboarded: (v: boolean) => void;
   resetDemo: () => void;
@@ -59,6 +60,7 @@ export function useLumen(): { state: SaveState; actions: GameActions } {
     setState((s) => ({ ...s, studyPos: { ...s.studyPos, [courseId]: index } })), []);
   const setActiveUnit = useCallback((unitId: string) => setState((s) => ({ ...s, activeUnit: unitId })), []);
   const setReminder = useCallback((r: Reminder) => setState((s) => ({ ...s, reminder: r })), []);
+  const replaceState = useCallback((next: SaveState) => setState(next), []);
   const migrateDone = useCallback((ids: string[]) =>
     setState((s) => (s.doneDays.length ? s : { ...s, doneDays: ids })), []);
   const setTheme = useCallback((t: SaveState["theme"]) => setState((s) => ({ ...s, theme: t })), []);
@@ -71,7 +73,7 @@ export function useLumen(): { state: SaveState; actions: GameActions } {
 
   return {
     state,
-    actions: { addXp, addGems, loseHeart, resetHearts, refillHearts, completeDay, addDiary, bumpMastery, setStudyPos, setActiveUnit, setReminder, migrateDone, setTheme, setOnboarded, resetDemo }
+    actions: { addXp, addGems, loseHeart, resetHearts, refillHearts, completeDay, addDiary, bumpMastery, setStudyPos, setActiveUnit, setReminder, migrateDone, replaceState, setTheme, setOnboarded, resetDemo }
   };
 }
 

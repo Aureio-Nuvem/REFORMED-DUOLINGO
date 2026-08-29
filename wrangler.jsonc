@@ -1,11 +1,22 @@
 {
-  // Deploy do Lúmen como site estático (Static Assets) no Cloudflare.
-  // Sem "main": é um deploy só de assets (a pasta dist), sem código de Worker.
-  // Isso evita a auto-configuração de framework do wrangler (que exige Vite 6).
+  // Lúmen no Cloudflare Workers: o Worker serve a API em /api/* e entrega o
+  // app (dist) pelo binding ASSETS. O SPA cai em index.html nas outras rotas.
   "name": "reformed-duolingo",
+  "main": "worker/index.ts",
   "compatibility_date": "2024-11-01",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lumen-db",
+      // Substituir pelo id que `wrangler d1 create lumen-db` imprimir.
+      "database_id": "PREENCHER_APOS_CRIAR_O_BANCO"
+    }
+  ]
+  // SESSION_SECRET é segredo, não vai aqui:
+  //   npx wrangler secret put SESSION_SECRET
 }
