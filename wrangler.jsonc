@@ -8,24 +8,14 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application"
-  }
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // LIGAR O LOGIN E A NUVEM (ver NUVEM.md)
-  //
-  // Enquanto este bloco estiver comentado, o app funciona normalmente, só que
-  // salvando apenas no aparelho. Para ligar a conta na nuvem:
-  //
-  //   1. crie o banco D1 chamado  lumen-db  no painel do Cloudflare
-  //   2. copie o Database ID que aparecer
-  //   3. apague as barras "//" das 8 linhas abaixo e cole o id no lugar indicado
-  //
-  // "d1_databases": [
-  //   {
-  //     "binding": "DB",
-  //     "database_name": "lumen-db",
-  //     "database_id": "COLE_AQUI_O_ID_DO_BANCO"
-  //   }
-  // ]
-  // ─────────────────────────────────────────────────────────────────────────
+  },
+  // Banco do login e da sincronização. As tabelas e o segredo de sessão são
+  // criados pelo próprio Worker na primeira chamada da API (ver NUVEM.md).
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lumen-db",
+      "database_id": "04b81f12-8d5f-4f20-a43b-874c091293ec"
+    }
+  ]
 }
