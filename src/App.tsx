@@ -7,6 +7,8 @@ import { COURSES } from "./content/courses";
 import type { DevotionalDay, Unit } from "./content/schema";
 import type { SaveState, Reminder } from "./engine/storage";
 import { applyReminder, reminderSupported, reminderPermission, requestReminderPermission } from "./engine/reminder";
+import { computeMedals, heatmap } from "./engine/medals";
+import { getVerse } from "./content/bible";
 import { useSync, type SyncStatus } from "./engine/useSync";
 import { AuthScreen } from "./components/AuthScreen";
 import { Invites } from "./components/Invites";
@@ -23,7 +25,7 @@ function resolveActiveUnit(state: SaveState): Unit {
   return UNITS.find((u) => u.days.some((d) => !done.has(d.id))) ?? UNITS[UNITS.length - 1];
 }
 
-type Screen = "home" | "academy" | "shop" | "profile" | "course" | "medals" | "diary" | "devo" | "units" | "auth" | "invites" | "onboard";
+type Screen = "home" | "academy" | "shop" | "profile" | "course" | "medals" | "diary" | "devo" | "units" | "auth" | "invites" | "selos" | "onboard";
 const CHROME: Screen[] = ["home", "academy", "shop", "profile"];
 
 const OFFSETS = [0, -1, -2, -1, 0, 1, 2, 1];
@@ -111,10 +113,11 @@ export function App() {
             <Profile state={state} muted={muted}
               account={sync.account} syncStatus={sync.status}
               onSignIn={() => go("auth")} onSignOut={sync.signOut} onSyncNow={() => void sync.syncNow()}
-              onInvites={() => go("invites")}
+              onInvites={() => go("invites")} onLocalName={actions.setLocalName}
               onReminder={(r) => actions.setReminder(r)}
               onDiary={() => go("diary")}
               onMedals={() => go("medals")}
+              onSelos={() => go("selos")}
               onToggleMute={() => { const m = !muted; setMuted(m); setMutedState(m); if (!m) snd.correct(); }}
               onToggleTheme={() => actions.setTheme(state.theme === "dark" ? "light" : "dark")}
               onReplayIntro={() => actions.setOnboarded(false)}
@@ -125,12 +128,19 @@ export function App() {
               onDone={(t, u, save, rev) => { void sync.adopt(t, u, save, rev); setScreen("profile"); }} />
           )}
           {screen === "invites" && <Invites onBack={() => go("profile")} />}
-          {screen === "medals" && <Medals onBack={() => go("profile")} />}
+          {screen === "medals" && <Medals state={state} onBack={() => go("profile")} />}
+          {screen === "selos" && <Selos seals={state.seals} onBack={() => go("profile")} />}
           {screen === "diary" && <Diary entries={state.diary} onBack={() => go("profile")} />}
           {screen === "devo" && playDay && (
             <Devotional day={playDay} hearts={state.hearts} gems={state.gems} actions={actions}
               onExit={() => setScreen("home")}
-              onDone={() => { actions.completeDay(playDay.id); setScreen("home"); }} />
+              onDone={() => {
+                actions.completeDay(playDay.id, {
+                  dayId: playDay.id, title: playDay.title,
+                  unit: activeUnit.title, ref: getVerse(playDay.carryRef).ref
+                });
+                setScreen("home");
+              }} />
           )}
         </div>
         {showChrome && <Nav screen={screen} onGo={go} />}
@@ -356,13 +366,19 @@ const SYNC_LABEL: Record<SyncStatus, string> = {
   error: "Sem conexão — salvo aqui"
 };
 
-function AccountBox({ account, status, onSignIn, onSignOut, onSyncNow, onInvites }: {
+function AccountBox({ account, status, localName, onLocalName, onSignIn, onSignOut, onSyncNow, onInvites }: {
   account: { name: string; username: string; owner?: boolean } | null; status: SyncStatus;
+  localName: string; onLocalName: (name: string) => void;
   onSignIn: () => void; onSignOut: () => void; onSyncNow: () => void; onInvites: () => void;
 }) {
   if (!account) {
     return (
       <div className="acc-box">
+        <label className="fld" style={{ marginBottom: 10 }}>
+          <span>Como quer ser chamado</span>
+          <input value={localName} maxLength={24} placeholder="Seu nome"
+            onChange={(e) => onLocalName(e.target.value)} />
+        </label>
         <button className="acc-row" onClick={onSignIn}>
           <span className="acc-ic"><Icon name="i-lock" /></span>
           <div className="acc-main">
@@ -371,7 +387,10 @@ function AccountBox({ account, status, onSignIn, onSignOut, onSyncNow, onInvites
           </div>
           <span className="acc-go"><Icon name="i-arrow" /></span>
         </button>
-        <div className="acc-fine">Sem conta, tudo funciona — mas fica só neste navegador.</div>
+        <div className="acc-fine">
+          O nome acima fica só neste aparelho. Para criar conta é preciso um código de
+          convite — peça o seu a quem te indicou o Lúmen.
+        </div>
       </div>
     );
   }
@@ -435,20 +454,22 @@ function ReminderSetting({ reminder, onReminder }: { reminder: Reminder; onRemin
 }
 
 /* ---------- Perfil ---------- */
-function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyncNow, onInvites, onReminder, onDiary, onMedals, onToggleMute, onToggleTheme, onReplayIntro, onReset }: {
+function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyncNow, onInvites, onLocalName, onReminder, onDiary, onMedals, onSelos, onToggleMute, onToggleTheme, onReplayIntro, onReset }: {
   state: ReturnType<typeof useLumen>["state"]; muted: boolean;
   account: { name: string; username: string; owner?: boolean } | null; syncStatus: SyncStatus;
   onSignIn: () => void; onSignOut: () => void; onSyncNow: () => void; onInvites: () => void;
+  onLocalName: (name: string) => void;
   onReminder: (r: Reminder) => void;
-  onDiary: () => void; onMedals: () => void; onToggleMute: () => void; onToggleTheme: () => void; onReplayIntro: () => void; onReset: () => void;
+  onDiary: () => void; onMedals: () => void; onSelos: () => void; onToggleMute: () => void; onToggleTheme: () => void; onReplayIntro: () => void; onReset: () => void;
 }) {
-  const heat = [2,3,2,1,3,3,0, 1,2,3,3,2,3,1, 3,3,2,2,3,3,0, 2,1,3,3,2,3,2, 3,2,3,1,3,2,3];
+  const heat = heatmap(state.seals);
+  const medalsDone = computeMedals(state).filter((m) => m.done).length;
   return (
     <section className="screen">
       <div className="prof-head">
-        <div className="prof-av">{(account?.name ?? "A").charAt(0).toUpperCase()}</div>
+        <div className="prof-av">{(account?.name || state.localName || "?").charAt(0).toUpperCase()}</div>
         <div>
-          <div className="prof-name">{account?.name ?? "Visitante"}</div>
+          <div className="prof-name">{account?.name || state.localName || "Visitante"}</div>
           <div className="prof-since">Membro desde agosto de 2026</div>
           <div className="prof-solideo"><Icon name="i-cross" />SOLI DEO GLORIA</div>
         </div>
@@ -456,8 +477,8 @@ function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyn
       <div className="pstat-grid">
         <div className="pstat"><span className="p-ic"><Icon name="i-flame" /></span><div><div className="p-v">{state.streak}</div><div className="p-k">Ofensiva</div></div></div>
         <div className="pstat g2"><span className="p-ic"><Icon name="i-xp" /></span><div><div className="p-v">{state.xp.toLocaleString("pt-BR")}</div><div className="p-k">XP total</div></div></div>
-        <div className="pstat"><span className="p-ic"><Icon name="i-book" /></span><div><div className="p-v">{state.dayIndex}</div><div className="p-k">Devocionais</div></div></div>
-        <div className="pstat g2"><span className="p-ic"><Icon name="i-medal" /></span><div><div className="p-v">4</div><div className="p-k">Medalhas</div></div></div>
+        <div className="pstat"><span className="p-ic"><Icon name="i-book" /></span><div><div className="p-v">{state.seals.length}</div><div className="p-k">Devocionais</div></div></div>
+        <div className="pstat g2"><span className="p-ic"><Icon name="i-medal" /></span><div><div className="p-v">{medalsDone}</div><div className="p-k">Medalhas</div></div></div>
       </div>
       <div className="sec-h">Constância devocional · últimas 5 semanas</div>
       <div className="heat">
@@ -467,8 +488,10 @@ function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyn
       <div className="sec-h">Meu diário</div>
       <button className="open-row" onClick={onDiary}><span className="di"><Icon name="i-journal" /></span>Ver minhas reflexões<span className="arw"><Icon name="i-arrow" /></span></button>
       <button className="open-row" onClick={onMedals}><span className="di"><Icon name="i-medal" /></span>Minhas medalhas<span className="arw"><Icon name="i-arrow" /></span></button>
+      <button className="open-row" onClick={onSelos}><span className="di"><Icon name="i-check" /></span>Meus selos<span className="arw"><Icon name="i-arrow" /></span></button>
       <div className="sec-h">Conta</div>
-      <AccountBox account={account} status={syncStatus} onSignIn={onSignIn} onSignOut={onSignOut} onSyncNow={onSyncNow} onInvites={onInvites} />
+      <AccountBox account={account} status={syncStatus} localName={state.localName} onLocalName={onLocalName}
+        onSignIn={onSignIn} onSignOut={onSignOut} onSyncNow={onSyncNow} onInvites={onInvites} />
       <div className="sec-h">Lembrete</div>
       <ReminderSetting reminder={state.reminder} onReminder={onReminder} />
       <div className="sec-h">Configurações</div>
@@ -483,34 +506,75 @@ function Profile({ state, muted, account, syncStatus, onSignIn, onSignOut, onSyn
 }
 
 /* ---------- Medalhas ---------- */
-function Medals({ onBack }: { onBack: () => void }) {
-  const medals: { ic: IconName; t: string; s: string; done: boolean; c?: string; p?: number }[] = [
-    { ic: "i-flame", t: "Chama Viva", s: "Ofensiva de 7 dias", done: true, c: "var(--terra)" },
-    { ic: "i-book", t: "Leitor Fiel", s: "10 lições", done: true, c: "var(--forest)" },
-    { ic: "i-target", t: "Perfeição", s: "Lição sem erros", done: true, c: "var(--mustard)" },
-    { ic: "i-cross", t: "Catecúmeno", s: "Concluiu os Solas", done: true, c: "var(--slate)" },
-    { ic: "i-sunrise", t: "Madrugador", s: "Antes das 8h", done: false, p: 60 },
-    { ic: "i-gem", t: "Tesouro", s: "Junte 100 gemas", done: false, p: 45 },
-    { ic: "i-temple", t: "Teólogo", s: "Unidade Institutas", done: false, p: 0 },
-    { ic: "i-anchor", t: "Firme na Fé", s: "Ofensiva de 14 dias", done: false, p: 50 },
-    { ic: "i-dove", t: "Fruto do Espírito", s: "30 dias seguidos", done: false, p: 23 }
-  ];
+function Medals({ state, onBack }: { state: SaveState; onBack: () => void }) {
+  const medals = computeMedals(state);
+  const done = medals.filter((m) => m.done).length;
   return (
     <section className="screen">
       <div className="diary-top">
         <button className="xbtn" onClick={onBack} aria-label="Voltar"><Icon name="i-arrow" style={{ transform: "scaleX(-1)" }} /></button>
         <div className="scr-title" style={{ margin: 0 }}>Medalhas</div>
       </div>
-      <div className="scr-sub">Conquistas ao longo da sua caminhada</div>
+      <div className="scr-sub">
+        {done === 0
+          ? "Nenhuma conquistada ainda — a primeira vem no seu primeiro devocional."
+          : `${done} de ${medals.length} conquistadas ao longo da sua caminhada`}
+      </div>
       <div className="medal-grid">
-        {medals.map((m, i) => (
-          <div className={"medal " + (m.done ? "done" : "locked")} key={i}>
-            <span className="m-badge" style={m.done ? { background: m.c } : undefined}><Icon name={m.done ? m.ic : "i-lock"} /></span>
-            <div className="m-t">{m.t}</div><div className="m-s">{m.s}</div>
-            {!m.done && <div className="m-prog"><i style={{ width: (m.p ?? 0) + "%" }} /></div>}
+        {medals.map((m) => (
+          <div className={"medal " + (m.done ? "done" : "locked")} key={m.id}>
+            <span className="m-badge" style={m.done ? { background: m.color } : undefined}>
+              <Icon name={(m.done ? m.icon : "i-lock") as IconName} />
+            </span>
+            <div className="m-t">{m.title}</div>
+            <div className="m-s">{m.hint}</div>
+            {!m.done && (
+              <>
+                <div className="m-prog"><i style={{ width: m.pct + "%" }} /></div>
+                <div className="m-count">{Math.min(m.have, m.goal)}/{m.goal}</div>
+              </>
+            )}
           </div>
         ))}
       </div>
+    </section>
+  );
+}
+
+/* ---------- Selos ---------- */
+function Selos({ seals, onBack }: { seals: SaveState["seals"]; onBack: () => void }) {
+  const fmt = (iso: string) => {
+    const [y, m, d] = iso.split("-");
+    return `${d}/${m}/${y.slice(2)}`;
+  };
+  return (
+    <section className="screen">
+      <div className="diary-top">
+        <button className="xbtn" onClick={onBack} aria-label="Voltar"><Icon name="i-arrow" style={{ transform: "scaleX(-1)" }} /></button>
+        <div className="scr-title" style={{ margin: 0 }}>Meus selos</div>
+      </div>
+      <div className="scr-sub">Um selo para cada devocional concluído — o registro da sua caminhada.</div>
+      {seals.length === 0 ? (
+        <div className="diary-empty">
+          <Icon name="i-check" />
+          <div className="t">Nenhum selo ainda</div>
+          <div>O primeiro nasce quando você concluir o devocional de hoje.</div>
+        </div>
+      ) : (
+        <div className="selo-grid">
+          {seals.map((s) => (
+            <div className="selo-card" key={s.dayId}>
+              <div className="sl-top">
+                <span className="sl-seal"><Icon name="i-check" /></span>
+                <span className="sl-date">{fmt(s.iso)}</span>
+              </div>
+              <div className="sl-t">{s.title}</div>
+              <div className="sl-u">{s.unit}</div>
+              <div className="sl-ref">{s.ref}</div>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

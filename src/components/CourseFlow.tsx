@@ -98,7 +98,10 @@ export function CourseFlow({ course, mastery, hearts, gems, studyPos, onStudyPos
         onWrong={actions.loseHeart}
         onRefill={actions.refillHearts}
         onQuit={() => setPhase({ kind: "menu" })}
-        onFinish={(correct, total) => setPhase({ kind: "result", mode: phase.mode, correct, total })}
+        onFinish={(correct, total) => {
+          actions.recordResult(correct, total);
+          setPhase({ kind: "result", mode: phase.mode, correct, total });
+        }}
       />
     );
   }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { loadState, saveState, todayStr, type SaveState, type Reminder } from "./engine/storage";
+import { loadState, saveState, todayStr, type SaveState, type Reminder, type Seal } from "./engine/storage";
 
 export const HEART_REFILL_COST = 20; // gemas para recarregar as vidas
 
@@ -9,7 +9,9 @@ export interface GameActions {
   loseHeart: () => void;
   resetHearts: () => void;
   refillHearts: () => void;   // gasta gemas para reabastecer as vidas
-  completeDay: (dayId: string) => void;
+  completeDay: (dayId: string, seal: Omit<Seal, "iso" | "hour">) => void;
+  recordResult: (correct: number, total: number) => void;
+  setLocalName: (name: string) => void;
   addDiary: (ref: string, text: string) => void;
   bumpMastery: (courseId: string, before: number, gain: number, setTo?: number) => number;
   setStudyPos: (courseId: string, index: number) => void;
@@ -40,10 +42,25 @@ export function useLumen(): { state: SaveState; actions: GameActions } {
   const resetHearts = useCallback(() => setState((s) => ({ ...s, hearts: 5 })), []);
   const refillHearts = useCallback(() => setState((s) =>
     s.gems >= HEART_REFILL_COST ? { ...s, gems: s.gems - HEART_REFILL_COST, hearts: 5 } : s), []);
-  const completeDay = useCallback((dayId: string) => setState((s) => {
+  const completeDay = useCallback((dayId: string, seal: Omit<Seal, "iso" | "hour">) => setState((s) => {
     if (s.doneDays.includes(dayId)) return { ...s, hearts: 5 };
-    return { ...s, doneDays: [...s.doneDays, dayId], dayIndex: s.dayIndex + 1, streak: s.streak + 1, hearts: 5 };
+    const now = new Date();
+    const iso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    return {
+      ...s,
+      doneDays: [...s.doneDays, dayId],
+      seals: [{ ...seal, iso, hour: now.getHours() }, ...s.seals],
+      dayIndex: s.dayIndex + 1, streak: s.streak + 1, hearts: 5
+    };
   }), []);
+
+  /** Uma lição sem nenhum erro conta para a medalha "Perfeição". */
+  const recordResult = useCallback((correct: number, total: number) => {
+    if (total > 0 && correct === total) setState((s) => ({ ...s, perfect: s.perfect + 1 }));
+  }, []);
+
+  const setLocalName = useCallback((name: string) =>
+    setState((s) => ({ ...s, localName: name.slice(0, 24) })), []);
   const addDiary = useCallback((ref: string, text: string) => {
     const t = text.trim();
     if (!t) return;
@@ -68,12 +85,13 @@ export function useLumen(): { state: SaveState; actions: GameActions } {
   const resetDemo = useCallback(() => setState((s) => ({
     ...loadState(), theme: s.theme, onboarded: true, reminder: s.reminder,
     streak: 0, gems: 30, xp: 0, hearts: 5, dayIndex: 0, doneDays: [], activeUnit: "",
+    seals: [], perfect: 0, localName: s.localName,
     mastery: {}, studyPos: {}, diary: s.diary
   })), []);
 
   return {
     state,
-    actions: { addXp, addGems, loseHeart, resetHearts, refillHearts, completeDay, addDiary, bumpMastery, setStudyPos, setActiveUnit, setReminder, migrateDone, replaceState, setTheme, setOnboarded, resetDemo }
+    actions: { addXp, addGems, loseHeart, resetHearts, refillHearts, completeDay, recordResult, setLocalName, addDiary, bumpMastery, setStudyPos, setActiveUnit, setReminder, migrateDone, replaceState, setTheme, setOnboarded, resetDemo }
   };
 }
 

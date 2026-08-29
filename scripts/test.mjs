@@ -8,9 +8,11 @@ const build = (src, out) =>
 
 build("worker/auth.ts", "auth.mjs");
 build("src/engine/merge.ts", "merge.mjs");
+execFileSync("npx", ["esbuild", "src/engine/medals.ts", "--bundle", "--format=esm",
+  "--outfile=.tmp-test/medals.mjs", "--log-level=error"], { stdio: "inherit" });
 
 let failed = false;
-for (const suite of ["tests/auth.test.mjs", "tests/merge.test.mjs"]) {
+for (const suite of ["tests/auth.test.mjs", "tests/merge.test.mjs", "tests/medals.test.mjs"]) {
   console.log(`\n— ${suite}`);
   try { execFileSync("node", [suite], { stdio: "inherit" }); }
   catch { failed = true; }

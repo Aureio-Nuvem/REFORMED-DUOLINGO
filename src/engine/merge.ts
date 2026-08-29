@@ -5,7 +5,7 @@
  * conflito real (preferências), vence o lado local — é o aparelho em que a
  * pessoa está mexendo agora.
  */
-import type { SaveState, DiaryEntry } from "./storage";
+import type { SaveState, DiaryEntry, Seal } from "./storage";
 
 const maxN = (a: number, b: number) => Math.max(a ?? 0, b ?? 0);
 
@@ -28,6 +28,18 @@ function mergeDiary(a: DiaryEntry[], b: DiaryEntry[]): DiaryEntry[] {
   return out;
 }
 
+/** Selos são um por dia concluído: a união, sem repetir o mesmo dia. */
+function mergeSeals(a: Seal[], b: Seal[]): Seal[] {
+  const seen = new Set<string>();
+  const out: Seal[] = [];
+  for (const s of [...(a ?? []), ...(b ?? [])]) {
+    if (seen.has(s.dayId)) continue;
+    seen.add(s.dayId);
+    out.push(s);
+  }
+  return out.sort((x, y) => y.iso.localeCompare(x.iso));
+}
+
 export function mergeSaves(local: SaveState, remote: SaveState): SaveState {
   return {
     ...local,
@@ -40,6 +52,9 @@ export function mergeSaves(local: SaveState, remote: SaveState): SaveState {
     mastery: mergeNumMap(local.mastery ?? {}, remote.mastery ?? {}),
     studyPos: mergeNumMap(local.studyPos ?? {}, remote.studyPos ?? {}),
     diary: mergeDiary(local.diary, remote.diary),
+    seals: mergeSeals(local.seals, remote.seals),
+    perfect: maxN(local.perfect, remote.perfect),
+    localName: local.localName || remote.localName,
     // Vidas: o menor, para não virar uma forma de recuperar vidas sincronizando.
     hearts: Math.min(local.hearts ?? 5, remote.hearts ?? 5),
     // Preferências: vence o aparelho atual.

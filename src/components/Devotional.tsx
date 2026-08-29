@@ -52,7 +52,8 @@ export function Devotional({ day, hearts, gems, actions, onExit, onDone }: Props
         onWrong={actions.loseHeart}
         onRefill={actions.refillHearts}
         onQuit={onExit}
-        onFinish={(correct) => {
+        onFinish={(correct, total) => {
+          actions.recordResult(correct, total);
           const xp = 15 + correct * 5;
           actions.addXp(xp);
           actions.addGems(8);
@@ -300,6 +301,7 @@ function Selo({ day, xp, onDone }: { day: DevotionalDay; xp: number; onDone: () 
         <div className="r s3"><Icon name="i-gem" /><span className="v">+8</span><span className="k">GEMAS</span></div>
       </div>
       <div className="carry"><div className="k">CARREGUE HOJE</div><div className="v">“{carry.text}”</div></div>
+      <div className="selo-note">O selo guarda este dia na sua coleção, no Perfil, e marca a data no seu mapa de constância.</div>
       <button className="cta terra" onClick={onDone}>Guardar o selo</button>
     </section>
   );
