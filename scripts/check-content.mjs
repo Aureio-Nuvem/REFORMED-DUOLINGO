@@ -43,5 +43,19 @@ for (const m of src.matchAll(/type:\s*"order"[\s\S]*?ref:\s*"([^"]+)"[\s\S]*?wor
   }
 }
 
+// 3) perguntas de preencher lacuna: a resposta precisa existir no versículo,
+//    e nenhum distrator pode aparecer nele (ficaria visível ao lado da lacuna).
+for (const m of src.matchAll(/type:\s*"mcq"[^}]*?verseRef:\s*"([^"]+)"[\s\S]*?opts:\s*\[([^\]]+)\],\s*answer:\s*(\d+)/g)) {
+  const v = bible[m[1]];
+  if (!v) continue;
+  const opts = m[2].split(/",\s*"/).map((o) => o.replace(/^"|"$/g, "").trim());
+  opts.forEach((o, i) => {
+    if (i !== Number(m[3]) && norm(v.text).includes(norm(o))) {
+      console.error(`DISTRATOR VISÍVEL no versículo ${v.ref}: "${o}"`);
+      errors++;
+    }
+  });
+}
+
 console.log(errors ? `\n${errors} problema(s).` : `OK — ${seen.size} referências conferidas.`);
 process.exit(errors ? 1 : 0);
