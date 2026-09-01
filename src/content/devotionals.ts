@@ -15,10 +15,52 @@ export const UNITS: Unit[] = [
     title: "Conhecendo a Deus",
     theme: "Fundamentos",
     icon: "i-lamp", accent: "var(--terra)",
-    blurb: "O ponto de partida da fé: quem Deus é e como Ele se dá a conhecer na sua Palavra. Providência, cuidado e refúgio, dos Salmos ao coração.",
-    farewell: "Você começou sem saber por onde Deus falaria e termina diante do trono, ouvindo “a quem enviarei?”. Foi este o caminho: a Palavra que ilumina o passo, o Pastor que conduz, o refúgio que sustenta, os céus que proclamam, o olhar que tudo conhece e a santidade que nos põe no lugar certo. Conhecer a Deus nunca foi o fim da linha — é o começo de uma vida enviada. Leve daqui uma certeza: Ele se deu a conhecer porque quis ser conhecido por você.",
+    blurb: "Como Deus se dá a conhecer — e o que muda quando Ele é conhecido. Dos céus que proclamam à quietude de saber que Ele é Deus, passando pela sua santidade e pelo seu cuidado.",
+    farewell: "Você começou olhando para os céus e termina em silêncio, ouvindo “ficai quietos, e sabei que eu sou Deus”. Entre um ponto e outro: a Palavra que ilumina o passo, a santidade que nos põe no lugar certo, o olhar que já conhece tudo em nós e o Pastor que conduz. Conhecer a Deus, na fé reformada, nunca foi acumular informação sobre Ele — é ser encontrado por Ele e aprender a descansar nisso. E se ficar uma coisa só, que seja o hábito: você não precisa entender tudo hoje. Precisa voltar amanhã.",
     about: "Unidade escrita para o Lúmen, a partir dos Salmos. As leituras vêm da Bíblia Livre (BLIVRE), uma tradução em português de domínio público. Na estação “A Voz dos Pais” você ouve João Calvino (1509–1564) e Agostinho (354–430) — dois mestres que a tradição reformada lê com atenção — em paráfrases nossas dos temas deles, sempre com a fonte indicada.",
     days: [
+      {
+        id: "cad-4",
+        title: "Os céus proclamam",
+        subtitle: "Salmo 19 · Revelação",
+        minutes: 8,
+        carryRef: "sl.19.1",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Antes de ler, lembre-se de que Deus já vinha falando antes de você abrir a Bíblia. Toque na lâmpada.",
+            prayer: "Senhor, abre os meus olhos para te ver onde eu já deixei de olhar. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "A glória e a lei",
+            passageRefs: ["sl.19.1", "sl.19.7"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "A lei que restaura",
+            verseRef: "sl.19.7", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "O teatro da glória",
+            intro: "Calvino explica por que a criação inteira fala de Deus — e por que ela não basta.",
+            author: "João Calvino", initial: "C", source: "Institutas I.5 · paráfrase",
+            text: "Calvino chamava o mundo criado de teatro da glória de Deus: não há canto do universo onde não brilhe alguma centelha dele. Mas os nossos olhos são fracos demais para ler esse espetáculo corretamente — por isso Deus acrescentou a sua Palavra. A criação nos deixa sem desculpa; a Escritura nos dá o Deus que salva." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você deixou de ver a mão de Deus por pressa?",
+            intro: "Responda ao Salmo 19 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", example: "Deus fala de duas maneiras: pelo mundo que fez e pela Palavra que deu." },
+              { key: "gratidao", example: "Agradeço por uma beleza simples que vi hoje e quase não notei." },
+              { key: "confissao", example: "Atravesso os dias sem levantar os olhos para nada além das minhas tarefas." },
+              { key: "suplica", example: "Restaura a minha alma pela tua Palavra, como este salmo promete." }
+            ] },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "A semente de oração do dia — ore com ela ou com as suas palavras.",
+            prayer: "Senhor, os céus falam de ti e a tua lei restaura a minha alma. Faze-me ler o teu mundo e a tua Palavra com olhos atentos. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Salmo 19 · O Desafio", q: "Complete o versículo que você leu:", verseRef: "sl.19.1",
+            opts: ["sabedoria", "glória", "força", "paz"], answer: 1,
+            exp: "“Os céus declaram a glória de Deus” — a criação é testemunha, não acaso (Sl 19.1)." },
+          { type: "mcq", kicker: "Salmo 19 · O Desafio", q: "Como o salmo descreve a lei do SENHOR?", verseRef: "sl.19.7",
+            opts: ["pesada", "perfeita", "opcional", "confusa"], answer: 1,
+            exp: "A lei do SENHOR é perfeita e restaura a alma — ela cura, não apenas exige (Sl 19.7)." },
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "Por que a criação não basta, segundo Calvino?",
+            opts: ["porque não fala de Deus", "porque os nossos olhos são fracos e precisam da Escritura", "porque Deus se escondeu", "porque a natureza é má"], answer: 1,
+            exp: "O mundo é o teatro da glória de Deus, mas só a Palavra nos dá o Deus que salva (I.5)." }
+        ]
+      },
       {
         id: "cad-1",
         title: "A lâmpada dos meus pés",
@@ -59,6 +101,90 @@ export const UNITS: Unit[] = [
           { type: "order", kicker: "Memorização · Salmo 119.133", q: "Monte a primeira parte do versículo:", ref: "Salmo 119.133",
             words: ["Firma", "meus", "passos", "em", "tua", "palavra"],
             exp: "“Firma meus passos em tua palavra” — a providência de Deus sustenta quem anda com Ele." }
+        ]
+      },
+      {
+        id: "cad-6",
+        title: "Santo, santo, santo",
+        subtitle: "Isaías 6 · Santidade",
+        minutes: 9,
+        carryRef: "is.6.8",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Hoje o texto é uma visão do trono. Chegue com reverência. Toque na lâmpada.",
+            prayer: "Santo Deus, prepara o meu coração para te ver como tu és. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Diante do trono",
+            passageRefs: ["is.6.3", "is.6.5"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Toda a terra cheia da sua glória",
+            verseRef: "is.6.3", seconds: 20 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Duas coisas que se revelam juntas",
+            intro: "Calvino abre as Institutas exatamente com o que acontece a Isaías nesta visão.",
+            author: "João Calvino", initial: "C", source: "Institutas I.1.1–2 · paráfrase",
+            text: "Calvino começa a sua obra dizendo que quase toda a sabedoria que possuímos consiste em duas partes: o conhecimento de Deus e o de nós mesmos — e que uma revela a outra. Enquanto nos comparamos com pessoas, achamos que vamos bem. Quando levantamos os olhos para Deus, como Isaías, a régua muda e enxergamos a verdade sobre nós. É por isso que a visão do trono termina em “ai de mim”." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Com quem você tem se comparado, em vez de olhar para Deus?",
+            intro: "Responda a Isaías 6 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", example: "Ver quem Deus é me mostra, ao mesmo tempo, quem eu sou." },
+              { key: "gratidao", example: "Agradeço porque, depois do “ai de mim”, veio a purificação e o chamado." },
+              { key: "confissao", example: "Meço a minha vida pelas pessoas ao meu redor, e não pela santidade de Deus." },
+              { key: "suplica", example: "Purifica os meus lábios e envia-me, como enviaste Isaías." }
+            ] },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "A semente de oração do dia — ore com reverência e sem pressa.",
+            prayer: "Santo, santo, santo és tu, Senhor. Diante da tua glória reconheço o que sou; purifica-me e faze-me dizer: eis-me aqui, envia-me. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Isaías 6 · O Desafio", q: "Qual foi a reação de Isaías diante da santidade de Deus?", verseRef: "is.6.5",
+            opts: ["Sou digno", "Ai de mim", "Nada senti", "Já esperava"], answer: 1,
+            exp: "Ver a Deus como Ele é revela o que somos — e isso precede a purificação (Is 6.5)." },
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "Para Calvino, conhecer a Deus e conhecer a si mesmo...",
+            opts: ["não têm relação entre si", "estão ligados: um revela o outro", "se excluem", "são impossíveis"], answer: 1,
+            exp: "Quase toda a sabedoria consiste nessas duas partes, e uma revela a outra (I.1.1–2)." },
+          { type: "match", kicker: "Isaías 6 · A visão do trono", q: "Relacione cada momento ao seu sentido:",
+            pairs: [["Santo, santo, santo", "Quem Deus é"], ["Ai de mim", "Quem eu sou"], ["A brasa do altar", "A purificação"], ["Envia-me", "O chamado"]],
+            exp: "A visão do trono segue uma ordem: adoração, confissão, purificação e envio." }
+        ]
+      },
+      {
+        id: "cad-5",
+        title: "Sonda-me, ó Deus",
+        subtitle: "Salmo 139 · Onisciência",
+        minutes: 8,
+        carryRef: "sl.139.23",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Venha inteiro — inclusive com o que você esconde dos outros. Deus já sabe. Toque na lâmpada.",
+            prayer: "Senhor, tu já me conheces por dentro. Não preciso fingir contigo. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Tu me conheces",
+            passageRefs: ["sl.139.1", "sl.139.7"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Examina o meu coração",
+            verseRef: "sl.139.23", seconds: 20 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Mais íntimo do que eu mesmo",
+            intro: "Agostinho descobriu que Deus estava mais perto do que ele imaginava — e mais dentro.",
+            author: "Agostinho", initial: "A", source: "Confissões III.6 · paráfrase",
+            text: "Agostinho passou anos procurando Deus longe, no mundo, e o encontrou dentro: Deus estava mais íntimo a ele do que o seu próprio íntimo, e mais alto do que o mais alto de si. Ser plenamente conhecido por Deus não é ameaça — é a única forma de ser plenamente amado sem máscara." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que você tem escondido, sabendo que Deus já vê?",
+            intro: "Responda ao Salmo 139 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", example: "Não existe lugar nem pensamento meu que esteja fora do alcance de Deus." },
+              { key: "gratidao", example: "Agradeço por ser conhecido por inteiro e ainda assim amado." },
+              { key: "confissao", example: "Tenho vivido uma versão editada de mim diante das pessoas — e tentado o mesmo com Deus." },
+              { key: "suplica", example: "Sonda-me e mostra-me o que eu mesmo não quero enxergar." }
+            ] },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "A semente de oração do dia — ore devagar, sem pressa de terminar.",
+            prayer: "Senhor, examina-me e conhece o meu coração. Mostra-me o que precisa mudar e guia-me pelo caminho eterno. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Salmo 139 · O Desafio", q: "Complete o versículo que você leu:", verseRef: "sl.139.1",
+            opts: ["esqueces", "conheces", "julgas", "evitas"], answer: 1,
+            exp: "“Tu me examinas e me conheces” — Deus me conhece melhor do que eu mesmo (Sl 139.1)." },
+          { type: "mcq", kicker: "A Voz dos Pais · Agostinho", q: "Onde Agostinho encontrou a Deus?",
+            opts: ["longe, no mundo", "mais íntimo a ele do que o seu próprio íntimo", "apenas no templo", "em lugar nenhum"], answer: 1,
+            exp: "Deus é mais íntimo a nós do que nós mesmos — conhecidos por inteiro e amados sem máscara." },
+          { type: "order", kicker: "Memorização · Salmo 139.23", q: "Monte o pedido do salmista:", ref: "Salmo 139.23",
+            words: ["Examina-me", "Deus", "e", "conhece", "meu", "coração"],
+            exp: "“Examina-me, Deus, e conhece meu coração” — quem não tem o que esconder pode pedir isso (Sl 139.23)." }
         ]
       },
       {
@@ -144,132 +270,6 @@ export const UNITS: Unit[] = [
             opts: ["Para dentro de si mesmo", "Para dentro de Deus", "Para longe da fé", "Para o acaso"], answer: 1,
             exp: "Deus é a fortaleza segura — corremos para dentro dele." }
         ]
-      },
-      {
-        id: "cad-4",
-        title: "Os céus proclamam",
-        subtitle: "Salmo 19 · Revelação",
-        minutes: 8,
-        carryRef: "sl.19.1",
-        stations: [
-          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Antes de ler, lembre-se de que Deus já vinha falando antes de você abrir a Bíblia. Toque na lâmpada.",
-            prayer: "Senhor, abre os meus olhos para te ver onde eu já deixei de olhar. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "A glória e a lei",
-            passageRefs: ["sl.19.1", "sl.19.7"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "A lei que restaura",
-            verseRef: "sl.19.7", seconds: 18 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "O teatro da glória",
-            intro: "Calvino explica por que a criação inteira fala de Deus — e por que ela não basta.",
-            author: "João Calvino", initial: "C", source: "Institutas I.5 · paráfrase",
-            text: "Calvino chamava o mundo criado de teatro da glória de Deus: não há canto do universo onde não brilhe alguma centelha dele. Mas os nossos olhos são fracos demais para ler esse espetáculo corretamente — por isso Deus acrescentou a sua Palavra. A criação nos deixa sem desculpa; a Escritura nos dá o Deus que salva." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você deixou de ver a mão de Deus por pressa?",
-            intro: "Responda ao Salmo 19 em quatro frentes. Uma frase em cada já basta.",
-            threads: [
-              { key: "ensino", example: "Deus fala de duas maneiras: pelo mundo que fez e pela Palavra que deu." },
-              { key: "gratidao", example: "Agradeço por uma beleza simples que vi hoje e quase não notei." },
-              { key: "confissao", example: "Atravesso os dias sem levantar os olhos para nada além das minhas tarefas." },
-              { key: "suplica", example: "Restaura a minha alma pela tua Palavra, como este salmo promete." }
-            ] },
-          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "A semente de oração do dia — ore com ela ou com as suas palavras.",
-            prayer: "Senhor, os céus falam de ti e a tua lei restaura a minha alma. Faze-me ler o teu mundo e a tua Palavra com olhos atentos. Amém." }
-        ],
-        challenge: [
-          { type: "mcq", kicker: "Salmo 19 · O Desafio", q: "Complete o versículo que você leu:", verseRef: "sl.19.1",
-            opts: ["sabedoria", "glória", "força", "paz"], answer: 1,
-            exp: "“Os céus declaram a glória de Deus” — a criação é testemunha, não acaso (Sl 19.1)." },
-          { type: "mcq", kicker: "Salmo 19 · O Desafio", q: "Como o salmo descreve a lei do SENHOR?", verseRef: "sl.19.7",
-            opts: ["pesada", "perfeita", "opcional", "confusa"], answer: 1,
-            exp: "A lei do SENHOR é perfeita e restaura a alma — ela cura, não apenas exige (Sl 19.7)." },
-          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "Por que a criação não basta, segundo Calvino?",
-            opts: ["porque não fala de Deus", "porque os nossos olhos são fracos e precisam da Escritura", "porque Deus se escondeu", "porque a natureza é má"], answer: 1,
-            exp: "O mundo é o teatro da glória de Deus, mas só a Palavra nos dá o Deus que salva (I.5)." }
-        ]
-      },
-      {
-        id: "cad-5",
-        title: "Sonda-me, ó Deus",
-        subtitle: "Salmo 139 · Onisciência",
-        minutes: 8,
-        carryRef: "sl.139.23",
-        stations: [
-          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Venha inteiro — inclusive com o que você esconde dos outros. Deus já sabe. Toque na lâmpada.",
-            prayer: "Senhor, tu já me conheces por dentro. Não preciso fingir contigo. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Tu me conheces",
-            passageRefs: ["sl.139.1", "sl.139.7"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Examina o meu coração",
-            verseRef: "sl.139.23", seconds: 20 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Mais íntimo do que eu mesmo",
-            intro: "Agostinho descobriu que Deus estava mais perto do que ele imaginava — e mais dentro.",
-            author: "Agostinho", initial: "A", source: "Confissões III.6 · paráfrase",
-            text: "Agostinho passou anos procurando Deus longe, no mundo, e o encontrou dentro: Deus estava mais íntimo a ele do que o seu próprio íntimo, e mais alto do que o mais alto de si. Ser plenamente conhecido por Deus não é ameaça — é a única forma de ser plenamente amado sem máscara." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que você tem escondido, sabendo que Deus já vê?",
-            intro: "Responda ao Salmo 139 em quatro frentes. Uma frase em cada já basta.",
-            threads: [
-              { key: "ensino", example: "Não existe lugar nem pensamento meu que esteja fora do alcance de Deus." },
-              { key: "gratidao", example: "Agradeço por ser conhecido por inteiro e ainda assim amado." },
-              { key: "confissao", example: "Tenho vivido uma versão editada de mim diante das pessoas — e tentado o mesmo com Deus." },
-              { key: "suplica", example: "Sonda-me e mostra-me o que eu mesmo não quero enxergar." }
-            ] },
-          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "A semente de oração do dia — ore devagar, sem pressa de terminar.",
-            prayer: "Senhor, examina-me e conhece o meu coração. Mostra-me o que precisa mudar e guia-me pelo caminho eterno. Amém." }
-        ],
-        challenge: [
-          { type: "mcq", kicker: "Salmo 139 · O Desafio", q: "Complete o versículo que você leu:", verseRef: "sl.139.1",
-            opts: ["esqueces", "conheces", "julgas", "evitas"], answer: 1,
-            exp: "“Tu me examinas e me conheces” — Deus me conhece melhor do que eu mesmo (Sl 139.1)." },
-          { type: "mcq", kicker: "A Voz dos Pais · Agostinho", q: "Onde Agostinho encontrou a Deus?",
-            opts: ["longe, no mundo", "mais íntimo a ele do que o seu próprio íntimo", "apenas no templo", "em lugar nenhum"], answer: 1,
-            exp: "Deus é mais íntimo a nós do que nós mesmos — conhecidos por inteiro e amados sem máscara." },
-          { type: "order", kicker: "Memorização · Salmo 139.23", q: "Monte o pedido do salmista:", ref: "Salmo 139.23",
-            words: ["Examina-me", "Deus", "e", "conhece", "meu", "coração"],
-            exp: "“Examina-me, Deus, e conhece meu coração” — quem não tem o que esconder pode pedir isso (Sl 139.23)." }
-        ]
-      },
-      {
-        id: "cad-6",
-        title: "Santo, santo, santo",
-        subtitle: "Isaías 6 · Santidade",
-        minutes: 9,
-        carryRef: "is.6.8",
-        stations: [
-          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Hoje o texto é uma visão do trono. Chegue com reverência. Toque na lâmpada.",
-            prayer: "Santo Deus, prepara o meu coração para te ver como tu és. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Diante do trono",
-            passageRefs: ["is.6.3", "is.6.5"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Toda a terra cheia da sua glória",
-            verseRef: "is.6.3", seconds: 20 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Duas coisas que se revelam juntas",
-            intro: "Calvino abre as Institutas exatamente com o que acontece a Isaías nesta visão.",
-            author: "João Calvino", initial: "C", source: "Institutas I.1.1–2 · paráfrase",
-            text: "Calvino começa a sua obra dizendo que quase toda a sabedoria que possuímos consiste em duas partes: o conhecimento de Deus e o de nós mesmos — e que uma revela a outra. Enquanto nos comparamos com pessoas, achamos que vamos bem. Quando levantamos os olhos para Deus, como Isaías, a régua muda e enxergamos a verdade sobre nós. É por isso que a visão do trono termina em “ai de mim”." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Com quem você tem se comparado, em vez de olhar para Deus?",
-            intro: "Responda a Isaías 6 em quatro frentes. Uma frase em cada já basta.",
-            threads: [
-              { key: "ensino", example: "Ver quem Deus é me mostra, ao mesmo tempo, quem eu sou." },
-              { key: "gratidao", example: "Agradeço porque, depois do “ai de mim”, veio a purificação e o chamado." },
-              { key: "confissao", example: "Meço a minha vida pelas pessoas ao meu redor, e não pela santidade de Deus." },
-              { key: "suplica", example: "Purifica os meus lábios e envia-me, como enviaste Isaías." }
-            ] },
-          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "A semente de oração do dia — ore com reverência e sem pressa.",
-            prayer: "Santo, santo, santo és tu, Senhor. Diante da tua glória reconheço o que sou; purifica-me e faze-me dizer: eis-me aqui, envia-me. Amém." }
-        ],
-        challenge: [
-          { type: "mcq", kicker: "Isaías 6 · O Desafio", q: "Qual foi a reação de Isaías diante da santidade de Deus?", verseRef: "is.6.5",
-            opts: ["Sou digno", "Ai de mim", "Nada senti", "Já esperava"], answer: 1,
-            exp: "Ver a Deus como Ele é revela o que somos — e isso precede a purificação (Is 6.5)." },
-          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "Para Calvino, conhecer a Deus e conhecer a si mesmo...",
-            opts: ["não têm relação entre si", "estão ligados: um revela o outro", "se excluem", "são impossíveis"], answer: 1,
-            exp: "Quase toda a sabedoria consiste nessas duas partes, e uma revela a outra (I.1.1–2)." },
-          { type: "match", kicker: "Isaías 6 · A visão do trono", q: "Relacione cada momento ao seu sentido:",
-            pairs: [["Santo, santo, santo", "Quem Deus é"], ["Ai de mim", "Quem eu sou"], ["A brasa do altar", "A purificação"], ["Envia-me", "O chamado"]],
-            exp: "A visão do trono segue uma ordem: adoração, confissão, purificação e envio." }
-        ]
       }
     ]
   },
@@ -278,172 +278,10 @@ export const UNITS: Unit[] = [
     title: "Salmos de Confiança",
     theme: "Confiança",
     icon: "i-anchor", accent: "var(--forest)",
-    blurb: "Quando o medo aperta e o mundo estremece, os Salmos ensinam o coração a descansar. Luz, deleite na Palavra e a certeza de pertencer a Deus.",
-    farewell: "Seis salmos, seis estados de alma: o medo, o deleite, a adoração, o desamparo, a secura e a culpa. Nenhum deles foi escrito por alguém com a vida resolvida — e é isso que os torna confiáveis. A confiança bíblica não nasce de circunstâncias boas, mas de um Deus que não muda quando elas mudam. Você aprendeu aqui a falar com a sua própria alma quando ela desanima. Continue falando.",
+    blurb: "Da secura ao louvor: seis salmos para os dias em que a fé não se sente. Culpa entregue, medo enfrentado, o Guarda que não dorme e a raiz plantada junto às águas.",
+    farewell: "Você entrou por um salmo de secura e sai por um salmo de louvor — e esse é exatamente o caminho. No meio ficaram a culpa entregue, o medo enfrentado, o Guarda que não dorme e a raiz plantada junto às águas. Nenhum destes salmos foi escrito por alguém com a vida resolvida, e é isso que os torna confiáveis: a confiança bíblica não nasce de circunstâncias boas, mas de um Deus que não muda quando elas mudam. Você aprendeu aqui a falar com a sua própria alma nos dias difíceis. Continue falando.",
     about: "Três salmos que a Igreja reza há séculos em tempos de medo: o 27 (coragem), o 1 (o deleite na Palavra) e o 100 (adoração). Texto bíblico da Bíblia Livre (BLIVRE), de domínio público; as vozes de Calvino e Lutero aparecem em paráfrases nossas, com a fonte indicada em cada estação.",
     days: [
-      {
-        id: "sc-1",
-        title: "Minha luz e salvação",
-        subtitle: "Salmo 27 · Coragem",
-        minutes: 7,
-        carryRef: "sl.27.1",
-        stations: [
-          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Nomeie diante de Deus um medo que você carrega. Toque na lâmpada.",
-            prayer: "Senhor, tu és a minha luz. Dissipa o meu medo com a tua presença. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "A quem temerei?", passageRefs: ["sl.27.1"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Descanse na luz", verseRef: "sl.27.1", seconds: 18 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "O temor certo",
-            intro: "Um reformador nos ajuda a redirecionar o medo.",
-            author: "João Calvino", initial: "C", source: "Institutas I.2.2 · paráfrase",
-            text: "Calvino ensinava que quem teme a Deus deixa de temer mil outras coisas. O temor reverente do Senhor não paralisa — liberta. Quando Deus é a maior realidade da minha vida, as ameaças diminuem ao seu tamanho verdadeiro." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que medo perde o poder quando Deus é a sua luz?",
-            intro: "Nomeie o seu medo e responda em quatro frentes.",
-            threads: [
-              { key: "ensino", example: "Se Deus é a minha luz e a minha salvação, nenhum medo tem a última palavra." },
-              { key: "gratidao", example: "Agradeço porque Ele já me livrou de um medo que me dominava." },
-              { key: "confissao", example: "Tenho temido mais a opinião das pessoas do que a Deus." },
-              { key: "suplica", example: "Tira de mim o medo que está me travando hoje." }
-            ] },
-          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "Ore em voz alta, se puder — o medo perde força quando a verdade é dita.",
-            prayer: "Senhor, luz da minha vida e minha salvação, a quem temerei? Anda comigo hoje e cala os meus medos. Amém." }
-        ],
-        challenge: [
-          { type: "mcq", kicker: "Salmo 27 · O Desafio", q: "O SENHOR é minha luz e minha...", verseRef: "sl.27.1",
-            opts: ["fortuna", "salvação", "fama", "força apenas"], answer: 1,
-            exp: "Luz (que revela) e salvação (que resgata): por isso, a quem temer?" },
-          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "O temor reverente de Deus, segundo Calvino,...",
-            opts: ["paralisa o crente", "liberta de outros medos", "é desnecessário", "vem das obras"], answer: 1,
-            exp: "Temer a Deus acima de tudo encolhe os outros temores ao tamanho real." },
-          { type: "match", kicker: "Salmo 27 · Luz e temor", q: "Relacione cada palavra ao que ela faz:",
-            pairs: [["Luz", "Revela o caminho"], ["Salvação", "Resgata o pecador"], ["Temor de Deus", "Liberta de outros medos"], ["Confiança", "Descanso na presença"]],
-            exp: "O Salmo 27 troca o medo pela confiança na presença de Deus." }
-        ]
-      },
-      {
-        id: "sc-2",
-        title: "Deleite na Palavra",
-        subtitle: "Salmo 1 · Meditação",
-        minutes: 7,
-        carryRef: "sl.1.2",
-        stations: [
-          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Peça a Deus prazer — e não só disciplina — na sua Palavra. Toque na lâmpada.",
-            prayer: "Pai, dá-me deleite na tua Palavra, não apenas dever. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Medita de dia e de noite", passageRefs: ["sl.1.2"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Rumine a Palavra", verseRef: "sl.1.2", seconds: 20 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "A árvore plantada",
-            intro: "Um reformador ilustra o fruto da meditação.",
-            author: "Martinho Lutero", initial: "L", source: "Oratio, meditatio, tentatio · paráfrase",
-            text: "Lutero comparava a meditação a ruminar: voltar ao mesmo texto de novo e de novo, deixando-o descer do olho ao coração. A árvore do Salmo 1 não dá fruto de repente — dá porque está plantada e enraizada junto às águas da Palavra." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que verdade da Palavra você quer 'ruminar' hoje?",
-            intro: "Responda ao Salmo 1 em quatro frentes. Uma frase em cada já basta.",
-            threads: [
-              { key: "ensino", example: "Deus me quer enraizado nEle, e não apenas informado sobre Ele." },
-              { key: "gratidao", example: "Agradeço pelo fruto que a Palavra já deu em mim, mesmo devagar." },
-              { key: "confissao", example: "Tenho lido a Bíblia por obrigação, sem prazer nenhum." },
-              { key: "suplica", example: "Dá-me deleite na tua Palavra, e não apenas disciplina." }
-            ] },
-          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "A semente de oração do dia — plante-a e volte a ela durante o dia.",
-            prayer: "Senhor, planta-me junto às águas da tua Palavra, para que eu dê fruto no tempo certo. Amém." }
-        ],
-        challenge: [
-          { type: "mcq", kicker: "Salmo 1 · O Desafio", q: "Onde está o prazer do homem bem-aventurado?", verseRef: "sl.1.2",
-            opts: ["Nas riquezas", "Na lei do SENHOR", "Na fama", "No conselho dos maus"], answer: 1,
-            exp: "O deleite na Palavra é a raiz de uma vida frutífera e firme." },
-          { type: "mcq", kicker: "A Voz dos Pais · Lutero", q: "Meditar, para Lutero, é como...",
-            opts: ["ler uma vez e esquecer", "ruminar o texto até o coração", "decorar sem entender", "evitar as Escrituras"], answer: 1,
-            exp: "Voltar ao texto até ele descer do olho ao coração." },
-          { type: "order", kicker: "Memorização · Salmo 1.2", q: "Complete a meditação:", ref: "Salmo 1.2",
-            words: ["medita", "em", "sua", "Lei", "de", "dia", "e", "de", "noite"],
-            exp: "A meditação constante mantém a árvore verde e frutífera." }
-        ]
-      },
-      {
-        id: "sc-3",
-        title: "Ele nos fez",
-        subtitle: "Salmo 100 · Adoração",
-        minutes: 7,
-        carryRef: "sl.100.3",
-        stations: [
-          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Comece reconhecendo: eu sou criatura, Ele é o Criador. Toque na lâmpada.",
-            prayer: "Criador, ensina-me a viver como quem pertence a ti. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Foi ele que nos fez", passageRefs: ["sl.100.3"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Você pertence a Ele", verseRef: "sl.100.3", seconds: 18 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Não a nós mesmos",
-            intro: "Um pai da Igreja resume de onde vem a nossa identidade.",
-            author: "Agostinho", initial: "A", source: "Confissões, criatura e Criador · paráfrase",
-            text: "Agostinho insistia que não nos criamos nem nos sustentamos. Reconhecer 'foi ele que nos fez, e não nós a nós mesmos' derruba o orgulho e funda a adoração: tudo o que sou é dom. Quem se recebe das mãos de Deus aprende a devolvê-lo em louvor." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que muda ao lembrar que você não se fez a si mesmo?",
-            intro: "Responda como criatura diante do Criador, em quatro frentes.",
-            threads: [
-              { key: "ensino", example: "Eu não me criei nem me sustento: tudo o que sou vem das mãos de Deus." },
-              { key: "gratidao", example: "Agradeço por dons que sempre tratei como mérito meu." },
-              { key: "confissao", example: "Tenho vivido como se fosse dono da minha vida e senhor dos meus planos." },
-              { key: "suplica", example: "Ensina-me a viver como quem pertence a ti." }
-            ] },
-          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "Ore como criatura diante do Criador — sem pressa e sem defesa.",
-            prayer: "Senhor, tu me fizeste e eu sou teu. Recebe hoje a minha vida em adoração. Amém." }
-        ],
-        challenge: [
-          { type: "mcq", kicker: "Salmo 100 · O Desafio", q: "Quem nos fez, segundo o v.3?", verseRef: "sl.100.3",
-            opts: ["Nós mesmos", "O acaso", "O SENHOR", "O destino"], answer: 2,
-            exp: "Somos criatura, não criador — e isso funda a adoração." },
-          { type: "mcq", kicker: "A Voz dos Pais · Agostinho", q: "Reconhecer que não nos criamos...",
-            opts: ["alimenta o orgulho", "funda a adoração", "não muda nada", "nega a Deus"], answer: 1,
-            exp: "Tudo o que sou é dom; por isso adoro." },
-          { type: "match", kicker: "Salmo 100 · Criatura e Criador", q: "Relacione cada termo ao seu lugar:",
-            pairs: [["Criador", "Deus"], ["Criatura", "Nós"], ["Pertencer", "Somos dele"], ["Louvor", "Resposta certa"]],
-            exp: "Da criação nasce a gratidão, e da gratidão o louvor." }
-        ]
-      },
-      {
-        id: "sc-4",
-        title: "O guarda que não dorme",
-        subtitle: "Salmo 121 · Proteção",
-        minutes: 7,
-        carryRef: "sl.121.2",
-        stations: [
-          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Traga aquilo que tem tirado o seu sono. Toque na lâmpada.",
-            prayer: "Senhor, tu não dormes. Ensina-me a descansar porque tu velas. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "De onde vem o meu socorro",
-            passageRefs: ["sl.121.1", "sl.121.2"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Ele não cochila",
-            verseRef: "sl.121.3", seconds: 18 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "A providência é um Pai, não uma engrenagem",
-            intro: "Calvino distingue a providência cristã de um destino cego.",
-            author: "João Calvino", initial: "C", source: "Institutas I.16–17 · paráfrase",
-            text: "Calvino insistia que a providência não é uma engrenagem impessoal girando sozinha, mas as mãos de um Pai que sustenta cada detalhe. Saber isso não nos torna passivos: torna-nos tranquilos. O crente age, planeja e trabalha — mas dorme, porque quem guarda a sua vida não cochila." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que você tem tentado vigiar sozinho?",
-            intro: "Responda ao Salmo 121 em quatro frentes. Uma frase em cada já basta.",
-            threads: [
-              { key: "ensino", example: "O meu socorro não vem dos montes nem de mim: vem do SENHOR, que fez os céus e a terra." },
-              { key: "gratidao", example: "Agradeço por um perigo do qual fui guardado sem nem ficar sabendo." },
-              { key: "confissao", example: "Tenho perdido o sono tentando vigiar o que não está nas minhas mãos." },
-              { key: "suplica", example: "Guarda o meu caminho hoje, e ensina-me a descansar enquanto tu velas." }
-            ] },
-          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "A semente de oração do dia — ore antes de dormir, se puder.",
-            prayer: "Senhor, tu guardas a minha entrada e a minha saída. Vela por mim esta noite e ensina-me a soltar o que não posso controlar. Amém." }
-        ],
-        challenge: [
-          { type: "mcq", kicker: "Salmo 121 · O Desafio", q: "Complete o versículo que você leu:", verseRef: "sl.121.2",
-            opts: ["do meu esforço", "do SENHOR", "do acaso", "dos montes"], answer: 1,
-            exp: "“Meu socorro vem do SENHOR, que fez os céus e a terra” (Sl 121.2)." },
-          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "A providência, para Calvino, é...",
-            opts: ["uma engrenagem impessoal", "as mãos de um Pai que sustenta cada detalhe", "o mesmo que destino cego", "indiferente ao crente"], answer: 1,
-            exp: "Saber disso não nos torna passivos: torna-nos tranquilos (I.16–17)." },
-          { type: "order", kicker: "Memorização · Salmo 121.2", q: "Monte a confissão do salmista:", ref: "Salmo 121.2",
-            words: ["Meu", "socorro", "vem", "do", "SENHOR"],
-            exp: "“Meu socorro vem do SENHOR” — a origem certa da segurança (Sl 121.2)." }
-        ]
-      },
       {
         id: "sc-5",
         title: "Sede de Deus",
@@ -527,6 +365,168 @@ export const UNITS: Unit[] = [
             words: ["Cria", "em", "mim", "um", "coração", "puro"],
             exp: "“Cria em mim um coração puro, ó Deus” — só o Criador pode criar de novo (Sl 51.10)." }
         ]
+      },
+      {
+        id: "sc-1",
+        title: "Minha luz e salvação",
+        subtitle: "Salmo 27 · Coragem",
+        minutes: 7,
+        carryRef: "sl.27.1",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Nomeie diante de Deus um medo que você carrega. Toque na lâmpada.",
+            prayer: "Senhor, tu és a minha luz. Dissipa o meu medo com a tua presença. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "A quem temerei?", passageRefs: ["sl.27.1"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Descanse na luz", verseRef: "sl.27.1", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "O temor certo",
+            intro: "Um reformador nos ajuda a redirecionar o medo.",
+            author: "João Calvino", initial: "C", source: "Institutas I.2.2 · paráfrase",
+            text: "Calvino ensinava que quem teme a Deus deixa de temer mil outras coisas. O temor reverente do Senhor não paralisa — liberta. Quando Deus é a maior realidade da minha vida, as ameaças diminuem ao seu tamanho verdadeiro." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que medo perde o poder quando Deus é a sua luz?",
+            intro: "Nomeie o seu medo e responda em quatro frentes.",
+            threads: [
+              { key: "ensino", example: "Se Deus é a minha luz e a minha salvação, nenhum medo tem a última palavra." },
+              { key: "gratidao", example: "Agradeço porque Ele já me livrou de um medo que me dominava." },
+              { key: "confissao", example: "Tenho temido mais a opinião das pessoas do que a Deus." },
+              { key: "suplica", example: "Tira de mim o medo que está me travando hoje." }
+            ] },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "Ore em voz alta, se puder — o medo perde força quando a verdade é dita.",
+            prayer: "Senhor, luz da minha vida e minha salvação, a quem temerei? Anda comigo hoje e cala os meus medos. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Salmo 27 · O Desafio", q: "O SENHOR é minha luz e minha...", verseRef: "sl.27.1",
+            opts: ["fortuna", "salvação", "fama", "força apenas"], answer: 1,
+            exp: "Luz (que revela) e salvação (que resgata): por isso, a quem temer?" },
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "O temor reverente de Deus, segundo Calvino,...",
+            opts: ["paralisa o crente", "liberta de outros medos", "é desnecessário", "vem das obras"], answer: 1,
+            exp: "Temer a Deus acima de tudo encolhe os outros temores ao tamanho real." },
+          { type: "match", kicker: "Salmo 27 · Luz e temor", q: "Relacione cada palavra ao que ela faz:",
+            pairs: [["Luz", "Revela o caminho"], ["Salvação", "Resgata o pecador"], ["Temor de Deus", "Liberta de outros medos"], ["Confiança", "Descanso na presença"]],
+            exp: "O Salmo 27 troca o medo pela confiança na presença de Deus." }
+        ]
+      },
+      {
+        id: "sc-4",
+        title: "O guarda que não dorme",
+        subtitle: "Salmo 121 · Proteção",
+        minutes: 7,
+        carryRef: "sl.121.2",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Traga aquilo que tem tirado o seu sono. Toque na lâmpada.",
+            prayer: "Senhor, tu não dormes. Ensina-me a descansar porque tu velas. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "De onde vem o meu socorro",
+            passageRefs: ["sl.121.1", "sl.121.2"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Ele não cochila",
+            verseRef: "sl.121.3", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "A providência é um Pai, não uma engrenagem",
+            intro: "Calvino distingue a providência cristã de um destino cego.",
+            author: "João Calvino", initial: "C", source: "Institutas I.16–17 · paráfrase",
+            text: "Calvino insistia que a providência não é uma engrenagem impessoal girando sozinha, mas as mãos de um Pai que sustenta cada detalhe. Saber isso não nos torna passivos: torna-nos tranquilos. O crente age, planeja e trabalha — mas dorme, porque quem guarda a sua vida não cochila." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que você tem tentado vigiar sozinho?",
+            intro: "Responda ao Salmo 121 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", example: "O meu socorro não vem dos montes nem de mim: vem do SENHOR, que fez os céus e a terra." },
+              { key: "gratidao", example: "Agradeço por um perigo do qual fui guardado sem nem ficar sabendo." },
+              { key: "confissao", example: "Tenho perdido o sono tentando vigiar o que não está nas minhas mãos." },
+              { key: "suplica", example: "Guarda o meu caminho hoje, e ensina-me a descansar enquanto tu velas." }
+            ] },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "A semente de oração do dia — ore antes de dormir, se puder.",
+            prayer: "Senhor, tu guardas a minha entrada e a minha saída. Vela por mim esta noite e ensina-me a soltar o que não posso controlar. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Salmo 121 · O Desafio", q: "Complete o versículo que você leu:", verseRef: "sl.121.2",
+            opts: ["do meu esforço", "do SENHOR", "do acaso", "dos montes"], answer: 1,
+            exp: "“Meu socorro vem do SENHOR, que fez os céus e a terra” (Sl 121.2)." },
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "A providência, para Calvino, é...",
+            opts: ["uma engrenagem impessoal", "as mãos de um Pai que sustenta cada detalhe", "o mesmo que destino cego", "indiferente ao crente"], answer: 1,
+            exp: "Saber disso não nos torna passivos: torna-nos tranquilos (I.16–17)." },
+          { type: "order", kicker: "Memorização · Salmo 121.2", q: "Monte a confissão do salmista:", ref: "Salmo 121.2",
+            words: ["Meu", "socorro", "vem", "do", "SENHOR"],
+            exp: "“Meu socorro vem do SENHOR” — a origem certa da segurança (Sl 121.2)." }
+        ]
+      },
+      {
+        id: "sc-2",
+        title: "Deleite na Palavra",
+        subtitle: "Salmo 1 · Meditação",
+        minutes: 7,
+        carryRef: "sl.1.2",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Peça a Deus prazer — e não só disciplina — na sua Palavra. Toque na lâmpada.",
+            prayer: "Pai, dá-me deleite na tua Palavra, não apenas dever. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Medita de dia e de noite", passageRefs: ["sl.1.2"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Rumine a Palavra", verseRef: "sl.1.2", seconds: 20 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "A árvore plantada",
+            intro: "Um reformador ilustra o fruto da meditação.",
+            author: "Martinho Lutero", initial: "L", source: "Oratio, meditatio, tentatio · paráfrase",
+            text: "Lutero comparava a meditação a ruminar: voltar ao mesmo texto de novo e de novo, deixando-o descer do olho ao coração. A árvore do Salmo 1 não dá fruto de repente — dá porque está plantada e enraizada junto às águas da Palavra." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que verdade da Palavra você quer 'ruminar' hoje?",
+            intro: "Responda ao Salmo 1 em quatro frentes. Uma frase em cada já basta.",
+            threads: [
+              { key: "ensino", example: "Deus me quer enraizado nEle, e não apenas informado sobre Ele." },
+              { key: "gratidao", example: "Agradeço pelo fruto que a Palavra já deu em mim, mesmo devagar." },
+              { key: "confissao", example: "Tenho lido a Bíblia por obrigação, sem prazer nenhum." },
+              { key: "suplica", example: "Dá-me deleite na tua Palavra, e não apenas disciplina." }
+            ] },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "A semente de oração do dia — plante-a e volte a ela durante o dia.",
+            prayer: "Senhor, planta-me junto às águas da tua Palavra, para que eu dê fruto no tempo certo. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Salmo 1 · O Desafio", q: "Onde está o prazer do homem bem-aventurado?", verseRef: "sl.1.2",
+            opts: ["Nas riquezas", "Na lei do SENHOR", "Na fama", "No conselho dos maus"], answer: 1,
+            exp: "O deleite na Palavra é a raiz de uma vida frutífera e firme." },
+          { type: "mcq", kicker: "A Voz dos Pais · Lutero", q: "Meditar, para Lutero, é como...",
+            opts: ["ler uma vez e esquecer", "ruminar o texto até o coração", "decorar sem entender", "evitar as Escrituras"], answer: 1,
+            exp: "Voltar ao texto até ele descer do olho ao coração." },
+          { type: "order", kicker: "Memorização · Salmo 1.2", q: "Complete a meditação:", ref: "Salmo 1.2",
+            words: ["medita", "em", "sua", "Lei", "de", "dia", "e", "de", "noite"],
+            exp: "A meditação constante mantém a árvore verde e frutífera." }
+        ]
+      },
+      {
+        id: "sc-3",
+        title: "Ele nos fez",
+        subtitle: "Salmo 100 · Adoração",
+        minutes: 7,
+        carryRef: "sl.100.3",
+        stations: [
+          { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
+            lead: "Comece reconhecendo: eu sou criatura, Ele é o Criador. Toque na lâmpada.",
+            prayer: "Criador, ensina-me a viver como quem pertence a ti. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Foi ele que nos fez", passageRefs: ["sl.100.3"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Você pertence a Ele", verseRef: "sl.100.3", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "Não a nós mesmos",
+            intro: "Um pai da Igreja resume de onde vem a nossa identidade.",
+            author: "Agostinho", initial: "A", source: "Confissões, criatura e Criador · paráfrase",
+            text: "Agostinho insistia que não nos criamos nem nos sustentamos. Reconhecer 'foi ele que nos fez, e não nós a nós mesmos' derruba o orgulho e funda a adoração: tudo o que sou é dom. Quem se recebe das mãos de Deus aprende a devolvê-lo em louvor." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que muda ao lembrar que você não se fez a si mesmo?",
+            intro: "Responda como criatura diante do Criador, em quatro frentes.",
+            threads: [
+              { key: "ensino", example: "Eu não me criei nem me sustento: tudo o que sou vem das mãos de Deus." },
+              { key: "gratidao", example: "Agradeço por dons que sempre tratei como mérito meu." },
+              { key: "confissao", example: "Tenho vivido como se fosse dono da minha vida e senhor dos meus planos." },
+              { key: "suplica", example: "Ensina-me a viver como quem pertence a ti." }
+            ] },
+          { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
+            intro: "Ore como criatura diante do Criador — sem pressa e sem defesa.",
+            prayer: "Senhor, tu me fizeste e eu sou teu. Recebe hoje a minha vida em adoração. Amém." }
+        ],
+        challenge: [
+          { type: "mcq", kicker: "Salmo 100 · O Desafio", q: "Quem nos fez, segundo o v.3?", verseRef: "sl.100.3",
+            opts: ["Nós mesmos", "O acaso", "O SENHOR", "O destino"], answer: 2,
+            exp: "Somos criatura, não criador — e isso funda a adoração." },
+          { type: "mcq", kicker: "A Voz dos Pais · Agostinho", q: "Reconhecer que não nos criamos...",
+            opts: ["alimenta o orgulho", "funda a adoração", "não muda nada", "nega a Deus"], answer: 1,
+            exp: "Tudo o que sou é dom; por isso adoro." },
+          { type: "match", kicker: "Salmo 100 · Criatura e Criador", q: "Relacione cada termo ao seu lugar:",
+            pairs: [["Criador", "Deus"], ["Criatura", "Nós"], ["Pertencer", "Somos dele"], ["Louvor", "Resposta certa"]],
+            exp: "Da criação nasce a gratidão, e da gratidão o louvor." }
+        ]
       }
     ]
   },
@@ -536,7 +536,7 @@ export const UNITS: Unit[] = [
     theme: "Evangelho",
     icon: "i-dove", accent: "var(--mustard-deep)",
     blurb: "O coração do Evangelho: somos salvos pela graça, não pelo mérito. Descanse no dom de Deus e nas misericórdias que se renovam a cada manhã.",
-    farewell: "Você entrou por Efésios 2, de mãos vazias, e sai por Romanos 8, com a certeza de que nada as arranca da mão dele. Entre uma coisa e outra: o convite ao cansado, as misericórdias de cada manhã, o fim da condenação e a alegria do perdão. Se ficar uma só frase, que seja esta — o veredito sobre você já foi dado, e é a favor. Descanse nela.",
+    farewell: "Você entrou por Efésios 2, de mãos vazias, e sai por Romanos 8, com a certeza de que nada as arranca da mão dele. Entre uma coisa e outra: o convite ao cansado, a alegria de confessar, o fim da condenação e as misericórdias que amanhecem de novo. É esta a lógica da graça — ela não espera você melhorar para chegar, e não vai embora quando você falha. Se ficar uma só frase, que seja esta: o veredito sobre você já foi dado, e é a favor. Descanse nela.",
     about: "Unidade sobre a graça, no centro da fé reformada: Efésios 2 (salvos por dom), Mateus 11 (o descanso que Cristo oferece) e Lamentações 3 (a fidelidade que se renova). Traz Martinho Lutero (1483–1546), o reformador cuja redescoberta da justificação pela fé abriu a Reforma, e Agostinho — ambos em paráfrases nossas.",
     days: [
       {
@@ -622,44 +622,45 @@ export const UNITS: Unit[] = [
         ]
       },
       {
-        id: "dg-3",
-        title: "Misericórdias que se renovam",
-        subtitle: "Lamentações 3 · Fidelidade",
+        id: "dg-5",
+        title: "A alegria do perdão",
+        subtitle: "Salmo 32 · Confissão",
         minutes: 7,
-        carryRef: "lm.3.23",
+        carryRef: "sl.32.1",
         stations: [
           { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Mesmo depois de um dia difícil, há misericórdia nova. Toque na lâmpada.",
-            prayer: "Deus fiel, abre os meus olhos para as tuas misericórdias de hoje. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Novas cada manhã",
-            passageRefs: ["lm.3.22", "lm.3.23"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Grande é a fidelidade", verseRef: "lm.3.23", seconds: 18 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "A providência que sustenta",
-            intro: "Um reformador nos lembra que nada foge das mãos de Deus.",
-            author: "João Calvino", initial: "C", source: "Institutas I.16–17 · paráfrase",
-            text: "Calvino ensinava que a providência não é um destino frio, mas o cuidado ativo de um Pai. Mesmo em Lamentações — um livro de choro — o crente enxerga misericórdias novas a cada manhã. Confiar na fidelidade de Deus não nega a dor; a atravessa com esperança." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você já viu a fidelidade de Deus na sua história?",
-            intro: "Responda a Lamentações 3 em quatro frentes. Uma frase em cada já basta.",
+            lead: "Guardar pecado cansa. Hoje é dia de soltar. Toque na lâmpada.",
+            prayer: "Senhor, não quero mais esconder. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Bem-aventurado o perdoado",
+            passageRefs: ["sl.32.1", "sl.32.5"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "A transgressão perdoada",
+            verseRef: "sl.32.1", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "O salmo dos últimos dias",
+            intro: "Este salmo acompanhou Agostinho até o fim da vida.",
+            author: "Agostinho", initial: "A", source: "tema dos Salmos penitenciais · paráfrase",
+            text: "Conta-se que Agostinho pediu que os salmos penitenciais fossem escritos na parede do seu quarto, para lê-los enquanto morria. Ele, que tanto escreveu sobre a graça, quis terminar olhando não para as próprias obras, mas para o perdão. A bem-aventurança do Salmo 32 não é a de quem nunca errou: é a de quem foi perdoado." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que pesa por estar guardado?",
+            intro: "Responda ao Salmo 32 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", example: "A fidelidade de Deus não depende de o meu dia ter sido bom." },
-              { key: "gratidao", example: "Agradeço por uma misericórdia pequena que recebi esta semana." },
-              { key: "confissao", example: "Julguei o caráter de Deus pela dor que senti." },
-              { key: "suplica", example: "Abre os meus olhos para as tuas misericórdias de amanhã." }
+              { key: "ensino", example: "A bem-aventurança não é nunca ter errado, mas ter sido perdoado." },
+              { key: "gratidao", example: "Agradeço pelo alívio que senti na última vez que confessei de verdade." },
+              { key: "confissao", example: "Tenho carregado em silêncio algo que precisava dizer a Deus." },
+              { key: "suplica", example: "Dá-me coragem de trazer à luz o que escondo, e recebe-me." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "Ore lembrando: a misericórdia de amanhã já está a caminho.",
-            prayer: "Senhor, as tuas misericórdias se renovam a cada manhã. Faze-me confiar na tua fidelidade hoje. Amém." }
+            intro: "A semente de oração do dia — nomeie diante de Deus o que precisa nomear.",
+            prayer: "Senhor, eu reconheço diante de ti o que escondi. Cobre a minha transgressão e devolve-me a alegria de andar contigo. Amém." }
         ],
         challenge: [
-          { type: "mcq", kicker: "Lamentações 3 · O Desafio", q: "Com que frequência as misericórdias se renovam?", verseRef: "lm.3.23",
-            opts: ["uma vez na vida", "cada manhã", "só nos bons dias", "raramente"], answer: 1,
-            exp: "Novas a cada manhã — a graça acompanha cada novo dia." },
-          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "A providência, para Calvino, é...",
-            opts: ["um destino frio", "o cuidado ativo de um Pai", "acaso", "ausência de Deus"], answer: 1,
-            exp: "Deus governa todas as coisas com cuidado paternal." },
-          { type: "order", kicker: "Memorização · Lamentações 3.23", q: "Complete a confissão:", ref: "Lamentações 3.23",
-            words: ["grande", "é", "a", "tua", "fidelidade"],
-            exp: "A fidelidade de Deus é a base firme de cada manhã." }
+          { type: "mcq", kicker: "Salmo 32 · O Desafio", q: "Complete a bem-aventurança:", verseRef: "sl.32.1",
+            opts: ["escondida", "perdoada", "esquecida", "pequena"], answer: 1,
+            exp: "“Bem-aventurado aquele cuja transgressão é perdoada” (Sl 32.1)." },
+          { type: "mcq", kicker: "Salmo 32 · O Desafio", q: "O que Davi fez com o seu pecado?", verseRef: "sl.32.5",
+            opts: ["disfarcei", "reconheci meu pecado", "justifiquei", "ignorei"], answer: 1,
+            exp: "“Eu reconheci meu pecado a ti, e não escondi minha maldade” — confessar é o caminho do alívio (Sl 32.5)." },
+          { type: "mcq", kicker: "A Voz dos Pais · Agostinho", q: "Para onde Agostinho quis olhar ao morrer?",
+            opts: ["para as próprias obras", "para o perdão de Deus", "para os seus livros", "para os seus discípulos"], answer: 1,
+            exp: "Quem mais escreveu sobre a graça quis terminar olhando para ela, não para si." }
         ]
       },
       {
@@ -705,45 +706,44 @@ export const UNITS: Unit[] = [
         ]
       },
       {
-        id: "dg-5",
-        title: "A alegria do perdão",
-        subtitle: "Salmo 32 · Confissão",
+        id: "dg-3",
+        title: "Misericórdias que se renovam",
+        subtitle: "Lamentações 3 · Fidelidade",
         minutes: 7,
-        carryRef: "sl.32.1",
+        carryRef: "lm.3.23",
         stations: [
           { type: "light", eyebrow: "Estação 01 · Acender a lâmpada", title: "Aquiete o coração",
-            lead: "Guardar pecado cansa. Hoje é dia de soltar. Toque na lâmpada.",
-            prayer: "Senhor, não quero mais esconder. Amém." },
-          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Bem-aventurado o perdoado",
-            passageRefs: ["sl.32.1", "sl.32.5"] },
-          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "A transgressão perdoada",
-            verseRef: "sl.32.1", seconds: 18 },
-          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "O salmo dos últimos dias",
-            intro: "Este salmo acompanhou Agostinho até o fim da vida.",
-            author: "Agostinho", initial: "A", source: "tema dos Salmos penitenciais · paráfrase",
-            text: "Conta-se que Agostinho pediu que os salmos penitenciais fossem escritos na parede do seu quarto, para lê-los enquanto morria. Ele, que tanto escreveu sobre a graça, quis terminar olhando não para as próprias obras, mas para o perdão. A bem-aventurança do Salmo 32 não é a de quem nunca errou: é a de quem foi perdoado." },
-          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que pesa por estar guardado?",
-            intro: "Responda ao Salmo 32 em quatro frentes. Uma frase em cada já basta.",
+            lead: "Mesmo depois de um dia difícil, há misericórdia nova. Toque na lâmpada.",
+            prayer: "Deus fiel, abre os meus olhos para as tuas misericórdias de hoje. Amém." },
+          { type: "read", eyebrow: "Estação 02 · A Palavra", title: "Novas cada manhã",
+            passageRefs: ["lm.3.22", "lm.3.23"] },
+          { type: "breath", eyebrow: "Estação 03 · Respiro", title: "Grande é a fidelidade", verseRef: "lm.3.23", seconds: 18 },
+          { type: "voice", eyebrow: "Estação 04 · A Voz dos Pais", title: "A providência que sustenta",
+            intro: "Um reformador nos lembra que nada foge das mãos de Deus.",
+            author: "João Calvino", initial: "C", source: "Institutas I.16–17 · paráfrase",
+            text: "Calvino ensinava que a providência não é um destino frio, mas o cuidado ativo de um Pai. Mesmo em Lamentações — um livro de choro — o crente enxerga misericórdias novas a cada manhã. Confiar na fidelidade de Deus não nega a dor; a atravessa com esperança." },
+          { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você já viu a fidelidade de Deus na sua história?",
+            intro: "Responda a Lamentações 3 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", example: "A bem-aventurança não é nunca ter errado, mas ter sido perdoado." },
-              { key: "gratidao", example: "Agradeço pelo alívio que senti na última vez que confessei de verdade." },
-              { key: "confissao", example: "Tenho carregado em silêncio algo que precisava dizer a Deus." },
-              { key: "suplica", example: "Dá-me coragem de trazer à luz o que escondo, e recebe-me." }
+              { key: "ensino", example: "A fidelidade de Deus não depende de o meu dia ter sido bom." },
+              { key: "gratidao", example: "Agradeço por uma misericórdia pequena que recebi esta semana." },
+              { key: "confissao", example: "Julguei o caráter de Deus pela dor que senti." },
+              { key: "suplica", example: "Abre os meus olhos para as tuas misericórdias de amanhã." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
-            intro: "A semente de oração do dia — nomeie diante de Deus o que precisa nomear.",
-            prayer: "Senhor, eu reconheço diante de ti o que escondi. Cobre a minha transgressão e devolve-me a alegria de andar contigo. Amém." }
+            intro: "Ore lembrando: a misericórdia de amanhã já está a caminho.",
+            prayer: "Senhor, as tuas misericórdias se renovam a cada manhã. Faze-me confiar na tua fidelidade hoje. Amém." }
         ],
         challenge: [
-          { type: "mcq", kicker: "Salmo 32 · O Desafio", q: "Complete a bem-aventurança:", verseRef: "sl.32.1",
-            opts: ["escondida", "perdoada", "esquecida", "pequena"], answer: 1,
-            exp: "“Bem-aventurado aquele cuja transgressão é perdoada” (Sl 32.1)." },
-          { type: "mcq", kicker: "Salmo 32 · O Desafio", q: "O que Davi fez com o seu pecado?", verseRef: "sl.32.5",
-            opts: ["disfarcei", "reconheci meu pecado", "justifiquei", "ignorei"], answer: 1,
-            exp: "“Eu reconheci meu pecado a ti, e não escondi minha maldade” — confessar é o caminho do alívio (Sl 32.5)." },
-          { type: "mcq", kicker: "A Voz dos Pais · Agostinho", q: "Para onde Agostinho quis olhar ao morrer?",
-            opts: ["para as próprias obras", "para o perdão de Deus", "para os seus livros", "para os seus discípulos"], answer: 1,
-            exp: "Quem mais escreveu sobre a graça quis terminar olhando para ela, não para si." }
+          { type: "mcq", kicker: "Lamentações 3 · O Desafio", q: "Com que frequência as misericórdias se renovam?", verseRef: "lm.3.23",
+            opts: ["uma vez na vida", "cada manhã", "só nos bons dias", "raramente"], answer: 1,
+            exp: "Novas a cada manhã — a graça acompanha cada novo dia." },
+          { type: "mcq", kicker: "A Voz dos Pais · Calvino", q: "A providência, para Calvino, é...",
+            opts: ["um destino frio", "o cuidado ativo de um Pai", "acaso", "ausência de Deus"], answer: 1,
+            exp: "Deus governa todas as coisas com cuidado paternal." },
+          { type: "order", kicker: "Memorização · Lamentações 3.23", q: "Complete a confissão:", ref: "Lamentações 3.23",
+            words: ["grande", "é", "a", "tua", "fidelidade"],
+            exp: "A fidelidade de Deus é a base firme de cada manhã." }
         ]
       },
       {
