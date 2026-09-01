@@ -472,3 +472,12 @@ button { font-family: inherit; }
 
 /* contador de progresso nas medalhas por conquistar */
 .m-count { font-size: 10px; font-weight: 900; letter-spacing: .06em; color: var(--ink-soft); margin-top: 5px; }
+
+/* ---------- Blocos de uma coleção grande ---------- */
+.blk-card { display: flex; align-items: center; gap: 13px; width: 100%; border: 1.5px solid var(--line); border-radius: 16px; padding: 14px; background: var(--card-2); margin-bottom: 11px; cursor: pointer; font: inherit; color: inherit; text-align: left; transition: border-color .12s, transform .08s; }
+.blk-card:hover { border-color: var(--terra); } .blk-card:active { transform: scale(.99); }
+.blk-n { width: 34px; height: 34px; flex: none; border-radius: 11px; display: grid; place-items: center; color: var(--cream); font-weight: 900; font-size: 14px; }
+.blk-n svg { font-size: 17px; }
+.blk-main { flex: 1; min-width: 0; display: grid; gap: 5px; }
+.blk-t { font-weight: 800; font-size: 15px; line-height: 1.2; }
+.blk-s { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); }

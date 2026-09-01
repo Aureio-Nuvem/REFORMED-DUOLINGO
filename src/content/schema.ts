@@ -67,6 +67,19 @@ export interface TeachCard {
   body: string;    // a explicação/resposta
 }
 
+/**
+ * Um bloco de uma coleção grande. Coleções como o Catecismo (107 perguntas)
+ * são grandes demais para uma maestria só: cada bloco é estudado e dominado
+ * por conta própria, com um recorte temático que se sustenta sozinho.
+ */
+export interface CourseBlock {
+  id: string;
+  title: string;       // ex.: "Deus e a Escritura"
+  subtitle: string;    // ex.: "Perguntas 1–6"
+  teach: TeachCard[];
+  questions: Question[];
+}
+
 /** Coleção da Academia (estudo livre). */
 export interface Course {
   id: string;
@@ -77,6 +90,7 @@ export interface Course {
   locked?: boolean;
   teach?: TeachCard[]; // material de estudo (modo Aprender)
   questions: Question[];
+  blocks?: CourseBlock[]; // quando existe, a coleção é estudada bloco a bloco
 }
 
 /** Item do Catecismo de Westminster (domínio público). */

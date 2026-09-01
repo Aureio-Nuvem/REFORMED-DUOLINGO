@@ -26,6 +26,7 @@ interface Props {
   gems: number;
   studyPos: number;                 // próximo cartão de estudo salvo
   onStudyPos: (index: number) => void;
+  masteryKey?: string;              // chave de progresso (coleção ou bloco)
   actions: GameActions;
   onExit: () => void;
 }
@@ -43,7 +44,7 @@ function Elapsed() {
   );
 }
 
-export function CourseFlow({ course, mastery, hearts, gems, studyPos, onStudyPos, actions, onExit }: Props) {
+export function CourseFlow({ course, mastery, hearts, gems, studyPos, onStudyPos, masteryKey, actions, onExit }: Props) {
   const [phase, setPhase] = useState<Phase>({ kind: "menu" });
   const cards = useMemo(() => buildFlashcards(course.questions), [course]);
   const teach = course.teach ?? [];
@@ -108,7 +109,7 @@ export function CourseFlow({ course, mastery, hearts, gems, studyPos, onStudyPos
 
   if (phase.kind === "result") {
     return (
-      <StudyResult course={course} phase={phase} before={mastery} actions={actions}
+      <StudyResult course={course} masteryKey={masteryKey ?? course.id} phase={phase} before={mastery} actions={actions}
         onDone={() => setPhase({ kind: "menu" })} />
     );
   }
@@ -147,8 +148,8 @@ export function CourseFlow({ course, mastery, hearts, gems, studyPos, onStudyPos
   );
 }
 
-function StudyResult({ course, phase, before, actions, onDone }: {
-  course: Course; phase: { mode: Mode; correct: number; total: number }; before: number; actions: GameActions; onDone: () => void;
+function StudyResult({ course, masteryKey, phase, before, actions, onDone }: {
+  course: Course; masteryKey: string; phase: { mode: Mode; correct: number; total: number }; before: number; actions: GameActions; onDone: () => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const acc = Math.round((phase.correct / phase.total) * 100);
@@ -159,7 +160,7 @@ function StudyResult({ course, phase, before, actions, onDone }: {
 
   const afterRef = useRef(before);
   useEffect(() => {
-    afterRef.current = actions.bumpMastery(course.id, before, gain, mastered ? 100 : undefined);
+    afterRef.current = actions.bumpMastery(masteryKey, before, gain, mastered ? 100 : undefined);
     actions.addXp(earned);
     actions.addGems(5);
     snd.win();

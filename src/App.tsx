@@ -4,7 +4,7 @@ import { useLumen } from "./state";
 import { setMuted, isMuted, snd } from "./engine/audio";
 import { UNITS } from "./content/devotionals";
 import { COURSES } from "./content/courses";
-import type { DevotionalDay, Unit } from "./content/schema";
+import type { Course, DevotionalDay, Unit } from "./content/schema";
 import type { SaveState, Reminder } from "./engine/storage";
 import { applyReminder, reminderSupported, reminderPermission, requestReminderPermission } from "./engine/reminder";
 import { computeMedals, heatmap } from "./engine/medals";
@@ -39,6 +39,7 @@ export function App() {
   const { state, actions } = useLumen();
   const [screen, setScreen] = useState<Screen>("home");
   const [courseId, setCourseId] = useState<string | null>(null);
+  const [blockId, setBlockId] = useState<string | null>(null);
   const [playDay, setPlayDay] = useState<DevotionalDay | null>(null);
   const [muted, setMutedState] = useState(isMuted());
   const sync = useSync(state, actions.replaceState);
@@ -94,20 +95,41 @@ export function App() {
               onBack={() => go("home")} />
           )}
           {screen === "academy" && (
-            <Academy mastery={state.mastery} onOpen={(id) => { setCourseId(id); setScreen("course"); }} />
+            <Academy mastery={state.mastery} onOpen={(id) => { setCourseId(id); setBlockId(null); setScreen("course"); }} />
           )}
-          {screen === "course" && courseId && (
-            <CourseFlow
-              course={COURSES.find((c) => c.id === courseId)!}
-              mastery={state.mastery[courseId] ?? 0}
-              studyPos={state.studyPos[courseId] ?? 0}
-              onStudyPos={(idx) => actions.setStudyPos(courseId, idx)}
-              hearts={state.hearts}
-              gems={state.gems}
-              actions={actions}
-              onExit={() => setScreen("academy")}
-            />
-          )}
+          {screen === "course" && courseId && (() => {
+            const course = COURSES.find((c) => c.id === courseId)!;
+            const block = course.blocks?.find((b) => b.id === blockId);
+
+            if (course.blocks && !block) {
+              return (
+                <Blocks course={course} mastery={state.mastery}
+                  onPick={(id) => { setBlockId(id); snd.nav(); }}
+                  onBack={() => go("academy")} />
+              );
+            }
+
+            // Com bloco, o estudo acontece sobre o recorte dele; sem blocos,
+            // sobre a coleção inteira. A chave de progresso muda junto.
+            const key = block ? `${course.id}:${block.id}` : course.id;
+            const target: Course = block
+              ? { ...course, title: block.title, subtitle: block.subtitle, teach: block.teach, questions: block.questions }
+              : course;
+
+            return (
+              <CourseFlow
+                course={target}
+                mastery={state.mastery[key] ?? 0}
+                studyPos={state.studyPos[key] ?? 0}
+                onStudyPos={(idx) => actions.setStudyPos(key, idx)}
+                masteryKey={key}
+                hearts={state.hearts}
+                gems={state.gems}
+                actions={actions}
+                onExit={() => (block ? setBlockId(null) : go("academy"))}
+              />
+            );
+          })()}
           {screen === "shop" && <Shop gems={state.gems} />}
           {screen === "profile" && (
             <Profile state={state} muted={muted}
@@ -306,7 +328,7 @@ function Academy({ mastery, onOpen }: { mastery: Record<string, number>; onOpen:
       <div className="scr-sub">Estude a fé reformada no seu ritmo · uma homenagem à Academia de Genebra</div>
       <div className="aca-note"><Icon name="i-flame" />Estudar rende XP e maestria. Sua <b>ofensiva</b> continua sendo do devocional diário.</div>
       {COURSES.map((c) => {
-        const m = mastery[c.id] ?? 0;
+        const m = courseMastery(c, mastery);
         if (c.locked) return (
           <div className="aca-card locked" key={c.id}>
             <span className="aca-ic" style={{ background: c.color }}><Icon name={c.icon as IconName} /></span>
@@ -320,6 +342,49 @@ function Academy({ mastery, onOpen }: { mastery: Record<string, number>; onOpen:
             <div className="aca-main">
               <div className="aca-t">{c.title}</div>
               <div className="aca-s">{c.subtitle}</div>
+              <div className="aca-mbar"><i style={{ width: m + "%" }} /></div>
+            </div>
+            <span className="aca-right"><span className="aca-pct">{m}%</span><span className="go"><Icon name="i-arrow" /></span></span>
+          </button>
+        );
+      })}
+    </section>
+  );
+}
+
+/** Maestria de uma coleção com blocos = média dos blocos. */
+function courseMastery(course: Course, mastery: Record<string, number>): number {
+  if (!course.blocks?.length) return mastery[course.id] ?? 0;
+  const sum = course.blocks.reduce((acc, b) => acc + (mastery[`${course.id}:${b.id}`] ?? 0), 0);
+  return Math.round(sum / course.blocks.length);
+}
+
+function Blocks({ course, mastery, onPick, onBack }: {
+  course: Course; mastery: Record<string, number>;
+  onPick: (blockId: string) => void; onBack: () => void;
+}) {
+  const blocks = course.blocks ?? [];
+  return (
+    <section className="screen">
+      <div className="diary-top">
+        <button className="xbtn" onClick={onBack} aria-label="Voltar">
+          <Icon name="i-arrow" style={{ transform: "scaleX(-1)" }} />
+        </button>
+        <div className="scr-title" style={{ margin: 0 }}>{course.title}</div>
+      </div>
+      <div className="scr-sub">
+        São muitas perguntas para uma vez só. Escolha um bloco — cada um tem a sua própria maestria.
+      </div>
+      {blocks.map((b, i) => {
+        const m = mastery[`${course.id}:${b.id}`] ?? 0;
+        return (
+          <button className="blk-card" key={b.id} onClick={() => onPick(b.id)}>
+            <span className="blk-n" style={{ background: m >= 100 ? "var(--forest)" : course.color }}>
+              {m >= 100 ? <Icon name="i-check" /> : i + 1}
+            </span>
+            <div className="blk-main">
+              <div className="blk-t">{b.title}</div>
+              <div className="blk-s">{b.subtitle} · {b.questions.length} perguntas</div>
               <div className="aca-mbar"><i style={{ width: m + "%" }} /></div>
             </div>
             <span className="aca-right"><span className="aca-pct">{m}%</span><span className="go"><Icon name="i-arrow" /></span></span>
