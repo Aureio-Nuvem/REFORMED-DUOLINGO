@@ -20,11 +20,11 @@ interface Props {
  * O que cada fio significa. Isto é fixo e explicado na tela: o conteúdo do dia
  * traz só a pergunta, e aqui dizemos ao usuário para que serve cada campo.
  */
-const FIOS: Record<ThreadKey, { n: string; label: string; hint: string; color: string }> = {
-  ensino:    { n: "1", label: "Ensino",   hint: "o que o texto me mostra sobre Deus",     color: "var(--mustard-deep)" },
-  gratidao:  { n: "2", label: "Gratidão", hint: "pelo que eu agradeço a partir disto",    color: "var(--forest)" },
-  confissao: { n: "3", label: "Confissão", hint: "o que eu reconheço diante de Deus",     color: "var(--terra)" },
-  suplica:   { n: "4", label: "Súplica",  hint: "o que eu peço a Ele agora",              color: "var(--slate)" }
+const FIOS: Record<ThreadKey, { n: string; label: string; question: string; color: string }> = {
+  ensino:    { n: "1", label: "Ensino",    question: "O que este texto me ensina sobre Deus?",       color: "var(--mustard-deep)" },
+  gratidao:  { n: "2", label: "Gratidão",  question: "Pelo que posso agradecer a partir disto?",     color: "var(--forest)" },
+  confissao: { n: "3", label: "Confissão", question: "O que preciso reconhecer diante de Deus?",     color: "var(--terra)" },
+  suplica:   { n: "4", label: "Súplica",   question: "O que peço a Ele hoje?",                       color: "var(--slate)" }
 };
 
 type Phase = { kind: "stations"; i: number } | { kind: "challenge" } | { kind: "selo"; xp: number };
@@ -232,24 +232,31 @@ function StationContent({ station }: { station: Station }) {
             {station.threads?.length ? (
               <>
                 <div className="fios-note">
-                  <b>Os quatro fios</b> são quatro maneiras de responder ao texto — o que ele
+                  <b>Os quatro fios</b> são as mesmas quatro perguntas todo dia — o que o texto
                   {" "}<b>ensina</b>, o que desperta <b>gratidão</b>, o que leva à <b>confissão</b> e o
-                  que vira <b>pedido</b>. Não precisa preencher todos, nem escrever bonito.
+                  que vira <b>pedido</b>. Cada uma traz um exemplo do texto de hoje: toque em
+                  {" "}<b>Usar</b> para acatá-lo, ou escreva o seu. Não precisa preencher todos.
                 </div>
                 {station.threads.map((t) => {
                   const fio = FIOS[t.key];
+                  const id = "fio-" + t.key;
                   return (
                     <div className="fio" key={t.key}>
                       <div className="fio-head">
                         <span className="fio-n" style={{ background: fio.color }}>{fio.n}</span>
-                        <div>
-                          <div className="fio-label">{fio.label}</div>
-                          <div className="fio-hint">{fio.hint}</div>
-                        </div>
+                        <div className="fio-label">{fio.label}</div>
                       </div>
-                      <div className="fio-q">{t.prompt}</div>
-                      <textarea className="fio-in" id={"fio-" + t.key} rows={2}
-                        placeholder="Escreva uma frase…" />
+                      <div className="fio-q">{fio.question}</div>
+                      <textarea className="fio-in" id={id} rows={2} placeholder="Escreva a sua resposta…" />
+                      <div className="fio-ex">
+                        <span className="fio-ex-k">Exemplo</span>
+                        <span className="fio-ex-t">{t.example}</span>
+                        <button className="fio-ex-b" onClick={() => {
+                          const el = document.getElementById(id) as HTMLTextAreaElement | null;
+                          if (el) { el.value = t.example; el.focus(); }
+                          snd.tap();
+                        }}>Usar</button>
+                      </div>
                     </div>
                   );
                 })}

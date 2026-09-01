@@ -17,11 +17,15 @@ export type Question =
   | { type: "match"; kicker: string; q: string; pairs: [string, string][]; exp: string };
 
 /**
- * Um dos "quatro fios" da reflexão. O QUE cada fio significa é fixo e vive na
- * interface (o app explica ao usuário); aqui fica só a pergunta daquele dia.
+ * Um dos "quatro fios" da reflexão.
+ *
+ * A PERGUNTA de cada fio é sempre a mesma ("O que este texto me ensina sobre
+ * Deus?") e vive na interface — é ela que cria a constância do pensamento.
+ * O conteúdo do dia traz apenas um EXEMPLO de resposta, tirado do texto
+ * daquele devocional, que a pessoa pode acatar ou trocar pelo que é seu.
  */
 export type ThreadKey = "ensino" | "gratidao" | "confissao" | "suplica";
-export interface ReflectThread { key: ThreadKey; prompt: string }
+export interface ReflectThread { key: ThreadKey; example: string }
 
 /** Estações do devocional guiado (registros: sereno 1–6, energético 7–8). */
 export type Station =

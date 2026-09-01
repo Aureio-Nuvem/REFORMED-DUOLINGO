@@ -39,10 +39,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde a Palavra iluminou um passo seu hoje?",
             intro: "Responda ao texto de hoje em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "O que a Palavra de hoje afirma sobre o caminho?" },
-              { key: "gratidao", prompt: "Por qual passo já iluminado por Deus eu agradeço?" },
-              { key: "confissao", prompt: "Onde tenho andado na minha própria luz?" },
-              { key: "suplica", prompt: "Que passo peço que Ele firme hoje?" }
+              { key: "ensino", example: "Deus não me mostra o caminho inteiro de uma vez — Ele ilumina o passo de hoje." },
+              { key: "gratidao", example: "Agradeço pelas vezes em que a Palavra me impediu de tomar uma decisão ruim." },
+              { key: "confissao", example: "Tenho decidido muita coisa sem abrir a Bíblia, confiando só no meu próprio julgamento." },
+              { key: "suplica", example: "Senhor, ilumina a decisão que preciso tomar esta semana." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia. Ore com ela ou deixe que ela abra as suas próprias palavras — Deus ouve as duas.",
@@ -81,10 +81,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Em que área você tem tentado ser o próprio pastor?",
             intro: "Responda ao Salmo 23 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "O que significa ter o SENHOR como Pastor?" },
-              { key: "gratidao", prompt: "Onde Ele já me guiou sem que eu percebesse?" },
-              { key: "confissao", prompt: "Que área da minha vida ainda pastoreio sozinho?" },
-              { key: "suplica", prompt: "Que direção peço a Ele hoje?" }
+              { key: "ensino", example: "Deus não é só poderoso: Ele cuida de mim de perto, como um pastor cuida da ovelha." },
+              { key: "gratidao", example: "Agradeço porque não me faltou o essencial, mesmo quando achei que faltaria." },
+              { key: "confissao", example: "Tenho carregado sozinho o peso de resolver tudo, como se não houvesse Pastor." },
+              { key: "suplica", example: "Guia-me na área em que estou perdido e não quero admitir." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — deixe que ela abra as suas próprias palavras.",
@@ -123,10 +123,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que muda quando você lembra que Deus reina sobre isso?",
             intro: "Traga a sua preocupação de hoje e responda em quatro frentes.",
             threads: [
-              { key: "ensino", prompt: "O que muda na minha situação se Deus reina sobre ela?" },
-              { key: "gratidao", prompt: "Que refúgio Ele já foi para mim antes?" },
-              { key: "confissao", prompt: "Onde troquei a quietude pela ansiedade?" },
-              { key: "suplica", prompt: "Que tempestade peço que Ele aquiete?" }
+              { key: "ensino", example: "Deus continua reinando mesmo quando tudo à minha volta parece fora de controle." },
+              { key: "gratidao", example: "Agradeço por já ter atravessado tempestades que eu achava que não passariam." },
+              { key: "confissao", example: "Minha primeira reação ao medo é a ansiedade, não a oração." },
+              { key: "suplica", example: "Aquieta o meu coração e lembra-me de quem está no comando." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore devagar. Cada frase é um lugar onde descansar, não uma fórmula.",
@@ -173,10 +173,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que medo perde o poder quando Deus é a sua luz?",
             intro: "Nomeie o seu medo e responda em quatro frentes.",
             threads: [
-              { key: "ensino", prompt: "O que significa Deus ser a minha luz e salvação?" },
-              { key: "gratidao", prompt: "De que medo Ele já me livrou?" },
-              { key: "confissao", prompt: "A que tenho dado mais peso do que a Ele?" },
-              { key: "suplica", prompt: "Que temor entrego agora?" }
+              { key: "ensino", example: "Se Deus é a minha luz e a minha salvação, nenhum medo tem a última palavra." },
+              { key: "gratidao", example: "Agradeço porque Ele já me livrou de um medo que me dominava." },
+              { key: "confissao", example: "Tenho temido mais a opinião das pessoas do que a Deus." },
+              { key: "suplica", example: "Tira de mim o medo que está me travando hoje." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore em voz alta, se puder — o medo perde força quando a verdade é dita.",
@@ -213,10 +213,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que verdade da Palavra você quer 'ruminar' hoje?",
             intro: "Responda ao Salmo 1 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "Que verdade da Palavra quero levar comigo hoje?" },
-              { key: "gratidao", prompt: "Que fruto a Palavra já deu na minha vida?" },
-              { key: "confissao", prompt: "Onde tratei a Escritura como dever, e não como deleite?" },
-              { key: "suplica", prompt: "Que raiz peço que Ele aprofunde em mim?" }
+              { key: "ensino", example: "Deus me quer enraizado nEle, e não apenas informado sobre Ele." },
+              { key: "gratidao", example: "Agradeço pelo fruto que a Palavra já deu em mim, mesmo devagar." },
+              { key: "confissao", example: "Tenho lido a Bíblia por obrigação, sem prazer nenhum." },
+              { key: "suplica", example: "Dá-me deleite na tua Palavra, e não apenas disciplina." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — plante-a e volte a ela durante o dia.",
@@ -253,10 +253,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "O que muda ao lembrar que você não se fez a si mesmo?",
             intro: "Responda como criatura diante do Criador, em quatro frentes.",
             threads: [
-              { key: "ensino", prompt: "O que muda em saber que não me fiz a mim mesmo?" },
-              { key: "gratidao", prompt: "Que dom recebido eu nomeio e agradeço hoje?" },
-              { key: "confissao", prompt: "Onde vivi como se fosse dono de mim?" },
-              { key: "suplica", prompt: "Que parte de mim devolvo ao Criador?" }
+              { key: "ensino", example: "Eu não me criei nem me sustento: tudo o que sou vem das mãos de Deus." },
+              { key: "gratidao", example: "Agradeço por dons que sempre tratei como mérito meu." },
+              { key: "confissao", example: "Tenho vivido como se fosse dono da minha vida e senhor dos meus planos." },
+              { key: "suplica", example: "Ensina-me a viver como quem pertence a ti." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore como criatura diante do Criador — sem pressa e sem defesa.",
@@ -304,10 +304,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Em que você ainda tenta 'merecer' o amor de Deus?",
             intro: "Responda à graça de Efésios 2 em quatro frentes.",
             threads: [
-              { key: "ensino", prompt: "O que significa ser salvo por dom, e não por mérito?" },
-              { key: "gratidao", prompt: "O que recebi sem nunca ter merecido?" },
-              { key: "confissao", prompt: "Onde ainda tento pagar o que já foi pago?" },
-              { key: "suplica", prompt: "Que mão fechada peço que Ele abra?" }
+              { key: "ensino", example: "A salvação é presente de Deus, não pagamento pelo que eu fiz." },
+              { key: "gratidao", example: "Agradeço por ser amado sem ter feito nada para merecer." },
+              { key: "confissao", example: "Ainda tento provar o meu valor a Deus com desempenho." },
+              { key: "suplica", example: "Ajuda-me a descansar na graça, e não na minha performance." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore de mãos abertas. Não há nada a apresentar, só a receber.",
@@ -345,10 +345,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que peso você precisa entregar a Cristo hoje?",
             intro: "Traga o seu cansaço e responda em quatro frentes.",
             threads: [
-              { key: "ensino", prompt: "Por que o jugo de Cristo é leve?" },
-              { key: "gratidao", prompt: "Onde Ele já carregou o peso comigo?" },
-              { key: "confissao", prompt: "Que peso insisti em levar sozinho?" },
-              { key: "suplica", prompt: "Que carga entrego a Ele agora?" }
+              { key: "ensino", example: "Jesus chama justamente quem está cansado, não quem está forte." },
+              { key: "gratidao", example: "Agradeço porque não preciso chegar inteiro para ser recebido por Ele." },
+              { key: "confissao", example: "Tenho carregado sozinho um peso que Ele já se ofereceu para levar comigo." },
+              { key: "suplica", example: "Toma este cansaço que eu não consigo mais sustentar." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — traga o cansaço junto, não o esconda.",
@@ -386,10 +386,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você já viu a fidelidade de Deus na sua história?",
             intro: "Responda a Lamentações 3 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "O que é uma fidelidade que se renova a cada manhã?" },
-              { key: "gratidao", prompt: "Que misericórdia eu recebi nesta semana?" },
-              { key: "confissao", prompt: "Onde julguei Deus pela dor, e não pelo seu caráter?" },
-              { key: "suplica", prompt: "Que manhã peço que Ele ilumine?" }
+              { key: "ensino", example: "A fidelidade de Deus não depende de o meu dia ter sido bom." },
+              { key: "gratidao", example: "Agradeço por uma misericórdia pequena que recebi esta semana." },
+              { key: "confissao", example: "Julguei o caráter de Deus pela dor que senti." },
+              { key: "suplica", example: "Abre os meus olhos para as tuas misericórdias de amanhã." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "Ore lembrando: a misericórdia de amanhã já está a caminho.",
@@ -439,10 +439,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Quem define o seu caminho: você ou Deus?",
             intro: "Comece o mês respondendo em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "De onde vem a regra da vida cristã, segundo o texto?" },
-              { key: "gratidao", prompt: "Que direção recebida de Deus eu agradeço?" },
-              { key: "confissao", prompt: "Onde tenho preferido a minha luz à dele?" },
-              { key: "suplica", prompt: "Que coração ensinável peço para estes dias?" }
+              { key: "ensino", example: "A régua da vida cristã vem de Deus, não da minha opinião sobre o que é bom." },
+              { key: "gratidao", example: "Agradeço por não precisar inventar sozinho o sentido da minha vida." },
+              { key: "confissao", example: "Tenho preferido a minha luz à dele quando é mais confortável." },
+              { key: "suplica", example: "Dá-me um coração ensinável para começar estes dias." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — ore com as suas próprias palavras, se preferir.",
@@ -481,10 +481,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que verdade você domina no discurso, mas ainda não pratica?",
             intro: "Responda a Tiago 1 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "O que Tiago diz sobre ouvir e praticar?" },
-              { key: "gratidao", prompt: "Que verdade já desceu da minha cabeça à minha vida?" },
-              { key: "confissao", prompt: "Que verdade eu domino no discurso, mas ainda não pratico?" },
-              { key: "suplica", prompt: "Que distância peço ao Espírito que feche?" }
+              { key: "ensino", example: "Deus quer a verdade descendo até a minha vida, e não parada na minha cabeça." },
+              { key: "gratidao", example: "Agradeço por uma verdade que finalmente virou prática em mim." },
+              { key: "confissao", example: "Sei explicar bem aquilo que ainda não vivo." },
+              { key: "suplica", example: "Fecha a distância entre o que eu sei e o que eu faço." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — adapte às suas palavras.",
@@ -523,10 +523,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde o perfeccionismo tem te paralisado em vez de te mover?",
             intro: "Responda a Filipenses 3 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "Como Paulo equilibra “não cheguei lá” com “prossigo”?" },
-              { key: "gratidao", prompt: "Que pequeno progresso dos últimos meses posso nomear?" },
-              { key: "confissao", prompt: "Onde o perfeccionismo tem me paralisado em vez de me mover?" },
-              { key: "suplica", prompt: "Que passo pequeno e concreto peço forças para dar?" }
+              { key: "ensino", example: "Deus se importa com a direção do meu coração, não com uma perfeição impossível." },
+              { key: "gratidao", example: "Agradeço por um progresso pequeno que reconheço nos últimos meses." },
+              { key: "confissao", example: "O perfeccionismo tem me paralisado em vez de me mover." },
+              { key: "suplica", example: "Dá-me constância para dar um passo pequeno esta semana." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — ore com as suas palavras.",
@@ -565,10 +565,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que área você ainda trata como território só seu?",
             intro: "Responda a Romanos 12 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "O que muda quando agenda, energia e talento são sacrifício, e não propriedade?" },
-              { key: "gratidao", prompt: "O que significa para mim ter sido comprado por preço?" },
-              { key: "confissao", prompt: "Que área da minha vida ainda trato como território só meu?" },
-              { key: "suplica", prompt: "Que posse eu entrego hoje?" }
+              { key: "ensino", example: "Eu pertenço a Deus: a minha vida não é propriedade minha." },
+              { key: "gratidao", example: "Agradeço por ter sido comprado por preço, e não abandonado." },
+              { key: "confissao", example: "Trato a minha agenda e o meu dinheiro como território só meu." },
+              { key: "suplica", example: "Reina onde eu tenho reinado." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — repita-a quando o ego voltar ao trono.",
@@ -607,10 +607,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Que decisão atual você está tomando com o ego no trono?",
             intro: "Traga uma decisão que está na sua mão e responda em quatro frentes.",
             threads: [
-              { key: "ensino", prompt: "Qual é a lógica de Jesus: por que quem perde a vida a acha?" },
-              { key: "gratidao", prompt: "Onde renunciar a algo já me trouxe mais vida, e não menos?" },
-              { key: "confissao", prompt: "Que decisão atual estou tomando com o ego no trono?" },
-              { key: "suplica", prompt: "Em que escolha peço coragem para perguntar “o que TU queres?” primeiro?" }
+              { key: "ensino", example: "Quem entrega a vida a Deus é justamente quem a encontra." },
+              { key: "gratidao", example: "Agradeço por uma renúncia que me trouxe mais vida, e não menos." },
+              { key: "confissao", example: "Tenho decidido pensando primeiro no que eu quero." },
+              { key: "suplica", example: "Dá-me coragem para perguntar o que tu queres antes do que eu quero." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — negar-se não é violência contra si, é entrega.",
@@ -649,10 +649,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "Onde você tem competido em vez de administrar?",
             intro: "Responda a 1 Coríntios 4 em quatro frentes. Uma frase em cada já basta.",
             threads: [
-              { key: "ensino", prompt: "O que a pergunta de Paulo desmonta no meu jeito de ver meus talentos?" },
-              { key: "gratidao", prompt: "Que dom eu uso todo dia sem lembrar de quem o deu?" },
-              { key: "confissao", prompt: "Com quem tenho me comparado, em vez de administrar o que recebi?" },
-              { key: "suplica", prompt: "O que peço para ser mordomo, e não dono?" }
+              { key: "ensino", example: "Tudo o que eu tenho de bom foi recebido, não conquistado." },
+              { key: "gratidao", example: "Agradeço por um talento que uso todo dia sem lembrar de quem o deu." },
+              { key: "confissao", example: "Tenho competido e me comparado em vez de administrar o que recebi." },
+              { key: "suplica", example: "Faze-me mordomo dos meus dons, e não dono deles." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — agradeça nomeando os dons, um a um.",
@@ -691,10 +691,10 @@ export const UNITS: Unit[] = [
           { type: "reflect", eyebrow: "Estação 05 · Reflexão do coração", title: "A quem, especificamente, você pode servir esta semana?",
             intro: "Responda a Gálatas 5 em quatro frentes. No último, escreva um nome.",
             threads: [
-              { key: "ensino", prompt: "Para que serve a liberdade que Cristo me deu?" },
-              { key: "gratidao", prompt: "Quem usou os próprios dons para me servir, e como isso me marcou?" },
-              { key: "confissao", prompt: "Que dom usei mais para construir o meu nome do que para servir?" },
-              { key: "suplica", prompt: "A quem, especificamente, vou servir nesta semana?" }
+              { key: "ensino", example: "A liberdade que Cristo me deu é para servir, não para me servir." },
+              { key: "gratidao", example: "Agradeço por alguém que usou os próprios dons para me servir." },
+              { key: "confissao", example: "Usei os meus dons mais para construir o meu nome do que para servir." },
+              { key: "suplica", example: "Mostra-me a quem servir nesta semana, e dá-me coragem de ir." }
             ] },
           { type: "pray", eyebrow: "Estação 06 · Oração", title: "Ore com estas palavras",
             intro: "A semente de oração do dia — ore pelo nome que você acabou de escrever.",
