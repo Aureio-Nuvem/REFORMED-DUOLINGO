@@ -57,6 +57,7 @@ export interface Unit {
   icon?: string;       // nome do ícone (padrão: i-book)
   accent?: string;     // var(--...) para o cartão da unidade
   source?: string;     // atribuição (ex.: "Baseado em João Calvino")
+  farewell?: string;   // palavra de encerramento, ao concluir a unidade
   days: DevotionalDay[];
 }
 

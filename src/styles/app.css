@@ -481,3 +481,29 @@ button { font-family: inherit; }
 .blk-main { flex: 1; min-width: 0; display: grid; gap: 5px; }
 .blk-t { font-weight: 800; font-size: 15px; line-height: 1.2; }
 .blk-s { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); }
+
+/* ---------- Encerramento de unidade ---------- */
+.ud-wrap { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 8px 2px 24px; }
+.ud-badge { width: 76px; height: 76px; border-radius: 24px; display: grid; place-items: center; color: var(--cream); box-shadow: var(--shadow); }
+.ud-badge svg { font-size: 38px; }
+.ud-eyebrow { font-size: 10px; font-weight: 900; letter-spacing: .2em; color: var(--ink-soft); margin-top: 16px; }
+.ud-title { font-family: var(--disp); font-weight: 800; font-size: 26px; line-height: 1.15; margin-top: 5px; }
+.ud-count { font-size: 12px; font-weight: 800; color: var(--ink-soft); margin-top: 6px; }
+.ud-word { font-size: 14.5px; font-weight: 600; line-height: 1.65; color: var(--ink-mid); text-align: left; background: var(--card-2); border: 1.5px solid var(--line); border-radius: 16px; padding: 15px; margin-top: 20px; }
+.ud-carry { width: 100%; text-align: left; margin-top: 18px; }
+.ud-k, .ud-next-k { font-size: 10px; font-weight: 900; letter-spacing: .16em; color: var(--ink-soft); margin-bottom: 9px; }
+.ud-next-k { margin-top: 22px; width: 100%; text-align: left; }
+.ud-row { display: flex; align-items: center; gap: 9px; padding: 8px 0; border-bottom: 1.5px solid var(--line); }
+.ud-row:last-child { border-bottom: none; }
+.ud-dot { width: 20px; height: 20px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--sage-soft); color: var(--forest); }
+.ud-dot svg { font-size: 11px; }
+.ud-rt { flex: 1; min-width: 0; font-weight: 700; font-size: 13.5px; }
+.ud-rr { flex: none; font-size: 11px; font-weight: 800; color: var(--mustard-deep); }
+.ud-next { display: flex; align-items: center; gap: 13px; width: 100%; border: 1.5px solid var(--line-strong); border-bottom-width: 4px; border-radius: 16px; padding: 14px; background: var(--card); cursor: pointer; font: inherit; color: inherit; text-align: left; transition: border-color .12s, transform .08s; }
+.ud-next:hover { border-color: var(--terra); } .ud-next:active { transform: translateY(2px); border-bottom-width: 2px; }
+.ud-nic { width: 46px; height: 46px; flex: none; border-radius: 14px; display: grid; place-items: center; color: var(--cream); }
+.ud-nic svg { font-size: 23px; }
+.ud-nmain { flex: 1; min-width: 0; }
+.ud-nt { font-family: var(--disp); font-weight: 800; font-size: 16px; }
+.ud-nb { font-size: 12px; font-weight: 600; color: var(--ink-soft); line-height: 1.45; margin-top: 3px; }
+.node.marco.done { background: var(--mustard); border-color: var(--mustard-deep); color: var(--cream); cursor: pointer; }

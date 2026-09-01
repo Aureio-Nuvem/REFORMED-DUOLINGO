@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IconSprite, Icon, type IconName } from "./ui/Icons";
 import { useLumen } from "./state";
 import { setMuted, isMuted, snd } from "./engine/audio";
@@ -8,6 +8,7 @@ import type { Course, DevotionalDay, Unit } from "./content/schema";
 import type { SaveState, Reminder } from "./engine/storage";
 import { applyReminder, reminderSupported, reminderPermission, requestReminderPermission } from "./engine/reminder";
 import { computeMedals, heatmap } from "./engine/medals";
+import { burst } from "./engine/confetti";
 import { getVerse } from "./content/bible";
 import { useSync, type SyncStatus } from "./engine/useSync";
 import { AuthScreen } from "./components/AuthScreen";
@@ -25,7 +26,7 @@ function resolveActiveUnit(state: SaveState): Unit {
   return UNITS.find((u) => u.days.some((d) => !done.has(d.id))) ?? UNITS[UNITS.length - 1];
 }
 
-type Screen = "home" | "academy" | "shop" | "profile" | "course" | "medals" | "diary" | "devo" | "units" | "auth" | "invites" | "selos" | "onboard";
+type Screen = "home" | "academy" | "shop" | "profile" | "course" | "medals" | "diary" | "devo" | "units" | "auth" | "invites" | "selos" | "unitdone" | "onboard";
 const CHROME: Screen[] = ["home", "academy", "shop", "profile"];
 
 const OFFSETS = [0, -1, -2, -1, 0, 1, 2, 1];
@@ -152,6 +153,12 @@ export function App() {
           {screen === "invites" && <Invites onBack={() => go("profile")} />}
           {screen === "medals" && <Medals state={state} onBack={() => go("profile")} />}
           {screen === "selos" && <Selos seals={state.seals} onBack={() => go("profile")} />}
+          {screen === "unitdone" && (
+            <UnitDone unit={activeUnit} seals={state.seals}
+              next={UNITS.find((u) => u.id !== activeUnit.id && u.days.some((d) => !done.has(d.id))) ?? null}
+              onNext={(id) => { actions.setActiveUnit(id); snd.nav(); setScreen("home"); }}
+              onHome={() => go("home")} />
+          )}
           {screen === "diary" && <Diary entries={state.diary} onBack={() => go("profile")} />}
           {screen === "devo" && playDay && (
             <Devotional day={playDay} hearts={state.hearts} gems={state.gems} actions={actions}
@@ -161,7 +168,9 @@ export function App() {
                   dayId: playDay.id, title: playDay.title,
                   unit: activeUnit.title, ref: getVerse(playDay.carryRef).ref
                 });
-                setScreen("home");
+                // Era o último dia por concluir? Então a unidade fecha aqui.
+                const restam = activeUnit.days.some((d) => d.id !== playDay.id && !done.has(d.id));
+                setScreen(restam ? "home" : "unitdone");
               }} />
           )}
         </div>
@@ -256,8 +265,76 @@ function Home({ unit, done, today, onStart, onOpenUnits }: {
           );
         })}
         <div className={"node-row " + offsetClass(unit.days.length)}>
-          <button className="node locked marco" disabled><span className="cap"><Icon name="i-trophy" /></span></button>
+          <button className={"node marco " + (doneAll ? "done" : "locked")} disabled={!doneAll}
+            onClick={doneAll ? onOpenUnits : undefined} aria-label="Marco da unidade">
+            <span className="cap"><Icon name={doneAll ? "i-trophy" : "i-lock"} /></span>
+          </button>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Encerramento de uma unidade ---------- */
+function UnitDone({ unit, seals, next, onNext, onHome }: {
+  unit: Unit; seals: SaveState["seals"]; next: Unit | null;
+  onNext: (unitId: string) => void; onHome: () => void;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    snd.win();
+    if (canvasRef.current) burst(canvasRef.current);
+  }, []);
+
+  const ids = new Set(unit.days.map((d) => d.id));
+  const carried = seals.filter((s) => ids.has(s.dayId));
+
+  return (
+    <section className="screen" style={{ position: "relative" }}>
+      <canvas ref={canvasRef} className="confetti" />
+      <div className="ud-wrap">
+        <span className="ud-badge" style={{ background: unit.accent ?? "var(--terra)" }}>
+          <Icon name="i-trophy" />
+        </span>
+        <div className="ud-eyebrow">UNIDADE CONCLUÍDA</div>
+        <div className="ud-title">{unit.title}</div>
+        <div className="ud-count">{unit.days.length} devocionais · {unit.theme}</div>
+
+        {unit.farewell && <div className="ud-word">{unit.farewell}</div>}
+
+        {carried.length > 0 && (
+          <div className="ud-carry">
+            <div className="ud-k">O QUE VOCÊ CARREGOU</div>
+            {carried.slice().reverse().map((s) => (
+              <div className="ud-row" key={s.dayId}>
+                <span className="ud-dot"><Icon name="i-check" /></span>
+                <span className="ud-rt">{s.title}</span>
+                <span className="ud-rr">{s.ref}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {next ? (
+          <>
+            <div className="ud-next-k">A PRÓXIMA CAMINHADA</div>
+            <button className="ud-next" onClick={() => onNext(next.id)}>
+              <span className="ud-nic" style={{ background: next.accent ?? "var(--terra)" }}>
+                <Icon name={(next.icon ?? "i-book") as IconName} />
+              </span>
+              <div className="ud-nmain">
+                <div className="ud-nt">{next.title}</div>
+                {next.blurb && <div className="ud-nb">{next.blurb}</div>}
+              </div>
+            </button>
+            <button className="ghost-btn" onClick={onHome}>Voltar ao início</button>
+          </>
+        ) : (
+          <>
+            <div className="ud-word">Você concluiu todas as unidades disponíveis. Novas caminhadas estão a caminho — e o seu diário e os seus selos continuam aqui.</div>
+            <button className="cta terra" onClick={onHome}>Voltar ao início</button>
+          </>
+        )}
       </div>
     </section>
   );

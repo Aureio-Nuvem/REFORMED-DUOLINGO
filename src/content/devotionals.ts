@@ -16,6 +16,7 @@ export const UNITS: Unit[] = [
     theme: "Fundamentos",
     icon: "i-lamp", accent: "var(--terra)",
     blurb: "O ponto de partida da fé: quem Deus é e como Ele se dá a conhecer na sua Palavra. Providência, cuidado e refúgio, dos Salmos ao coração.",
+    farewell: "Você começou sem saber por onde Deus falaria e termina diante do trono, ouvindo “a quem enviarei?”. Foi este o caminho: a Palavra que ilumina o passo, o Pastor que conduz, o refúgio que sustenta, os céus que proclamam, o olhar que tudo conhece e a santidade que nos põe no lugar certo. Conhecer a Deus nunca foi o fim da linha — é o começo de uma vida enviada. Leve daqui uma certeza: Ele se deu a conhecer porque quis ser conhecido por você.",
     about: "Unidade escrita para o Lúmen, a partir dos Salmos. As leituras vêm da Bíblia Livre (BLIVRE), uma tradução em português de domínio público. Na estação “A Voz dos Pais” você ouve João Calvino (1509–1564) e Agostinho (354–430) — dois mestres que a tradição reformada lê com atenção — em paráfrases nossas dos temas deles, sempre com a fonte indicada.",
     days: [
       {
@@ -278,6 +279,7 @@ export const UNITS: Unit[] = [
     theme: "Confiança",
     icon: "i-anchor", accent: "var(--forest)",
     blurb: "Quando o medo aperta e o mundo estremece, os Salmos ensinam o coração a descansar. Luz, deleite na Palavra e a certeza de pertencer a Deus.",
+    farewell: "Seis salmos, seis estados de alma: o medo, o deleite, a adoração, o desamparo, a secura e a culpa. Nenhum deles foi escrito por alguém com a vida resolvida — e é isso que os torna confiáveis. A confiança bíblica não nasce de circunstâncias boas, mas de um Deus que não muda quando elas mudam. Você aprendeu aqui a falar com a sua própria alma quando ela desanima. Continue falando.",
     about: "Três salmos que a Igreja reza há séculos em tempos de medo: o 27 (coragem), o 1 (o deleite na Palavra) e o 100 (adoração). Texto bíblico da Bíblia Livre (BLIVRE), de domínio público; as vozes de Calvino e Lutero aparecem em paráfrases nossas, com a fonte indicada em cada estação.",
     days: [
       {
@@ -534,6 +536,7 @@ export const UNITS: Unit[] = [
     theme: "Evangelho",
     icon: "i-dove", accent: "var(--mustard-deep)",
     blurb: "O coração do Evangelho: somos salvos pela graça, não pelo mérito. Descanse no dom de Deus e nas misericórdias que se renovam a cada manhã.",
+    farewell: "Você entrou por Efésios 2, de mãos vazias, e sai por Romanos 8, com a certeza de que nada as arranca da mão dele. Entre uma coisa e outra: o convite ao cansado, as misericórdias de cada manhã, o fim da condenação e a alegria do perdão. Se ficar uma só frase, que seja esta — o veredito sobre você já foi dado, e é a favor. Descanse nela.",
     about: "Unidade sobre a graça, no centro da fé reformada: Efésios 2 (salvos por dom), Mateus 11 (o descanso que Cristo oferece) e Lamentações 3 (a fidelidade que se renova). Traz Martinho Lutero (1483–1546), o reformador cuja redescoberta da justificação pela fé abriu a Reforma, e Agostinho — ambos em paráfrases nossas.",
     days: [
       {
@@ -793,6 +796,7 @@ export const UNITS: Unit[] = [
     theme: "Vida Cristã · Calvino",
     icon: "i-cross", accent: "var(--slate)",
     source: "Baseado em João Calvino",
+    farewell: "Dez dias com Calvino, e o essencial já foi dito: a regra vem de fora, e a vida não nos pertence. Você atravessou o chamado à vida cristã e a negação de si — o coração do Livrete. O caminho continua em levar a cruz, meditar na vida futura e usar bem a vida presente. Por ora, leve a frase que organiza todo o resto: não somos nossos; somos de Deus.",
     about: "O “Livrete de Ouro” é o apelido que ganhou um trecho das Institutas da Religião Cristã, a grande obra de João Calvino (1509–1564): os capítulos 6 a 10 do Livro III. Por serem práticos e curtos, foram publicados sozinhos durante séculos, como um pequeno manual de vida cristã — daí o apelido. Não trata de doutrina abstrata, mas de como viver: negar a si mesmo, carregar a cruz, usar bem os bens desta vida. Cada dia aqui traz uma leitura bíblica, uma paráfrase nossa do que Calvino diz naquela seção (com a referência para você conferir na sua edição) e os quatro fios para responder. A obra está em domínio público.",
     blurb: "Uma caminhada pela “Breve Instrução sobre a Vida Cristã” de Calvino (Institutas III.6–10). O chamado à vida cristã e a negação de si: a regra que vem de fora, e a vida que deixa de nos pertencer.",
     days: [
